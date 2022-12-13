@@ -1,4 +1,8 @@
 
+//Find out how many ones a binary representation of a number (n) has
+
+//MY SOLUTION
+
 function countBits(n) {
     let bitChanges = []
     let ones = []
@@ -20,6 +24,35 @@ function countBits(n) {
     console.log(ones.length)
     return ones.length
   }
+
+  //BEST SOLUTION
+
+  function countBits(n) {
+    n.toString(2).split('0').join('').length
+  }
+
+  /*
+   WHAT I LEARNED
+
+   -using .toString on a number lets you provide a radix, which is a base the 
+   computer uses to represent the number. It defaults as 10 so for example 29
+   has 10 in it twice and then 9 ones. 29 in binary (or radix 2) would be 
+   11101. In base two you have 1,2,4,8,16 so 29 minus 16 is 13 (1) 13 - 8 is 
+   5 (1) 5 - 4 is 1 (1) 1 - 2 is -1 (0) and 1 - 1 is 1 (1) so 11101.
+
+   -if you assign an already existing array to another already existing array
+   it will return the length of the array for some reason
+   
+   -when indexing the last number in an array you need to specify the array 
+   length and then subtract it by one, so not bitChanges[-1], 
+   bitChanges[bitChanges.length - 1]
+
+   The crux of finding a more traditonal and less tricky solution was finding
+   the pattern to binary code. I started off trying to create a function that 
+   modified an array for each value of n which, which I got close to but ultimatley
+   proved too tricky. After looking at a binary chart i found the pattern 
+   of subtracting base binary units from n. 
+   */
 
   //CODE GRAVEYARD
 
