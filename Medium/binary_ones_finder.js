@@ -32,6 +32,11 @@ function countBits(n) {
   }
 
   /*
+  n.toString(2) returns 11101, its then split by 0 to remove the 0s. 
+  Its joined back into a string and the length is taken for the answer. 
+  */
+
+  /*
    WHAT I LEARNED
 
    -using .toString on a number lets you provide a radix, which is a base the 
