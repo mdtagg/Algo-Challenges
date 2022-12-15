@@ -4,17 +4,22 @@ function validSolution(board) {
     let boxes = []
 
     while(count < board.length) {
-        columnBox = []
+        let columnBox = []
+        let box = []
         for(let i = 0;i < 9;i++) {
             columnBox.push(board[i][count])
+            if(count === 2 || count === 5 || count === 8) {
+                box.push(board[i].slice(count - 2,count + 1))
+            }
             if(i === 8) {
-                // console.log(columnBox)
                 columns.push(columnBox)
+                boxes.push(box)
             }
         }
         count++
     }
     console.log(columns)
+    console.log(boxes)
 }
 
 validSolution([[5, 3, 4, 6, 7, 8, 9, 1, 2], 
