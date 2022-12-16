@@ -1,16 +1,7 @@
 function validSolution(board) {
-    
-    // console.log(rowCheck(board))
-    // console.log(columnCheck(board))
-    // console.log(boxCheck(board))
 
-    if(rowCheck(board) && columnCheck(board) && boxCheck(board)) {
-        // console.log(true)
-        return true
-    }else {
-        console.log(false)
-        return false
-    }
+    if(rowCheck(board) && columnCheck(board) && boxCheck(board)) return true
+    return false
 }
 
 const rowCheck = (board) => {
@@ -18,7 +9,6 @@ const rowCheck = (board) => {
         if(!board[i].slice().sort().join('').includes('123456789')) {
             return false
         }else if(i === 8) {
-            // console.log(true)
             return true
         }
     }
@@ -37,7 +27,6 @@ const columnCheck = (board) => {
         }
         count++
     }
-    // console.log(columns)
     return rowCheck(columns)
 }
 
@@ -55,7 +44,6 @@ const boxCheck = (board) => {
         }
         count+=3
     }
-    // console.log(boxes)
     return rowCheck(boxes)
 }
 
