@@ -1,3 +1,5 @@
+//validate a sudoku board
+
 function validSolution(board) {
 
     if(rowCheck(board) && columnCheck(board) && boxCheck(board)) return true
@@ -57,7 +59,43 @@ validSolution([[5, 3, 4, 6, 7, 8, 9, 1, 2],
                 [2, 8, 7, 4, 1, 9, 6, 3, 5],
                 [3, 4, 5, 2, 8, 6, 1, 7, 9]])
 
+// BEST SOLUTION FOUND 
 
+function equals45(n){
+    return n == 45;
+  }
+  
+  function validSolution(board){
+    var sumh = [0,0,0,0,0,0,0,0,0];
+    var sumv = [0,0,0,0,0,0,0,0,0];
+    osums = [[0,0,0],[0,0,0],[0,0,0]];
+    for (var i=0;i<9;i++){
+      for (var j=0;j<9;j++){
+        sumh[i] += board[i][j];
+        sumv[j] += board[i][j];
+        osums[Math.floor(i/3)][Math.floor(j/3)] += board[i][j];
+      }
+    }
+    for (var i=0;i<3;i++) if (!osums[i].every(equals45)) return false;
+    return (sumh.every(equals45) && sumv.every(equals45));
+  }
+
+/*
+WHAT I LEARNED 
+
+-you have to use .slice() when using .sort() on arrays within arrays because
+if you dont it will sort the original array in place and there is just about 
+nothing that I tried that will prevent that from happening, even Array.from 
+in a scope a layer up. 
+
+-placing new variables at different layers and pushing destructured array 
+values into them can simplify getting the nested array you want. 
+*/
+
+
+
+
+//CODE GRAVEYARD
                 // let rowCount = 2
                 // let rows = []
                 // let columns = []
