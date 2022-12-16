@@ -1,14 +1,23 @@
 function validSolution(board) {
     let rowCount = 2
-    let rows = board
+    let rows = []
     let columns = []
     let boxes = []
 
     while(board[8].length > 0) {
         let columnBox = []
         let box = []
+
         for(let i = 0;i < 9;i++) {
             columnBox.push(board[i][rowCount])
+            if(rows.length < 9) {
+               rows.push(board[i].slice(0,board[i].length))
+            }
+            if(i === 8) {
+                columns.push(columnBox)
+                columnBox = []
+            }
+            
             if(rowCount === 0) {
                 box.push(...board[i].splice(0,3))
             }
@@ -19,9 +28,7 @@ function validSolution(board) {
             if(rowCount === 0 && i === 8) {
                 rowCount += 2
             }
-            if(i === 8) {
-                columns.push(columnBox)
-            }
+            
         }
         rowCount--
     }
