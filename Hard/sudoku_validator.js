@@ -1,25 +1,33 @@
 function validSolution(board) {
-    let count = 0
+    let rowCount = 2
+    let rows = board
     let columns = []
     let boxes = []
 
-    while(count < board.length) {
+    while(board[8].length > 0) {
         let columnBox = []
         let box = []
         for(let i = 0;i < 9;i++) {
-            columnBox.push(board[i][count])
-            if(count === 2 || count === 5 || count === 8) {
-                box.push(board[i].slice(count - 2,count + 1))
+            columnBox.push(board[i][rowCount])
+            if(rowCount === 0) {
+                box.push(...board[i].splice(0,3))
+            }
+            if(rowCount === 0 && (i === 2 || i === 5 || i === 8)) {
+                boxes.push(box)
+                box = []
+            }
+            if(rowCount === 0 && i === 8) {
+                rowCount += 2
             }
             if(i === 8) {
                 columns.push(columnBox)
-                boxes.push(box)
             }
         }
-        count++
+        rowCount--
     }
     console.log(columns)
     console.log(boxes)
+    console.log(rows)
 }
 
 validSolution([[5, 3, 4, 6, 7, 8, 9, 1, 2], 
