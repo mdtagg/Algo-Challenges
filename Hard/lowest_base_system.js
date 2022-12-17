@@ -1,30 +1,40 @@
 
 
 function lowestBase(s) {
-    // let number = s
-    let baseNumbers = [1]
-    let baseRep = []
+    let number = s
     let base = 2
-    while(base < s) {
-        baseNumbers.push(base)
-        base *= 2
-    }
-    console.log(baseNumbers)
-    for(let i = baseNumbers.length - 1;i >= 0;i--) {
-        if(s - baseNumbers[i] >= 0) {
-            baseRep.push('1')
-            s -= baseNumbers[i]
+    while(number !== 0) {
+        let baseNumbers = [1]
+        let currentBase = base
+        let baseRep = []
+        while(base < number) {
+            baseNumbers.push(base)
+            base *= base
         }
-        if(i === 0 && s === 0) {
-            console.log(baseNumbers[1])
-        }else if(i === 0 && s !== 0) {
-
+        // console.log(baseNumbers)
+        for(let i = baseNumbers.length - 1;i >= 0;i--) {
+            
+            if(number - baseNumbers[i] >= 0) {
+                number -= baseNumbers[i]
+                baseRep.push('1')
+            }else {
+                baseRep.push('0')
+            }
+            if(i === 0 && number !== 0) {
+                baseRep.push('0')
+            }
         }
+        if(baseRep.every(number => number === '1')) {
+            console.log(currentBase)
+        }else {
+            base = baseNumbers[1] + 1
+            number = s
+        }
+        // console.log(baseRep)
     }
-    console.log(baseRep)
 }
 
-lowestBase(7)
+lowestBase(57)
 
 
 
