@@ -1,15 +1,15 @@
 
-
 function lowestBase(s) {
     let number = s
     let base = 2
+    console.log(s.toString(20))
     while(number !== 0) {
         let baseNumbers = [1]
         let currentBase = base
         let baseRep = []
         while(base < number) {
             baseNumbers.push(base)
-            base *= base
+            base *= currentBase
         }
         // console.log(baseNumbers)
         for(let i = baseNumbers.length - 1;i >= 0;i--) {
@@ -25,7 +25,7 @@ function lowestBase(s) {
             }
         }
         if(baseRep.every(number => number === '1')) {
-            console.log(currentBase)
+            // console.log(currentBase)
         }else {
             base = baseNumbers[1] + 1
             number = s
@@ -34,7 +34,7 @@ function lowestBase(s) {
     }
 }
 
-lowestBase(57)
+lowestBase(1000002)
 
 
 
