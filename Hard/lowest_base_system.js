@@ -1,26 +1,105 @@
-
 function lowestBase(s) {
-    let test = 16
-    console.log(test.toString(4))
-    // console.log(test)
-    // console.log(s.toString(2))
-    let sArray = s.toString(2).split('')
-    console.log(sArray)
-    let baseArray = [1]
-    let base = 2
-    for(let i = sArray.length - 2;i >= 0;i--) {
-        if(sArray[i] === '1') {
-            baseArray.push(base)
-        }else {
-            baseArray.push(0)
-        }
-        base*=2
+    let base = 4
+    let testArr = [1]
+    let currentBase = base
+    if(testArr.reduce((prev,curr) => prev +curr) === s) {
+        console.log(base)
     }
-    console.log(baseArray.reverse())
-    // console.log(21 + 2 - 3 + 8 - 16)
+    while(testArr.reduce((prev,curr) => prev + curr,base) !== s) {
+        currentBase *= base
+        testArr.push(currentBase)
+        
+    }
 }
-    lowestBase(21)
+
+lowestBase(21)
+// 125002500050001
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let test = 1000
+//     console.log(test.toString(2))
+    // console.log(s.toString(3))
+    // console.log(test.toString(2))
+    // [4,2,1]
+    // [1,0,1,0,1]
+    // [1,0.5,0,0,1]
+    // [1,0.5,0.25]
+
+    // [16,1,4] [1,.125,1]
+    
+    // [512,256,128,64,32,8]
+
+    
+
+    // [1,1,1,0,0,1]
+    // [1,1,1,.25]
+    // [1,1,1,0,.5,0]
+    // [1,1,1,.25,0,0]
+    // [1,1,.625,1]
+    
+    // [1.5,0,1,0,0,1]
+    // [1.5,0.5,0,0,0,1]
+    // [1.5,0.5,0.125]
+
+    
+
+    // [1.5,0,1,0,0,1]
+    // [1.5,.5,0,0,0,1]
+    // [1.5,.5,.125]
+    // [1.75,0,.125]
+    // [1.75,0.625]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // 125002500050001
+
+   
+        //     let test = 16
+        //     console.log(test.toString(4))
+        //     // console.log(test)
+        //     // console.log(s.toString(2))
+        //     let sArray = s.toString(2).split('')
+        //     console.log(sArray)
+        //     let baseArray = [1]
+        //     let base = 2
+        //     for(let i = sArray.length - 2;i >= 0;i--) {
+        //         if(sArray[i] === '1') {
+        //             baseArray.push(base)
+        //         }else {
+        //             baseArray.push(0)
+        //         }
+        //         base*=2
+        //     }
+        //     console.log(baseArray.reverse())
+        //     // console.log(21 + 2 - 3 + 8 - 16)
     
 //     let numbers = [2,3,4,5,6,7,8,9,10]
 //     let newS = s - 1 
