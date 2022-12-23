@@ -1,21 +1,26 @@
 function compress(music) {
-    let identical = []
+    
     let consecutive = []
     let interval = []
     let compressedArray = []
-    console.log(Math.round((Math.sqrt((music[1] - music[0]))**2)))
-    console.log(Math.round(Math.sqrt((music[2] - music[1])**2)))
+
     while (music.length) {
         let current = music[0]
-        let next = music[1]
-        if(current === next) {
-            while(music[0] === current) {
-                identical.push(...music.splice(0,1))
+        if(music[0] === music[1]) {
+            let identical = []
+            let consecutiveCount = 0
+            for(let i = 0;i < music.length;i++) {
+                if(music[i] === current) {
+                    consecutiveCount++
+                }else {
+                    break
+                }
             }
-            identical = identical.reduce((prev,curr) => prev + curr)
-            compressedArray.push(`${current}*${identical}`)
-            identical = []
-        }else if(current === next - 1 && next === music[2] - 1) {
+            identical.push(...music.splice(0,consecutiveCount))
+            compressedArray.push(`${current}*${identical.length}`)
+        }
+        
+        else if(current === next - 1 && next === music[2] - 1) {
             while(music[0] === music[1] - 1) {
                 consecutive.push(...music.splice(0,1))
             }
@@ -28,7 +33,6 @@ function compress(music) {
         Math.round(Math.sqrt((music[2] - music[1])**2))) {
             let intervalNum = music[1] - music[0]
             while(music[1] - music[0] === intervalNum) {
-                // Math.round(Math.sqrt(music[1] - music[0])**2)
                 interval.push(...music.splice(0,1))
             }
             interval.push(...music.splice(0,1))
@@ -43,7 +47,7 @@ function compress(music) {
     console.log(compressedArray)
 
 }
-compress([0, 2, 4, 5, 7, 6, 5])
+compress([1,1,1,5,5,5])
 
 
 // let single = []
