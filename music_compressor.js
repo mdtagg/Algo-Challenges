@@ -3,6 +3,8 @@ function compress(music) {
     let consecutive = []
     let interval = []
     let compressedArray = []
+    console.log(Math.round((Math.sqrt((music[1] - music[0]))**2)))
+    console.log(Math.round(Math.sqrt((music[2] - music[1])**2)))
     while (music.length) {
         let current = music[0]
         let next = music[1]
@@ -12,32 +14,36 @@ function compress(music) {
             }
             identical = identical.reduce((prev,curr) => prev + curr)
             compressedArray.push(`${current}*${identical}`)
+            identical = []
         }else if(current === next - 1 && next === music[2] - 1) {
             while(music[0] === music[1] - 1) {
                 consecutive.push(...music.splice(0,1))
             }
             consecutive.push(...music.splice(0,1))
             compressedArray.push(`${consecutive[0]}-${consecutive[consecutive.length - 1]}`)
+            consecutive = []
         }
 
-        else if(Math.ceil(Math.sqrt((music[1] - music[0]))**2) === 
-        Math.ceil(Math.sqrt((music[2] - music[1])**2))) {
+        else if(Math.round(Math.sqrt((music[1] - music[0]))**2) === 
+        Math.round(Math.sqrt((music[2] - music[1])**2))) {
             let intervalNum = music[1] - music[0]
-            while(music[1] - music[0] === Math.ceil(Math.sqrt(music[1] - music[0])**2)) {
+            while(music[1] - music[0] === intervalNum) {
+                // Math.round(Math.sqrt(music[1] - music[0])**2)
                 interval.push(...music.splice(0,1))
             }
             interval.push(...music.splice(0,1))
             compressedArray.push(`${interval[0]}-${interval[interval.length - 1]}/${intervalNum}`)
+            interval = []
+        }
+        else {
+            compressedArray.push(music.splice(0,1))
         }
     }
-    console.log(identical)
-    console.log(consecutive)
-    console.log(interval)
     compressedArray = compressedArray.join(',')
     console.log(compressedArray)
 
 }
-compress([1,1,1,4,5,6,3,6,9])
+compress([0, 2, 4, 5, 7, 6, 5])
 
 
 // let single = []
