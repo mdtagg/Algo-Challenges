@@ -18,23 +18,26 @@ function compress(music) {
             }
             consecutive.push(...music.splice(0,1))
             compressedArray.push(`${consecutive[0]}-${consecutive[consecutive.length - 1]}`)
-        }else if(Math.sqrt((music[1] - music[0]))**2 === Math.sqrt((music[2] - music[1])**2)) {
-            console.log('test')
-            // while(music[1] - music[0] === Math.sqrt(music[1] - music[0])**2) {
-            //     interval.push(...music.splice(0,1))
-            // }
-            // interval.push(...music.splice(0,1))
+        }
 
+        else if(Math.ceil(Math.sqrt((music[1] - music[0]))**2) === 
+        Math.ceil(Math.sqrt((music[2] - music[1])**2))) {
+            let intervalNum = music[1] - music[0]
+            while(music[1] - music[0] === Math.ceil(Math.sqrt(music[1] - music[0])**2)) {
+                interval.push(...music.splice(0,1))
+            }
+            interval.push(...music.splice(0,1))
+            compressedArray.push(`${interval[0]}-${interval[interval.length - 1]}/${intervalNum}`)
         }
     }
     console.log(identical)
     console.log(consecutive)
     console.log(interval)
-    // compressedArray = compressedArray.join(',')
+    compressedArray = compressedArray.join(',')
     console.log(compressedArray)
 
 }
-compress([3,6,9])
+compress([1,1,1,4,5,6,3,6,9])
 
 
 // let single = []
