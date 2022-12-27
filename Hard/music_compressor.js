@@ -1,5 +1,5 @@
 function compress(music) {
-    
+    console.log(music)
     let compressedArray = []
 
     while (music.length) {
@@ -21,17 +21,21 @@ function compress(music) {
             compressedArray.push(`${current}*${identicalCount}`)
         }
 
-        else if(intervalTest === 1 && intervalTestTwo === 1) {
+        else if(intervalTest === 1 && intervalTestTwo === 1 && 
+            music[1] - music[0] === music[2] - music[1]) {
+            
             let consecutive = []
-         
+            
             while(Math.round(Math.sqrt((music[1] - music[0])**2)) === 1) {
                 consecutive.push(...music.splice(0,1))
             }
             consecutive.push(...music.splice(0,1))
             compressedArray.push(`${consecutive[0]}-${consecutive[consecutive.length - 1]}`)
+            
         }
 
-        else if(intervalTest === intervalTestTwo) {
+        else if(intervalTest === intervalTestTwo &&
+            music[1] - music[0] === music[2] - music[1]) {
             let interval = []
             while(Math.round(Math.sqrt((music[1] - music[0])**2)) === intervalTest) {
                 interval.push(...music.splice(0,1))
@@ -45,9 +49,14 @@ function compress(music) {
     }
     compressedArray = compressedArray.join(',')
     console.log(compressedArray)
-
 }
-compress([1,10,8,6,7])
+compress([
+    -42, -41, -40, -31, 54, -17, -15, -13, -11, -40,
+     84,  86,  24,  75, 76,  75,  74,  73,  72,  -6,
+     -7,  -8,  -9, -10, 84,  85,  86, -19,  11,  12,
+     13,  14,  55,  92,  5,   3,   1,  -1,  -3,  -6,
+     -5,  33,  33,  33, 10,  87
+  ])
 
 
 // let single = []
