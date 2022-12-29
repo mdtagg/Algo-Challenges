@@ -1,15 +1,13 @@
 function findTheNumberPlate(customerID){
-    let plate = []
+    let plate = ['a','a','a',,,]
     let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
     
     while(customerID > 0) {
         let count = 0
         if(customerID <= 998) {
-            // plate.push('aaa')
-            let customerIdLength = customerID.toString().length
-            if(customerIdLength === 2) {
+            if(customerID < 99 && customerID >= 9) {
                 plate.push('0')
-            }else if(customerIdLength === 1) {
+            }else if(customerID < 9) {
                 plate.push('00')
             }
             plate.push(customerID + 1)
@@ -19,29 +17,27 @@ function findTheNumberPlate(customerID){
                 customerID -= 999
                 count++
             }
-            plate.unshift(alphabet[count])
-            // plate.push('aa')
+            plate[0] = alphabet[count]
         }
         else if(customerID > 25973 && customerID <= 675323) {
             while(customerID > 25973) {
                 customerID -= 25974
                 count++
             }
-            plate.unshift(alphabet[count])
-            // plate.push('a')
+            plate[1] = alphabet[count]
         }else if(customerID > 675323 && customerID <= 17558423) {
             while(customerID > 675323) {
                 customerID -= 675324
                 count++
             }
-            plate.push(alphabet[count])
+            plate[2] = alphabet[count]
         }
         
     }
     console.log(plate.join(''))
   }
 
-findTheNumberPlate(17558423)
+findTheNumberPlate(10598400)
 
 // ,'aaa004'
 
