@@ -8,17 +8,11 @@ function changer(str) {
             let index = alphabet.indexOf(item)
             newStr.splice(i,1,alphabet[index + 1])
             item = alphabet[index + 1]
-            console.log(item)
         }
         if(vowels.includes(item)) {
             newStr.splice(i,1,item.toUpperCase())
         }
     })
-    // newStr.forEach((item,i) => {
-    //     if(vowels.includes(item)) {
-    //         newStr.splice(i,1,item.toUpperCase())
-    //     }
-    // })
     console.log(newStr.join(''))
   }
 
