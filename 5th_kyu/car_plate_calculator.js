@@ -9,7 +9,6 @@ function findTheNumberPlate(customerID){
                 let index = Math.floor(customerID / changeValues[i])
                 plate[i] = alphabet[index]
                 customerID -= changeValues[i] * index
-                console.log(customerID)
             }
         }
     }
@@ -23,6 +22,8 @@ function findTheNumberPlate(customerID){
     console.log(plate.join(''))
 }
     findTheNumberPlate(1487)
+
+    //FIRST SOLUTION
 
     // function findTheNumberPlate(customerID){
     //     let plate = ['a','a','a',,,]
@@ -67,8 +68,7 @@ function findTheNumberPlate(customerID){
 
 
 
-
-
+//CODE GRAVEYARD
     
     // while(customerID > 0) {
     //     let count = 0
