@@ -2,29 +2,12 @@ function evaluateJump(setting) {
     let settingArray = setting.split('\n')
     .map(item => item.trim())
     .filter(item => item !== '.......')
+   
     
     let startLevel = settingArray.findIndex(item => item.includes('Y'))
     let startPosition = settingArray[startLevel].indexOf('Y')
 
-    let jumpOptions = []
-    startPosition += 2
-
-while(jumpOptions.length < 4) {
-    let jumpOption = []
-    for(let i = 1;i < settingArray.length;i++) {
-        for(let j = startPosition;j > settingArray[i].length - 4;j--) {
-            console.log(j)
-            if(settingArray[i][j] === 'Y') {
-                continue
-            }
-            jumpOption.push(settingArray[i][j])
-        }
-        jumpOptions.push(jumpOption)
-    }
-}
-    console.log(jumpOptions)
     console.log(settingArray)
-
 }
 
   evaluateJump(
@@ -33,6 +16,70 @@ while(jumpOptions.length < 4) {
   ###....                   
   ###....                   
   ###....`)
+
+//   let jumpOptions = [[],[],[],[]]
+//     let count = 0
+//     while(count < 4) {
+//         for(let i = 0;i < settingArray.length;i++) {
+//             if(count === startPosition) {
+//                 continue
+//             }else {
+//                 jumpOptions[count].push(settingArray[i][count])
+//             }
+//         }
+//         count++
+//     }
+//     console.log(settingArray)
+//     console.log(jumpOptions)
+
+//   let jumpOptions = []
+
+//     while(jumpOptions[3].length < 4) {
+//         let jumpOption = []
+//         for(let i = 0;i < settingArray.length;i++) {
+            
+//         }
+//     }
+
+//   while(jumpOption.length < 4) {
+//     if(settingArray[i][0] === 'Y') {
+//         continue
+//     }else {
+//         jumpOption.push(settingArray[i].splice(0,1))
+//     }
+// }
+// jumpOptions.push(jumpOption)
+
+
+ // let jumpAreas = settingArray[0].split('Y').map(item => item.length)
+    // console.log(jumpAreas)
+
+    // for(let i = 0;i < settingArray.length;i++) {
+    //     for(let j = startPosition + 2;j > 1;j--) {
+    //         if(settingArray[i][j] === 'Y') {
+    //             continue
+    //         }
+    //         console.log(settingArray[i][j])
+    //     }
+    // }
+
+//   let jumpOptions = []
+//   startPosition += 2
+
+// while(jumpOptions.length < 4) {
+//   let jumpOption = []
+//   for(let i = 1;i < settingArray.length;i++) {
+//       for(let j = startPosition;j > settingArray[i].length - 4;j--) {
+//           console.log(j)
+//           if(settingArray[i][j] === 'Y') {
+//               continue
+//           }
+//           jumpOption.push(settingArray[i][j])
+//       }
+//       jumpOptions.push(jumpOption)
+//   }
+// }
+//   console.log(jumpOptions)
 
   // let newArray = []
     // for(let i = 0;i < settingArray.length;i++) {
