@@ -2,11 +2,25 @@ function evaluateJump(setting) {
     let settingArray = setting.split('\n')
     .map(item => item.trim())
     .filter(item => item !== '.......')
-   
+    .map(item => item.split(''))
     
     let startLevel = settingArray.findIndex(item => item.includes('Y'))
     let startPosition = settingArray[startLevel].indexOf('Y')
+    let jumpOptions = []
 
+    for(let i = 0;i < settingArray.length;i++) {
+        jumpOptions.push(settingArray[i].splice(0,startPosition))
+        jumpOptions.push(settingArray[i].splice(startPosition + 1,2))
+    }
+
+    for(let j = 0;j < jumpOptions.length;j+=2) {
+        console.log(jumpOptions[j])
+    }
+    for(let k = 1;k < jumpOptions.length;k+=2) {
+        console.log(jumpOptions[k])
+    }
+
+    console.log(jumpOptions)
     console.log(settingArray)
 }
 
