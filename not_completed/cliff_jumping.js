@@ -19,7 +19,7 @@ function evaluateJump(setting) {
     for(let k = 1;k < jumpOptions.length;k+=2) {
         console.log(jumpOptions[k])
     }
-
+    
     console.log(jumpOptions)
     console.log(settingArray)
 }
