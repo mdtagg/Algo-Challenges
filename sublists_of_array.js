@@ -10,24 +10,31 @@ function power(array) {
                 subSet.push(set[i])
                 subSet.push(set[set.length - 1])
             }
+            if(i === 1) {
+                subArray.push(subSet)
+                continue
+            }
+            
             while(subSet.length) {
                 subArray.push(subSet.splice(0,2))
             }
+            
+            subArray.push(set.slice(0))
         }
        
     }
     subArray.unshift([])
-    subArray.push(set)
     console.log(subArray)
-    // let count = 0
+}
+
+power([1])
+
+// let count = 0
     // while(count < 1) {
     //     let set = []
         
     // }
     // console.log(subArray)
-}
-
-power([1,2,3])
 
 // subArray[subArray.length - 1 !== array]
 
