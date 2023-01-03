@@ -1,8 +1,12 @@
 function power(array) {
-	let subArray = []
+    
+    console.log(array)
+    // let test =[ [], [ 304 ], [ 304, 50 ], [ 304, 50, 578 ], [ 304, 50, 578, 882 ], [ 304, 50, 882 ], [ 304, 578 ], [ 304, 578, 882 ], [ 304, 882 ], [ 50 ], [ 50, 578 ], [ 50, 578, 882 ], [ 50, 882 ], [ 578 ], [ 578, 882 ], [ 882 ] ]
+	// console.log(testTwo)
+    let subArray = []
     let set = []
     for(let i = 0;i < array.length;i++) {
-        subArray.push(array[i])
+        subArray.push([array[i]])
         set.push(array[i])
         if(i !== 0) {
             let subSet = []
@@ -27,7 +31,7 @@ function power(array) {
     console.log(subArray)
 }
 
-power([1])
+power([ 50, 304, 578, 882 ])
 
 // let count = 0
     // while(count < 1) {

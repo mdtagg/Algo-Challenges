@@ -1,19 +1,50 @@
 function lowestBase(s) {
-    let base = 4
-    let testArr = [1]
-    let currentBase = base
-    if(testArr.reduce((prev,curr) => prev +curr) === s) {
-        console.log(base)
-    }
-    while(testArr.reduce((prev,curr) => prev + curr,base) !== s) {
-        currentBase *= base
-        testArr.push(currentBase)
-        
-    }
+    let result = s - 1
+    let base = 2
+    console.log(result / 5000)
+    
+    // while(base < 5001) {
+    //     let reduced = []
+    //     if(result % base === 0) {
+            
+    //     }
+    // }
+    // console.log(base)
+    
 }
 
-lowestBase(21)
-// 125002500050001
+lowestBase(125002500050001)
+
+
+
+
+// let base = 2
+//     console.log(Math.pow(13,13))
+//     console.log(Math.pow(14,14))
+//     while(Math.pow(base,base) <= s) {
+//         base++
+//     }
+//     console.log(base)
+//     let result = s
+//     let test = 0
+//     while(result > 1) {
+//         result = Math.floor(result / base)
+//         test++
+//     }
+//     console.log(test)
+
+
+// let base = 4
+//     let testArr = [1]
+//     let currentBase = base
+//     if(testArr.reduce((prev,curr) => prev +curr) === s) {
+//         console.log(base)
+//     }
+//     while(testArr.reduce((prev,curr) => prev + curr,base) !== s) {
+//         currentBase *= base
+//         testArr.push(currentBase)
+        
+//     }
 
 
 
