@@ -1,19 +1,26 @@
-function lowestBase(s) {
-    let result = s - 1
-    let base = 2
-    console.log(result / 5000)
-    
-    // while(base < 5001) {
-    //     let reduced = []
-    //     if(result % base === 0) {
-            
-    //     }
-    // }
-    // console.log(base)
-    
-}
+function getMinBase(n) {
+    for(let i=Math.ceil(Math.log2(n)); i>1; i--) {
+      let root=Math.round(findRoot(n,i));
+      if([...'1'.repeat(i)].reduce((s,_)=>s*root+1,0)===n) return root;
+    }
+  }
+  
+  function findRoot(n,i) {
+    var l=1, r=Number.MAX_SAFE_INTEGER;
+    while((r-l)/l>1e-12) {
+      let m=(r+l)/2, g=(Math.pow(m,i)-1)/(m-1);
+      g<n?l=m:r=m;
+    }
+    return (r+l)/2;
+  }
 
 lowestBase(125002500050001)
+
+//DID NOT SOLVE WITH OWN SOLUTION
+
+/*
+I didnt get this one because of the heavy math concepts like log
+*/
 
 
 
