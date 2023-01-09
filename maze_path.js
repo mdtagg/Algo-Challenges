@@ -2,54 +2,81 @@ function pathFinder(maze) {
     let rows = maze.split('\n').map(item => item.trim())
     let currentPosition = [0,0]
     let endPosition = [rows.length - 1,rows[0].length - 1]
-    let lastMove = 'down'
+    let lastMove = ''
     let mazeBranches = []
+    let numMoves = 1
+    let count = 0
+    let boundary = rows.length - 1
 
-    const nextMove = (currentPosition,direction) => {
-        let row = currentPosition[0]
-        let column = currentPosition[1]
-        switch(direction) {
-            case 'down':
-                row += 1
-                break
-            case 'right':
-                column += 1
-                break
-            case 'up':
-                row -= 1
-                break
-            case 'left':
-                column -= 1
-                break
-        }
-        let newPosition = [row,column]
-        return {newPosition}
+    while(count < 4) {
+        let nextPosition = possibleMoves(currentPosition,rows,lastMove,boundary)
+        // console.log(nextPosition)
+        lastMove = nextPosition[0][1]
+        // console.log(lastMove)
+        currentPosition = nextMove(currentPosition,nextPosition[0][1])
+        count++
+        numMoves++
+        if(currentPosition.toString() === endPosition.toString()) break
+        // if(count > 2) break
+        
+        console.log(numMoves)
     }
-
-    let possibleMoves = (currentPosition,rows) => {
-
-        let cardinals = [
-            [currentPosition[0] - 1, 'up'],
-            [currentPosition[1] + 1, 'right'],
-            [currentPosition[0] + 1, 'down'],
-            [currentPosition[1] - 1, 'left']
-        ]
-        cardinals = cardinals.filter(item => item[0] === -1 ? false : true)
-        for(let i = 0;i < cardinals.length;i++) {
-            let moveValues = nextMove(currentPosition,cardinals[i][1]).newPosition
-            if(rows[moveValues[0]][moveValues[1]] === 'W') {
-                cardinals.splice(i,1)
-            } 
-        }
-        return {cardinals}
-    }
-
-    let nextPosition = possibleMoves(currentPosition,rows).cardinals
-    if(possibleMoves > 1) {
-
-    }
-    currentPosition = nextMove(currentPosition,nextPosition[0][1]).newPosition
     console.log(currentPosition)
+    // console.log(numMoves)
+}
+
+//takes current position and a direction and returns the coordinates of moving
+// in that direction
+function nextMove(currentPosition,direction) {
+    let row = currentPosition[0]
+    let column = currentPosition[1]
+    switch(direction) {
+        case 'down':
+            row += 1
+            break
+        case 'right':
+            column += 1
+            break
+        case 'up':
+            row -= 1
+            break
+        case 'left':
+            column -= 1
+            break
+    }
+    let newPosition = [row,column]
+    return newPosition
+}
+
+// takes the current position and the rows and filters out the undefined moves
+//and the moves that would result in hitting a wall
+function possibleMoves(currentPosition,rows,lastMove,boundary) {
+
+    let opposites = {
+        down: 'up',
+        right: 'left',
+        up: 'down',
+        left: 'right'
+    }
+
+    let cardinals = [
+        [currentPosition[0] - 1, 'up'],
+        [currentPosition[1] + 1, 'right'],
+        [currentPosition[0] + 1, 'down'],
+        [currentPosition[1] - 1, 'left']
+    ]
+    cardinals = cardinals.filter(item => item[0] === -1 ||
+        item[0] > boundary ? false : true)
+    .filter(item => item[1] === opposites[lastMove] ? false : true)
+    console.log('cardinals after:',cardinals)
+    
+    for(let i = 0;i < cardinals.length;i++) {
+        let moveValues = nextMove(currentPosition,cardinals[i][1])
+        if(rows[moveValues[0]][moveValues[1]] === 'W') {
+            cardinals.splice(i,1)
+        } 
+    }
+    return cardinals
 }
 
 pathFinder(`.W.
