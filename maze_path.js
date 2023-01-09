@@ -8,8 +8,12 @@ function pathFinder(maze) {
     let count = 0
     let boundary = rows.length - 1
 
-    while(count < 4) {
+    while(count < 5) {
         let nextPosition = possibleMoves(currentPosition,rows,lastMove,boundary)
+        if(!nextPosition.length) {
+            console.log(false)
+            return false
+        }
         // console.log(nextPosition)
         lastMove = nextPosition[0][1]
         // console.log(lastMove)
@@ -19,7 +23,7 @@ function pathFinder(maze) {
         if(currentPosition.toString() === endPosition.toString()) break
         // if(count > 2) break
         
-        console.log(numMoves)
+        // console.log(numMoves)
     }
     console.log(currentPosition)
     // console.log(numMoves)
@@ -49,7 +53,7 @@ function nextMove(currentPosition,direction) {
 }
 
 // takes the current position and the rows and filters out the undefined moves
-//and the moves that would result in hitting a wall
+//and the moves that would result in hitting a wall, and the prior move
 function possibleMoves(currentPosition,rows,lastMove,boundary) {
 
     let opposites = {
@@ -68,20 +72,17 @@ function possibleMoves(currentPosition,rows,lastMove,boundary) {
     cardinals = cardinals.filter(item => item[0] === -1 ||
         item[0] > boundary ? false : true)
     .filter(item => item[1] === opposites[lastMove] ? false : true)
-    console.log('cardinals after:',cardinals)
-    
-    for(let i = 0;i < cardinals.length;i++) {
-        let moveValues = nextMove(currentPosition,cardinals[i][1])
-        if(rows[moveValues[0]][moveValues[1]] === 'W') {
-            cardinals.splice(i,1)
-        } 
-    }
+    .filter(item => {
+        let moveValues = nextMove(currentPosition,item[1])
+        return rows[moveValues[0]][moveValues[1]] === 'W' ? false : true
+    })
+    console.log(cardinals)
     return cardinals
 }
 
 pathFinder(`.W.
             .W.
-            ...`)
+            W..`)
 
 
             // let opposites = {
@@ -100,6 +101,14 @@ pathFinder(`.W.
             // let keys = Object.keys(cardinalObject)
 
 //CODE GRAVEYARD
+
+// for(let i = 0;i < cardinals.length;i++) {
+    //     let moveValues = nextMove(currentPosition,cardinals[i][1])
+    //     if(rows[moveValues[0]][moveValues[1]] === 'W') {
+    //         cardinals.splice(i,1)
+    //     } 
+    //     console.log(cardinals)
+    // }
 
 // class Location {
 //     constructor(x, y, steps) {
