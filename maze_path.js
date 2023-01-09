@@ -1,56 +1,132 @@
-class Location {
-    constructor(x, y, steps) {
-        this.x = x;
-        this.y = y;
-        this.steps = steps;
-    }
-}
-
-function update(open, map, visited, x, y, length) {
-    if (x >= 0 && y >= 0 && x < visited.length && y < visited[x].length && map[x][y] == 0 && !visited[x][y]) {
-        visited[x][y] = true;
-        open.push(new Location(x, y, length));
-    }
-}
-
-function parse(maze) {
-    var parsed = [];
-    maze.split("\n").forEach( row => {
-        parsed.push(row.split('').map(x => x == '.' ? 0 : 1));
-    });
-    return parsed;
-}
-
 function pathFinder(maze) {
-    var map = parse(maze);
-    
-    var visited = [];
-    for (var i = 0; i < map.length; i++) {
-        var row = [];
-        for (var j = 0; j < map.length; j++) {
-            row.push(false);
+    let rows = maze.split('\n').map(item => item.trim())
+    let currentPosition = [0,0]
+    let endPosition = [rows.length - 1,rows[0].length - 1]
+    let lastMove = 'down'
+    let mazeBranches = []
+
+    const nextMove = (currentPosition,direction) => {
+        let row = currentPosition[0]
+        let column = currentPosition[1]
+        switch(direction) {
+            case 'down':
+                row += 1
+                break
+            case 'right':
+                column += 1
+                break
+            case 'up':
+                row -= 1
+                break
+            case 'left':
+                column -= 1
+                break
         }
-        visited.push(row);
+        let newPosition = [row,column]
+        return {newPosition}
     }
-    var open = [];
-    open.push(new Location(0, 0, 0));
 
-    var min = map.length * map.length;
+    let possibleMoves = (currentPosition,rows) => {
 
-    while (open.length != 0) {
-        var p = open.shift();
-        if (p.x == map.length - 1 && p.y == map[p.x].length - 1 && min > p.steps) {
-            min = p.steps;
+        let cardinals = [
+            [currentPosition[0] - 1, 'up'],
+            [currentPosition[1] + 1, 'right'],
+            [currentPosition[0] + 1, 'down'],
+            [currentPosition[1] - 1, 'left']
+        ]
+        cardinals = cardinals.filter(item => item[0] === -1 ? false : true)
+        for(let i = 0;i < cardinals.length;i++) {
+            let moveValues = nextMove(currentPosition,cardinals[i][1]).newPosition
+            if(rows[moveValues[0]][moveValues[1]] === 'W') {
+                cardinals.splice(i,1)
+            } 
         }
-
-        update(open, map, visited, p.x - 1, p.y, p.steps + 1);
-        update(open, map, visited, p.x + 1, p.y, p.steps + 1);
-        update(open, map, visited, p.x, p.y - 1, p.steps + 1);
-        update(open, map, visited, p.x, p.y + 1, p.steps + 1);
+        return {cardinals}
     }
 
-    return min == map.length * map.length ? false : min;
+    let nextPosition = possibleMoves(currentPosition,rows).cardinals
+    if(possibleMoves > 1) {
+
+    }
+    currentPosition = nextMove(currentPosition,nextPosition[0][1]).newPosition
+    console.log(currentPosition)
 }
+
+pathFinder(`.W.
+            .W.
+            ...`)
+
+
+            // let opposites = {
+            //     down: 'up',
+            //     right: 'left',
+            //     up: 'down',
+            //     left: 'right'
+            // }
+
+            // const cardinalObject = {
+            //     up: [currentPosition[0] - 1],
+            //     right: [currentPosition[1] + 1],
+            //     down: [currentPosition[0] + 1],
+            //     left: currentPosition[1] - 1
+            // }
+            // let keys = Object.keys(cardinalObject)
+
+//CODE GRAVEYARD
+
+// class Location {
+//     constructor(x, y, steps) {
+//         this.x = x;
+//         this.y = y;
+//         this.steps = steps;
+//     }
+// }
+
+// function update(open, map, visited, x, y, length) {
+//     if (x >= 0 && y >= 0 && x < visited.length && y < visited[x].length && map[x][y] == 0 && !visited[x][y]) {
+//         visited[x][y] = true;
+//         open.push(new Location(x, y, length));
+//     }
+// }
+
+// function parse(maze) {
+//     var parsed = [];
+//     maze.split("\n").forEach( row => {
+//         parsed.push(row.split('').map(x => x == '.' ? 0 : 1));
+//     });
+//     return parsed;
+// }
+
+// function pathFinder(maze) {
+//     var map = parse(maze);
+    
+//     var visited = [];
+//     for (var i = 0; i < map.length; i++) {
+//         var row = [];
+//         for (var j = 0; j < map.length; j++) {
+//             row.push(false);
+//         }
+//         visited.push(row);
+//     }
+//     var open = [];
+//     open.push(new Location(0, 0, 0));
+
+//     var min = map.length * map.length;
+
+//     while (open.length != 0) {
+//         var p = open.shift();
+//         if (p.x == map.length - 1 && p.y == map[p.x].length - 1 && min > p.steps) {
+//             min = p.steps;
+//         }
+
+//         update(open, map, visited, p.x - 1, p.y, p.steps + 1);
+//         update(open, map, visited, p.x + 1, p.y, p.steps + 1);
+//         update(open, map, visited, p.x, p.y - 1, p.steps + 1);
+//         update(open, map, visited, p.x, p.y + 1, p.steps + 1);
+//     }
+
+//     return min == map.length * map.length ? false : min;
+// }
 
 //DID NOT SOLVE WITH OWN SOLUTION 
 
@@ -59,9 +135,7 @@ whole hell of a lot going on here, very complex for 4 kyu
 */
 
 
-  pathFinder(`.W.
-              .W.
-              ...`)
+
 
 
             //   const layers = maze.split('\n').map(item => item.trim())
