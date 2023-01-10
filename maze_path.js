@@ -8,25 +8,39 @@ function pathFinder(maze) {
     let count = 0
     let boundary = rows.length - 1
 
-    while(count < 5) {
+    while(count < 10) {
         let nextPosition = possibleMoves(currentPosition,rows,lastMove,boundary)
-        if(!nextPosition.length) {
+        // console.log(nextPosition)
+        if(nextPosition.length > 1) {
+            mazeBranches.push([currentPosition,...nextPosition.splice(1)])
+            mazeBranches.push([[1,0],[1,'up']])
+            // console.log('mazeBranches',...mazeBranches)
+            evaluateBranches(mazeBranches)
+        }else if(!nextPosition.length && !mazeBranches.length) {
             console.log(false)
             return false
         }
-        // console.log(nextPosition)
         lastMove = nextPosition[0][1]
-        // console.log(lastMove)
         currentPosition = nextMove(currentPosition,nextPosition[0][1])
         count++
         numMoves++
         if(currentPosition.toString() === endPosition.toString()) break
-        // if(count > 2) break
-        
-        // console.log(numMoves)
     }
-    console.log(currentPosition)
+    // console.log(currentPosition)
     // console.log(numMoves)
+}
+
+function evaluateBranches(mazeBranches) {
+    let currentBranch = mazeBranches[0]
+    // console.log(currentBranch)
+    let currentPosition = currentBranch[0]
+    console.log(currentPosition)
+    let startMove = currentBranch[1]
+    console.log(startMove)
+
+    // console.log('branch',mazeBranches)
+
+    mazeBranches = []
 }
 
 //takes current position and a direction and returns the coordinates of moving
@@ -76,13 +90,13 @@ function possibleMoves(currentPosition,rows,lastMove,boundary) {
         let moveValues = nextMove(currentPosition,item[1])
         return rows[moveValues[0]][moveValues[1]] === 'W' ? false : true
     })
-    console.log(cardinals)
+    // console.log(cardinals)
     return cardinals
 }
 
-pathFinder(`.W.
+pathFinder(`...
             .W.
-            W..`)
+            ...`)
 
 
             // let opposites = {
