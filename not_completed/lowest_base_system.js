@@ -1,4 +1,5 @@
-function getMinBase(n) {
+function lowestBase(n) {
+  console.log(Math.ceil(Math.log2(n)))
     for(let i=Math.ceil(Math.log2(n)); i>1; i--) {
       let root=Math.round(findRoot(n,i));
       if([...'1'.repeat(i)].reduce((s,_)=>s*root+1,0)===n) return root;
