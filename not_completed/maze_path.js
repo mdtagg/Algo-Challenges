@@ -99,30 +99,7 @@ pathFinder(`....
             ....`)
 
 
-            // let opposites = {
-            //     down: 'up',
-            //     right: 'left',
-            //     up: 'down',
-            //     left: 'right'
-            // }
-
-            // const cardinalObject = {
-            //     up: [currentPosition[0] - 1],
-            //     right: [currentPosition[1] + 1],
-            //     down: [currentPosition[0] + 1],
-            //     left: currentPosition[1] - 1
-            // }
-            // let keys = Object.keys(cardinalObject)
-
-//CODE GRAVEYARD
-
-// for(let i = 0;i < cardinals.length;i++) {
-    //     let moveValues = nextMove(currentPosition,cardinals[i][1])
-    //     if(rows[moveValues[0]][moveValues[1]] === 'W') {
-    //         cardinals.splice(i,1)
-    //     } 
-    //     console.log(cardinals)
-    // }
+//BEST SOLUTION
 
 // class Location {
 //     constructor(x, y, steps) {
@@ -184,7 +161,30 @@ pathFinder(`....
 whole hell of a lot going on here, very complex for 4 kyu
 */
 
+//CODE GRAVEYARD
 
+  // let opposites = {
+            //     down: 'up',
+            //     right: 'left',
+            //     up: 'down',
+            //     left: 'right'
+            // }
+
+            // const cardinalObject = {
+            //     up: [currentPosition[0] - 1],
+            //     right: [currentPosition[1] + 1],
+            //     down: [currentPosition[0] + 1],
+            //     left: currentPosition[1] - 1
+            // }
+            // let keys = Object.keys(cardinalObject)
+
+// for(let i = 0;i < cardinals.length;i++) {
+    //     let moveValues = nextMove(currentPosition,cardinals[i][1])
+    //     if(rows[moveValues[0]][moveValues[1]] === 'W') {
+    //         cardinals.splice(i,1)
+    //     } 
+    //     console.log(cardinals)
+    // }
 
 
 
