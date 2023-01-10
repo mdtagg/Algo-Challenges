@@ -13,7 +13,7 @@ function pathFinder(maze) {
         // console.log(nextPosition)
         if(nextPosition.length > 1) {
             mazeBranches.push([currentPosition,...nextPosition.splice(1)])
-            mazeBranches.push([[1,0],[1,'up']])
+            // mazeBranches.push([[1,0],[1,'up']])
             // console.log('mazeBranches',...mazeBranches)
             evaluateBranches(mazeBranches)
         }else if(!nextPosition.length && !mazeBranches.length) {
@@ -34,11 +34,11 @@ function evaluateBranches(mazeBranches) {
     let currentBranch = mazeBranches[0]
     // console.log(currentBranch)
     let currentPosition = currentBranch[0]
-    console.log(currentPosition)
+    // console.log(currentPosition)
     let startMove = currentBranch[1]
-    console.log(startMove)
+    // console.log(startMove)
 
-    // console.log('branch',mazeBranches)
+    console.log('branch',mazeBranches)
 
     mazeBranches = []
 }
@@ -94,9 +94,9 @@ function possibleMoves(currentPosition,rows,lastMove,boundary) {
     return cardinals
 }
 
-pathFinder(`...
-            .W.
-            ...`)
+pathFinder(`....
+            ....
+            ....`)
 
 
             // let opposites = {
