@@ -1,159 +1,171 @@
-function pathFinder(maze) {
-    let rows = maze.split('\n').map(item => item.trim())
-    let currentPosition = [0,0]
-    let endPosition = [rows.length - 1,rows[0].length - 1]
-    let lastMove = ''
-    let mazeBranches = []
-    let numMoves = 1
-    let count = 0
-    let boundary = rows.length - 1
-
-    while(count < 10) {
-        let nextPosition = possibleMoves(currentPosition,rows,lastMove,boundary)
-        // console.log(nextPosition)
-        if(nextPosition.length > 1) {
-            mazeBranches.push([currentPosition,...nextPosition.splice(1)])
-            // mazeBranches.push([[1,0],[1,'up']])
-            // console.log('mazeBranches',...mazeBranches)
-            evaluateBranches(mazeBranches)
-        }else if(!nextPosition.length && !mazeBranches.length) {
-            console.log(false)
-            return false
-        }
-        lastMove = nextPosition[0][1]
-        currentPosition = nextMove(currentPosition,nextPosition[0][1])
-        count++
-        numMoves++
-        if(currentPosition.toString() === endPosition.toString()) break
-    }
-    // console.log(currentPosition)
-    // console.log(numMoves)
-}
-
-function evaluateBranches(mazeBranches) {
-    let currentBranch = mazeBranches[0]
-    // console.log(currentBranch)
-    let currentPosition = currentBranch[0]
-    // console.log(currentPosition)
-    let startMove = currentBranch[1]
-    // console.log(startMove)
-
-    console.log('branch',mazeBranches)
-
-    mazeBranches = []
-}
-
-//takes current position and a direction and returns the coordinates of moving
-// in that direction
-function nextMove(currentPosition,direction) {
-    let row = currentPosition[0]
-    let column = currentPosition[1]
-    switch(direction) {
-        case 'down':
-            row += 1
-            break
-        case 'right':
-            column += 1
-            break
-        case 'up':
-            row -= 1
-            break
-        case 'left':
-            column -= 1
-            break
-    }
-    let newPosition = [row,column]
-    return newPosition
-}
-
-// takes the current position and the rows and filters out the undefined moves
-//and the moves that would result in hitting a wall, and the prior move
-function possibleMoves(currentPosition,rows,lastMove,boundary) {
-
-    let opposites = {
-        down: 'up',
-        right: 'left',
-        up: 'down',
-        left: 'right'
-    }
-
-    let cardinals = [
-        [currentPosition[0] - 1, 'up'],
-        [currentPosition[1] + 1, 'right'],
-        [currentPosition[0] + 1, 'down'],
-        [currentPosition[1] - 1, 'left']
-    ]
-    cardinals = cardinals.filter(item => item[0] === -1 ||
-        item[0] > boundary ? false : true)
-    .filter(item => item[1] === opposites[lastMove] ? false : true)
-    .filter(item => {
-        let moveValues = nextMove(currentPosition,item[1])
-        return rows[moveValues[0]][moveValues[1]] === 'W' ? false : true
-    })
-    // console.log(cardinals)
-    return cardinals
-}
-
-pathFinder(`....
-            ....
-            ....`)
-
-
-//BEST SOLUTION
-
-// class Location {
-//     constructor(x, y, steps) {
-//         this.x = x;
-//         this.y = y;
-//         this.steps = steps;
-//     }
-// }
-
-// function update(open, map, visited, x, y, length) {
-//     if (x >= 0 && y >= 0 && x < visited.length && y < visited[x].length && map[x][y] == 0 && !visited[x][y]) {
-//         visited[x][y] = true;
-//         open.push(new Location(x, y, length));
-//     }
-// }
-
-// function parse(maze) {
-//     var parsed = [];
-//     maze.split("\n").forEach( row => {
-//         parsed.push(row.split('').map(x => x == '.' ? 0 : 1));
-//     });
-//     return parsed;
-// }
-
 // function pathFinder(maze) {
-//     var map = parse(maze);
-    
-//     var visited = [];
-//     for (var i = 0; i < map.length; i++) {
-//         var row = [];
-//         for (var j = 0; j < map.length; j++) {
-//             row.push(false);
+//     let rows = maze.split('\n').map(item => item.trim())
+//     let currentPosition = [0,0]
+//     let endPosition = [rows.length - 1,rows[0].length - 1]
+//     let lastMove = ''
+//     let mazeBranches = []
+//     let numMoves = 1
+//     let count = 0
+//     let boundary = rows.length - 1
+
+//     while(count < 10) {
+//         let nextPosition = possibleMoves(currentPosition,rows,lastMove,boundary)
+//         // console.log(nextPosition)
+//         if(nextPosition.length > 1) {
+//             mazeBranches.push([currentPosition,...nextPosition.splice(1)])
+//             // mazeBranches.push([[1,0],[1,'up']])
+//             // console.log('mazeBranches',...mazeBranches)
+//             evaluateBranches(mazeBranches)
+//         }else if(!nextPosition.length && !mazeBranches.length) {
+//             console.log(false)
+//             return false
 //         }
-//         visited.push(row);
+//         lastMove = nextPosition[0][1]
+//         currentPosition = nextMove(currentPosition,nextPosition[0][1])
+//         count++
+//         numMoves++
+//         if(currentPosition.toString() === endPosition.toString()) break
 //     }
-//     var open = [];
-//     open.push(new Location(0, 0, 0));
-
-//     var min = map.length * map.length;
-
-//     while (open.length != 0) {
-//         var p = open.shift();
-//         if (p.x == map.length - 1 && p.y == map[p.x].length - 1 && min > p.steps) {
-//             min = p.steps;
-//         }
-
-//         update(open, map, visited, p.x - 1, p.y, p.steps + 1);
-//         update(open, map, visited, p.x + 1, p.y, p.steps + 1);
-//         update(open, map, visited, p.x, p.y - 1, p.steps + 1);
-//         update(open, map, visited, p.x, p.y + 1, p.steps + 1);
-//     }
-
-//     return min == map.length * map.length ? false : min;
+//     // console.log(currentPosition)
+//     // console.log(numMoves)
 // }
+
+// function evaluateBranches(mazeBranches) {
+//     let currentBranch = mazeBranches[0]
+//     // console.log(currentBranch)
+//     let currentPosition = currentBranch[0]
+//     // console.log(currentPosition)
+//     let startMove = currentBranch[1]
+//     // console.log(startMove)
+
+//     console.log('branch',mazeBranches)
+
+//     mazeBranches = []
+// }
+
+// //takes current position and a direction and returns the coordinates of moving
+// // in that direction
+// function nextMove(currentPosition,direction) {
+//     let row = currentPosition[0]
+//     let column = currentPosition[1]
+//     switch(direction) {
+//         case 'down':
+//             row += 1
+//             break
+//         case 'right':
+//             column += 1
+//             break
+//         case 'up':
+//             row -= 1
+//             break
+//         case 'left':
+//             column -= 1
+//             break
+//     }
+//     let newPosition = [row,column]
+//     return newPosition
+// }
+
+// // takes the current position and the rows and filters out the undefined moves
+// //and the moves that would result in hitting a wall, and the prior move
+// function possibleMoves(currentPosition,rows,lastMove,boundary) {
+
+//     let opposites = {
+//         down: 'up',
+//         right: 'left',
+//         up: 'down',
+//         left: 'right'
+//     }
+
+//     let cardinals = [
+//         [currentPosition[0] - 1, 'up'],
+//         [currentPosition[1] + 1, 'right'],
+//         [currentPosition[0] + 1, 'down'],
+//         [currentPosition[1] - 1, 'left']
+//     ]
+//     cardinals = cardinals.filter(item => item[0] === -1 ||
+//         item[0] > boundary ? false : true)
+//     .filter(item => item[1] === opposites[lastMove] ? false : true)
+//     .filter(item => {
+//         let moveValues = nextMove(currentPosition,item[1])
+//         return rows[moveValues[0]][moveValues[1]] === 'W' ? false : true
+//     })
+//     // console.log(cardinals)
+//     return cardinals
+// }
+
+// pathFinder(`....
+//             ....
+//             ....`)
+
+
+// BEST SOLUTION
+
+class Location {
+    constructor(x, y, steps) {
+        this.x = x;
+        this.y = y;
+        this.steps = steps;
+    }
+}
+
+function update(open, map, visited, x, y, length) {
+    if (x >= 0 && y >= 0 && x < visited.length && y < visited[x].length && map[x][y] == 0 && !visited[x][y]) {
+        visited[x][y] = true;
+        open.push(new Location(x, y, length));
+    }
+}
+
+/*
+parse takes the maze, splits it by the new line so we have three arrays within an array each corresponding to a row. 
+then for each row we check to see if the character at each spot is a dot, if it is a zero gets put in if not a 1 does. 
+so parsed changes each character to either a 0 or a 1. 
+*/
+function parse(maze) {
+    var parsed = [];
+    maze.split("\n").forEach( row => {
+        parsed.push(row.split('').map(x => x == '.' ? 0 : 1));
+    });
+    // console.log(parsed)
+    return parsed;
+}
+
+function pathFinder(maze) {
+    var map = parse(maze);
+    var visited = [];
+    for (var i = 0; i < map.length; i++) {
+        var row = [];
+        for (var j = 0; j < map.length; j++) {
+            row.push(false);
+        }
+        visited.push(row);
+    }
+    //visited takes the new map array we got from parsed and created a new array where each value is either true or false based on 
+    //whether the values in map are 1s or 0s
+    var open = [];
+    open.push(new Location(0, 0, 0));
+
+    var min = map.length * map.length;
+
+    while (open.length != 0) {
+        var p = open.shift();
+        console.log(p)
+        if (p.x == map.length - 1 && p.y == map[p.x].length - 1 && min > p.steps) {
+            min = p.steps;
+        }
+
+        update(open, map, visited, p.x - 1, p.y, p.steps + 1);
+        update(open, map, visited, p.x + 1, p.y, p.steps + 1);
+        update(open, map, visited, p.x, p.y - 1, p.steps + 1);
+        update(open, map, visited, p.x, p.y + 1, p.steps + 1);
+    }
+
+    return min == map.length * map.length ? false : min;
+}
+
+pathFinder(`.W.
+.W.
+...`)
 
 //DID NOT SOLVE WITH OWN SOLUTION 
 
