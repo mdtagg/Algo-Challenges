@@ -1,24 +1,56 @@
-function pathFinder(maze) {
-   let rawMaze = maze.split('\n').map(row => row.split(''))
-   let parsedMaze = []
-   let visited = []
-   for(let i = 0;i < rawMaze.length;i++) {
-    let parsedRow = []
-    let parsedVisited = []
-    for(let j = 0;j < rawMaze[i].length;j++) {
-        if(rawMaze[i][j] === '.') {
-            parsedRow.push(0)
-        }else {
-            parsedRow.push(1)
-        }
-        parsedVisited.push(false)
+function parseMaze(maze) {
+    //returns the maze parsed to 0s and 1s and also the visited spaces array all initialized to false at first 
+    let rawMaze = maze.split('\n').map(row => row.split(''))
+    let parsedMaze = []
+    let visited = []
+    for(let i = 0;i < rawMaze.length;i++) {
+     let parsedRow = []
+     let parsedVisited = []
+     for(let j = 0;j < rawMaze[i].length;j++) {
+         if(rawMaze[i][j] === '.') {
+             parsedRow.push(0)
+         }else {
+             parsedRow.push(1)
+         }
+         parsedVisited.push(false)
+     }
+     parsedMaze.push(parsedRow)
+     visited.push(parsedVisited)
     }
-    parsedMaze.push(parsedRow)
-    visited.push(parsedVisited)
-   }
-//    console.log(rawMaze)
-   console.log(parsedMaze)
-   console.log(visited)
+    return [ parsedMaze, visited ]
+}
+//create new Location object with updated coordinates when the update function is run 
+const Location = (x,y,steps) => {
+    return { x,y,steps }
+}
+//checks to see if all conditions are met at each of the cardinal directions and then updates the visited array, the steps and 
+//creates a new location object with the updated coordinates 
+function update(location,x,y,parsedMaze,visited,steps) {
+    if(x >= 0 && y >= 0 && x <= parsedMaze.length - 1 && y <= parsedMaze[x].length - 1 && parsedMaze[x][y] === 0 && !visited[x][y]) {
+        visited[x][y] = true
+        steps += 1
+        location.push(Location(x,y,steps))
+    }
+}
+
+function pathFinder(maze) {
+    let [ parsedMaze, visited ] = parseMaze(maze)
+    let location = []
+    //location is pushed and not initialized with a new Location object so that it will be empty when all the possible moves have been 
+    //evaluated which will terminate the while loop 
+    location.push(Location(0,0,0))
+    let min = maze.length * maze.length
+    while(location.length) {
+        let currentLocation = location.shift()
+        if(currentLocation.x === parsedMaze.length - 1 && currentLocation.y === parsedMaze.length - 1 && min > currentLocation.steps) {
+            min = currentLocation.steps
+        }
+        update(location,currentLocation.x + 1,currentLocation.y,parsedMaze,visited,currentLocation.steps)
+        update(location,currentLocation.x - 1,currentLocation.y,parsedMaze,visited,currentLocation.steps)
+        update(location,currentLocation.x,currentLocation.y + 1,parsedMaze,visited,currentLocation.steps)
+        update(location,currentLocation.x,currentLocation.y - 1,parsedMaze,visited,currentLocation.steps)
+    }
+    return min === maze.length * maze.length ? false : min
 }
 
 pathFinder(`.W.
