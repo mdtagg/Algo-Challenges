@@ -1,3 +1,4 @@
+
 function parseMaze(maze) {
     //returns the maze parsed to 0s and 1s and also the visited spaces array all initialized to false at first 
     let rawMaze = maze.split('\n').map(row => row.split(''))
@@ -58,27 +59,7 @@ pathFinder(`.W.
 ...`)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// BEST SOLUTION
+// BEST SOLUTION FOUND
 
 // class Location {
 //     constructor(x, y, steps) {
