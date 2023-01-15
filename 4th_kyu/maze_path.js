@@ -1,4 +1,15 @@
+/*
+CHALLENGE: You are given a string representing a maze with a series of dots (.) which represent viable spaces to move and Ws (W) which 
+represent walls you cannot move through, determine what the fastest path through the maze is IF it is possible solve. If it is return 
+the number of moves representing the fastest path and if it is not return false. . You start at coordinates [0,0] (upper right), the maze 
+will always have an equal number of rows and columns and the exit will always be the bottom right of the maze, or row length - 1, 
+column length -1. Here is an example maze 
 
+`.W.
+.W.
+...`
+
+*/
 function parseMaze(maze) {
     //returns the maze parsed to 0s and 1s and also the visited spaces array all initialized to false at first 
     let rawMaze = maze.split('\n').map(row => row.split(''))
