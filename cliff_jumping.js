@@ -1,7 +1,16 @@
 function evaluateJump(setting) {
     let validJumps = [
-      '.#',
-      '..#'
+      '..#',
+      '...#',
+      '..~',
+      '...~',
+      '....~',
+      '..~~',
+      '...~~',
+      '....~~',
+      '.....~~',
+      '......~~',
+      '.......~~'
     ]
     let validMoves = []
     setting = setting.split('\n').map(row => row.trim())
@@ -16,39 +25,65 @@ function evaluateJump(setting) {
       startPosition + 1,
       startPosition + 2
     ].filter(item => item >= 0 && item <= setting[0].length - 1)
-    .map(item => {
+    // console.log(possibleJumps)
+
+    possibleJumps = possibleJumps.map(item => {
       let jumpProfile = []
       for(let i = 0;i < setting.length;i++) {
         jumpProfile.push(setting[i][item])
       }
       return jumpProfile
     })
-    .map(item => {
-      item = item.splice(1)
+    // console.log(possibleJumps)
+    .map((item,index) => {
       let possibles = []
       for(let i = 0;i < item.length;i++) {
         possibles.push(item[i])
-        console.log(possibles)
-        //issue here is that arrays need to be converted to strings for comparison 
-        if(validJumps.includes(possibles.join(''))) {
-          validMoves.push([i + 1,1])
+        if(validJumps.includes(possibles.join('')) && item.includes('~')) {
+          validMoves.push([i,index - 1])
+          break
+        }
+        else if(validJumps.includes(possibles.join(''))) {
+          validMoves.push([i - 1,index - 1])
         }
       }
-      console.log(item)
     })
-    console.log(possibleJumps)
     console.log(validMoves)
-
+    //problem here has to do with the index not being adjusted for when the start position is not above 2
     
     
 }
 
   evaluateJump(
- `.......
-  ..Y....                 
-  ###....                   
-  ####...                   
-  ###....`)
+   `.Y.....                   
+    ###....                   
+    ###....   
+    ###....
+    ###....
+    ###....
+    ###~~~~
+    ###~~~~`)
+
+   // if(setting[0].includes('#')) {
+    //   let firstHash = setting[0][startPosition - 1]
+    //   // let secondHash = setting[0][startPosition + 1]
+
+    //   firstHash === '#' && secondHash === '#' ? possibleJumps = [] :
+    //   firstHash === '#' ? possibleJumps.splice(startPosition - 2,2) :
+    //   possibleJumps.splice(startPosition,2)
+      
+    //   // let firstHash = setting[0].indexOf('#')
+    //   // let lastHash = setting[0].lastIndexOf('#')
+    //   // if(firstHash === startPosition - 1 && lastHash === startPosition + 1) {
+    //   //   possibleJumps = []
+    //   // }else if(firstHash === startPosition - 1) {
+    //   //   possibleJumps.splice(startPosition - 2,2)
+    //   // }else if(lastHash === startPosition + 1) {
+    //   //   possibleJumps.splice(startPosition,2)
+    //   // }
+    // }
+     
+    // // console.log(possibleJumps)
 
   // let settingArray = setting.split('\n')
   //   .map(item => item.trim())
