@@ -1,35 +1,58 @@
 function evaluateJump(setting) {
-    let settingArray = setting.split('\n')
-    .map(item => item.trim())
-    .filter(item => item !== '.......')
-    .map(item => item.split(''))
+    setting = setting.split('\n').map(row => row.trim())
+    while(!setting[0].includes('Y')) {
+      setting.splice(0,1)
+    }
+    console.log(setting)
+    let startPosition = setting[0].indexOf('Y')
+    let possibleJumps = [
+      startPosition - 2,
+      startPosition - 1,
+      startPosition + 1,
+      startPosition + 2
+    ].filter(item => item >= 0 && item <= setting[0].length - 1)
+    .map(item => {
+      let jumpProfile = []
+      for(let i = 0;i < setting.length;i++) {
+        jumpProfile.push(setting[i][item])
+      }
+      return jumpProfile
+    })
     
-    let startLevel = settingArray.findIndex(item => item.includes('Y'))
-    let startPosition = settingArray[startLevel].indexOf('Y')
-    let jumpOptions = []
-
-    for(let i = 0;i < settingArray.length;i++) {
-        jumpOptions.push(settingArray[i].splice(0,startPosition))
-        jumpOptions.push(settingArray[i].splice(startPosition + 1,2))
-    }
-
-    for(let j = 0;j < jumpOptions.length;j+=2) {
-        console.log(jumpOptions[j])
-    }
-    for(let k = 1;k < jumpOptions.length;k+=2) {
-        console.log(jumpOptions[k])
-    }
+    console.log(possibleJumps)
     
-    console.log(jumpOptions)
-    console.log(settingArray)
 }
 
   evaluateJump(
  `.......
   ..Y....                 
   ###....                   
-  ###....                   
+  ####...                   
   ###....`)
+
+  // let settingArray = setting.split('\n')
+  //   .map(item => item.trim())
+  //   .filter(item => item !== '.......')
+  //   .map(item => item.split(''))
+    
+  //   let startLevel = settingArray.findIndex(item => item.includes('Y'))
+  //   let startPosition = settingArray[startLevel].indexOf('Y')
+  //   let jumpOptions = []
+
+  //   for(let i = 0;i < settingArray.length;i++) {
+  //       jumpOptions.push(settingArray[i].splice(0,startPosition))
+  //       jumpOptions.push(settingArray[i].splice(startPosition + 1,2))
+  //   }
+
+  //   for(let j = 0;j < jumpOptions.length;j+=2) {
+  //       console.log(jumpOptions[j])
+  //   }
+  //   for(let k = 1;k < jumpOptions.length;k+=2) {
+  //       console.log(jumpOptions[k])
+  //   }
+    
+  //   console.log(jumpOptions)
+  //   console.log(settingArray)
 
 //   let jumpOptions = [[],[],[],[]]
 //     let count = 0
