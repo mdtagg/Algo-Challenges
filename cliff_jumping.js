@@ -1,4 +1,9 @@
 function evaluateJump(setting) {
+    let validJumps = [
+      ['.','#'],
+      ['.','.','#']
+    ]
+    let validMoves = []
     setting = setting.split('\n').map(row => row.trim())
     while(!setting[0].includes('Y')) {
       setting.splice(0,1)
@@ -18,8 +23,23 @@ function evaluateJump(setting) {
       }
       return jumpProfile
     })
-    
+    .map(item => {
+      item = item.splice(1)
+      let possibles = []
+      for(let i = 0;i < item.length;i++) {
+        possibles.push(item[i])
+        console.log(possibles)
+        //issue here is that arrays need to be converted to strings for comparison 
+        if(validJumps.includes(possibles)) {
+          validMoves.push([i,1])
+        }
+      }
+      console.log(item)
+    })
     console.log(possibleJumps)
+    console.log(validMoves)
+
+    
     
 }
 
