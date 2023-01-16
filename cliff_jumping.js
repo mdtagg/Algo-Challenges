@@ -10,14 +10,15 @@ function evaluateJump(setting) {
       '....~~',
       '.....~~',
       '......~~',
-      '.......~~'
+      '.......~~',
+      '........~~'
     ]
     let validMoves = []
     setting = setting.split('\n').map(row => row.trim())
     while(!setting[0].includes('Y')) {
       setting.splice(0,1)
     }
-    console.log(setting)
+    // console.log(setting)
     let startPosition = setting[0].indexOf('Y')
     let possibleJumps = [
       startPosition - 2,
@@ -26,7 +27,6 @@ function evaluateJump(setting) {
       startPosition + 2
     ].filter(item => item >= 0 && item <= setting[0].length - 1)
     // console.log(possibleJumps)
-
     possibleJumps = possibleJumps.map(item => {
       let jumpProfile = []
       for(let i = 0;i < setting.length;i++) {
@@ -37,32 +37,31 @@ function evaluateJump(setting) {
     // console.log(possibleJumps)
     .map((item,index) => {
       let possibles = []
+      let test = startPosition - 1
+      // index += 1
+      console.log(item)
       for(let i = 0;i < item.length;i++) {
         possibles.push(item[i])
-        if(validJumps.includes(possibles.join('')) && item.includes('~')) {
-          validMoves.push([i,index - 1])
+        if(validJumps.includes(possibles.join('')) && item.includes('~~')) {
+          validMoves.push([i + 1,index])
+        }else if(validJumps.includes(possibles.join('')) && item.includes('~')) {
+          validMoves.push([i,index - test])
           break
         }
         else if(validJumps.includes(possibles.join(''))) {
-          validMoves.push([i - 1,index - 1])
+          validMoves.push([i - 1,index - test])
         }
       }
     })
     console.log(validMoves)
     //problem here has to do with the index not being adjusted for when the start position is not above 2
-    
-    
 }
 
   evaluateJump(
-   `.Y.....                   
-    ###....                   
-    ###....   
-    ###....
-    ###....
-    ###....
-    ###~~~~
-    ###~~~~`)
+   `...Y...
+    ..##...
+    ..##...
+    ~####~~`)
 
    // if(setting[0].includes('#')) {
     //   let firstHash = setting[0][startPosition - 1]
