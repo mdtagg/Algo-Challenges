@@ -1,7 +1,7 @@
 function evaluateJump(setting) {
     let validJumps = [
-      ['.','#'],
-      ['.','.','#']
+      '.#',
+      '..#'
     ]
     let validMoves = []
     setting = setting.split('\n').map(row => row.trim())
@@ -30,8 +30,8 @@ function evaluateJump(setting) {
         possibles.push(item[i])
         console.log(possibles)
         //issue here is that arrays need to be converted to strings for comparison 
-        if(validJumps.includes(possibles)) {
-          validMoves.push([i,1])
+        if(validJumps.includes(possibles.join(''))) {
+          validMoves.push([i + 1,1])
         }
       }
       console.log(item)
