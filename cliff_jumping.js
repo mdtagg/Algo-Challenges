@@ -34,36 +34,79 @@ function evaluateJump(setting) {
       }
       return jumpProfile
     })
+    findMoves(possibleJumps,startPosition)
     // console.log(possibleJumps)
-    .map((item,index) => {
-      let possibles = []
-      startPosition >= 2 && index < 2 ? index -= 2 :
-      startPosition === 1 && index < 1 ? index -= 1:
-      startPosition === 1 && index >= 1 ? index :
-      index -= 1
-      console.log(index)
-      for(let i = 0;i < item.length;i++) {
-        possibles.push(item[i])
-        if(validJumps.includes(possibles.join('')) && item.includes('~~')) {
-          validMoves.push([i + 1,index])
-        }else if(validJumps.includes(possibles.join('')) && item.includes('~')) {
-          validMoves.push([i,index])
-          break
-        }
-        else if(validJumps.includes(possibles.join(''))) {
-          validMoves.push([i - 1,index])
-        }
-      }
-    })
-    console.log(validMoves)
+    // .map((item,index) => {
+    //   let possibles = []
+    //   startPosition >= 2 && index < 2 ? index -= 2 :
+    //   startPosition === 1 && index < 1 ? index -= 1:
+    //   startPosition === 1 && index >= 1 ? index :
+    //   index -= 1
+    //   console.log(index)
+    //   for(let i = 0;i < item.length;i++) {
+    //     possibles.push(item[i])
+    //     if(validJumps.includes(possibles.join('')) && item.includes('~~')) {
+    //       validMoves.push([i + 1,index])
+    //     }else if(validJumps.includes(possibles.join('')) && item.includes('~')) {
+    //       validMoves.push([i,index])
+    //       break
+    //     }
+    //     else if(validJumps.includes(possibles.join(''))) {
+    //       validMoves.push([i - 1,index])
+    //     }
+    //   }
+    // })
+    // console.log(validMoves)
     //problem here has to do with the index not being adjusted for when the start position is not above 2
 }
 
+function findMoves(possibleJumps,startPosition) {
+  let validMoves = []
+  let validJumps = [
+    '..#',
+    '...#',
+    '..x',
+    '...x',
+    '..~',
+    '...~',
+    '....~',
+    '..~~',
+    '...~~',
+    '....~~',
+    '.....~~',
+    '......~~',
+    '.......~~',
+    '........~~'
+  ]
+  possibleJumps.map((item,index) => {
+    let possibles = []
+    startPosition >= 2 && index < 2 ? index -= 2 :
+    startPosition === 1 && index < 1 ? index -= 1:
+    startPosition === 1 && index >= 1 ? index :
+    index -= 1
+    console.log(index)
+    for(let i = 0;i < item.length;i++) {
+      possibles.push(item[i])
+      if(validJumps.includes(possibles.join('')) && item.includes('~~')) {
+        validMoves.push([i + 1,index])
+      }else if(validJumps.includes(possibles.join('')) && item.includes('~')) {
+        validMoves.push([i,index])
+        break
+      }
+      else if(validJumps.includes(possibles.join(''))) {
+        validMoves.push([i - 1,index])
+      }
+    }
+  })
+  console.log(validMoves)
+}
+
   evaluateJump(
- `.Y.....
-  ###....
-  ###....
-  ####~~~`)
+`.......
+.Y#....
+###....
+###xx~~
+###xxxx`)
 
    // if(setting[0].includes('#')) {
     //   let firstHash = setting[0][startPosition - 1]
