@@ -37,19 +37,21 @@ function evaluateJump(setting) {
     // console.log(possibleJumps)
     .map((item,index) => {
       let possibles = []
-      let test = startPosition - 1
-      // index += 1
-      console.log(item)
+      startPosition >= 2 && index < 2 ? index -= 2 :
+      startPosition === 1 && index < 1 ? index -= 1:
+      startPosition === 1 && index >= 1 ? index :
+      index -= 1
+      console.log(index)
       for(let i = 0;i < item.length;i++) {
         possibles.push(item[i])
         if(validJumps.includes(possibles.join('')) && item.includes('~~')) {
           validMoves.push([i + 1,index])
         }else if(validJumps.includes(possibles.join('')) && item.includes('~')) {
-          validMoves.push([i,index - test])
+          validMoves.push([i,index])
           break
         }
         else if(validJumps.includes(possibles.join(''))) {
-          validMoves.push([i - 1,index - test])
+          validMoves.push([i - 1,index])
         }
       }
     })
@@ -58,10 +60,10 @@ function evaluateJump(setting) {
 }
 
   evaluateJump(
-   `...Y...
-    ..##...
-    ..##...
-    ~####~~`)
+ `.Y.....
+  ###....
+  ###....
+  ####~~~`)
 
    // if(setting[0].includes('#')) {
     //   let firstHash = setting[0][startPosition - 1]
