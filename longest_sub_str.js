@@ -3,24 +3,27 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-    if(s === "") return 0
-    if(s.length === 1) return 1
+    if(s === '') return 0
+    let strArray = s.split('')
+    let duplicates = []
     let longestStr = []
-    let highestLen = []
-    s = s.split('')
     let str = []
-    for(let i = 0;i < s.length;i++) {
-        if(!str.includes(s[i])) {
-            str.push(s[i])
-            highestLen.push(str.length)
-        }else {
-            longestStr.push(str)
-            str = []
-            str.push(s[i])
+    while(strArray.length) {
+        for(let i = 0;i < strArray.length;i++) {
+            if(!duplicates.includes(strArray[i])) {
+                duplicates.push(strArray[i])
+                str.push(strArray[i])
+            }else {
+                longestStr.push(str)
+                str = []
+                strArray.splice(0,1)
+                duplicates = []
+                break
+            }
         }
     }
-    console.log(longestStr)
-    return Math.max(...highestLen)
+    longestStr = Math.max(...longestStr.map(item => item.length))
+    
 };
 
 lengthOfLongestSubstring('dvdf')
