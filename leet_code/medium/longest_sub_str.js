@@ -39,7 +39,6 @@ var lengthOfLongestSubstring = function(s) {
         }
 
         uniqueChars.add(s.charAt(right));
-        console.log(s.charAt(right))
         maxLength = Math.max(maxLength, uniqueChars.size);
         right++;
     }
