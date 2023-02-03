@@ -3,13 +3,10 @@
  * @return {string}
  */
 var longestPalindrome = function(s) {
+    console.log(s.length)
     if(s.length === 1) console.log(s)
-    let sLen = s.split('').length / 2
-    let evenPalTest = s.split('').splice(0,sLen).join('')
-    if(evenPalTest === s.split('').splice(sLen).reverse().join('')) {
-        console.log(s)
-    }
-    let highestPal = ''
+    let highestPal = s[0]
+    if(s.split('').every(letter => letter === highestPal)) console.log(s)
     let palindromes = []    
     for(let i = 0;i < s.length;i++) {
         let left = i - 1
@@ -19,28 +16,52 @@ var longestPalindrome = function(s) {
                 if(s[left] === undefined || s[right] === undefined || s[left] !== s[right]) break
                 if(s.slice(left,right + 1).length > highestPal.length) {
                     highestPal = s.slice(left,right + 1)
+                    palindromes.push(highestPal)
                 }
-                palindromes.push(highestPal)
                 right++
                 left--
             }
         }else if(s[i] === s[right]) {
-            while(s[i] === s[right]) {
-                let test = s.slice(i,right + 1)
-                right++
-                if(highestPal.length < test.length) {
-                    highestPal = test
-                }
+            let left = i
+            console.log(i)
+            if(i === 447) {
+                console.log({left,right})
             }
+            while(s[left] !== undefined ||  s[right] !== undefined) {
+                if(s[left] !== s[right]) break
+                let evenPal = s.slice(left,right + 1)
+                // console.log(evenPal)
+                if(highestPal.length < evenPal.length) {
+                    highestPal = evenPal
+                    palindromes.push(highestPal)
+                }
+                right++
+                left--
+        }
         }
     }
     console.log(highestPal)
     console.log(palindromes)
 };
 
+let alphabet = "aabbccddefghijklmnopqrstuvwxyz"
+let alphaTest = alphabet + alphabet.split('').reverse().join('')
+let failTest = "aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa"
 
-longestPalindrome("tattarrattat")
+longestPalindrome(failTest)
 
+
+// "aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa"
+
+
+// console.log(alphaTest)
+
+//EVEN SINGLE PALINDROME
+// let sLen = s.split('').length / 2
+//     let evenPalTest = s.split('').splice(0,sLen).join('')
+//     if(evenPalTest === s.split('').splice(sLen).reverse().join('')) {
+//         console.log(s)
+//     }
 
 
 // let highesArrtPal = ''
