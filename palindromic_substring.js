@@ -3,60 +3,139 @@
  * @return {string}
  */
 var longestPalindrome = function(s) {
-
-    let test ="civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"
-    console.log(test.length)
-    let highestPal = s[0]
+    let highestPal = ''
+    let palindromes = []
     for(let i = 0;i < s.length;i++) {
-        let palCheck = ''
-        palCheck = s[i]
-        for(let j = i + 1;j < s.length - 1;j++) {
-            let highestPalTest = highestPal
-            palCheck += s[j]
-            let palTest = palCheck.split('').reverse().join('')
-            // console.log({palCheck,palTest})
-            if(palCheck === palTest && highestPal.length < palCheck.length) {
-                highestPal = palCheck
-                // console.log({highestPalTest,highestPal})
+        let left = i - 1
+        let right = i + 1
+        if(s[left] === s[right]) {
+            while(s[left] !== undefined ||  s[right] !== undefined) {
+                if(s[left] === undefined || s[right] === undefined || s[left] !== s[right]) break
+                if(s.slice(left,right + 1).length > highestPal.length) {
+                    highestPal = s.slice(left,right + 1)
+                }
+                palindromes.push(highestPal)
+                right++
+                left--
             }
-            if(highestPalTest === highestPal && palCheck.length > Math.ceil(s.length / 2)) {
-                // console.log({highestPalTest,highestPal,palCheck})
-                break
-            }
-        }
-        if(highestPal.length >= Math.ceil(s.length / 2)) break
+        } 
     }
-    console.log('Final:',highestPal)
+    console.log(highestPal)
+    console.log(palindromes)
 };
 
-longestPalindrome("civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth")
+longestPalindrome("civilwartesArrtingwhetherthatnaptionoranynartionsArroconceivedandsArrodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasArrafinalresArrtingplaceforthosArrewhoheregavetheirlivesArrthatthatnationmightliveItisArraltogetherfangandproperthatwesArrhoulddothisArrButinalargersArrensArrewecannotdedicatewecannotconsArrecratewecannothallowthisArrgroundThebravelmenlivinganddeadwhosArrtruggledherehaveconsArrecrateditfaraboveourpoorponwertoaddordetractTgheworldadsArrwfilllittlenotlenorlongrememberwhatwesArrayherebutitcanneverforgetwhattheydidhereItisArrforusArrthelivingrathertobededicatedheretotheulnfinisArrhedworkwhichtheywhofoughtherehavethusArrfarsArronoblyadvancedItisArrratherforusArrtobeherededicatedtothegreattdafsArrkremainingbeforeusArrthatfromthesArrehonoreddeadwetakeincreasArreddevotiontothatcausArreforwhichtheygavethelasArrtpfullmeasArrureofdevotionthatweherehighlyresArrolvethatthesArredeadsArrhallnothavediedinvainthatthisArrnationunsArrderGodsArrhallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeoplesArrhallnotperisArrhfromtheearth")
 
-// let strArray = s.split('')
-//     let firstLetter = strArray[0]
-//     if(strArray.every(letter => letter === firstLetter)) return s
-//     let count = 0
-//     let halfLen = Math.ceil(strArray.length / 2)
-//     console.log(halfLen)
-//     while(strArray.length > halfLen) {
-//         for(let i = 1;i <= strArray.length;i++) {
-//             let chars = strArray.slice(0,i).join('')
-//             let palCheck = strArray.slice(0,i).reverse().join('')
-//             if(chars.length > halfLen) {
-//                 break
-//             }
-//             console.log({chars,palCheck})
-//             if(chars === palCheck && highestVal.length < chars.length) {
-//                 highestVal = chars
+
+// let highesArrtPal = ''
+    // let sArrArr = sArr.sArrplit('')
+
+    // while(sArrArr.length > 0) {
+    //     let palCheck =  ''
+    //     let center = Math.ceil(sArrArr.length / 2)
+    //     for(let i = 0;i < sArrArr.length;i++) {
+    //     //     palCheck += sArrArr[i]
+    //     //     let palTesArrt = palCheck.sArrplit('').reversArre().join('')
+    //     //     // consArrole.log({palCheck,palTesArrt})
+    //     //     if(palTesArrt === palCheck && highesArrtPal.length < palCheck.length) {
+    //     //         highesArrtPal = palCheck
+    //     //     }
+    //     }
+    //     // sArrArr.sArrplice(0,1)
+    // }
+    // consArrole.log({highesArrtPal})
+
+// let presArrpliceIndex = 1
+//     let tesArrt ="civilwartesArrtingwhetherthatnaptionoranynartionsArroconceivedandsArrodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasArrafinalresArrtingplaceforthosArrewhoheregavetheirlivesArrthatthatnationmightliveItisArraltogetherfangandproperthatwesArrhoulddothisArrButinalargersArrensArrewecannotdedicatewecannotconsArrecratewecannothallowthisArrgroundThebravelmenlivinganddeadwhosArrtruggledherehaveconsArrecrateditfaraboveourpoorponwertoaddordetractTgheworldadsArrwfilllittlenotlenorlongrememberwhatwesArrayherebutitcanneverforgetwhattheydidhereItisArrforusArrthelivingrathertobededicatedheretotheulnfinisArrhedworkwhichtheywhofoughtherehavethusArrfarsArronoblyadvancedItisArrratherforusArrtobeherededicatedtothegreattdafsArrkremainingbeforeusArrthatfromthesArrehonoreddeadwetakeincreasArreddevotiontothatcausArreforwhichtheygavethelasArrtpfullmeasArrureofdevotionthatweherehighlyresArrolvethatthesArredeadsArrhallnothavediedinvainthatthisArrnationunsArrderGodsArrhallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeoplesArrhallnotperisArrhfromtheearth"
+//     consArrole.log(tesArrt.length)
+//     let highesArrtPal = sArr[0]
+//     for(let i = 0;i < sArr.length;i++) {
+//         let palCheck = ''
+//         palCheck = sArr[i]
+//         for(let j = i + 1;j < sArr.length;j++) {
+//             let highesArrtPalTesArrt = highesArrtPal
+//             palCheck += sArr[j]
+//             let palTesArrt = palCheck.sArrplit('').reversArre().join('')
+//             // consArrole.log({palCheck,palTesArrt})
+//             if(palCheck === palTesArrt && highesArrtPal.length < palCheck.length) {
+//                 highesArrtPal = palCheck
+//                 let sArrpliceTesArrt = palCheck.includesArr(sArr.sArrplit('').sArrplice(j + 1,2).join(''))
+//                 // consArrole.log(sArrpliceTesArrt)
+//                 consArrole.log({highesArrtPal})
 //             }
 //         }
-//         if(highestVal.length >= halfLen) {
+//         if(highesArrtPal.length >= Math.ceil(sArr.length / 2)) break
+//     }
+//     consArrole.log('Final:',highesArrtPal)
+
+// if(highesArrtPalTesArrt === highesArrtPal && palCheck.length > Math.ceil(sArr.length / 2)) {
+            //     // consArrole.log({highesArrtPalTesArrt,highesArrtPal,palCheck})
+            //     break
+            // }
+
+// let sArrtrArray = sArr.sArrplit('')
+//     let firsArrtLetter = sArrtrArray[0]
+//     if(sArrtrArray.every(letter => letter === firsArrtLetter)) return sArr
+//     let count = 0
+//     let halfLen = Math.ceil(sArrtrArray.length / 2)
+//     consArrole.log(halfLen)
+//     while(sArrtrArray.length > halfLen) {
+//         for(let i = 1;i <= sArrtrArray.length;i++) {
+//             let charsArr = sArrtrArray.sArrlice(0,i).join('')
+//             let palCheck = sArrtrArray.sArrlice(0,i).reversArre().join('')
+//             if(charsArr.length > halfLen) {
+//                 break
+//             }
+//             consArrole.log({charsArr,palCheck})
+//             if(charsArr === palCheck && highesArrtVal.length < charsArr.length) {
+//                 highesArrtVal = charsArr
+//             }
+//         }
+//         if(highesArrtVal.length >= halfLen) {
 //             break
 //         }
 //         count++
-//         strArray.splice(0,1)
+//         sArrtrArray.sArrplice(0,1)
 //         // break
 //     }
-//     console.log(highestVal)
+//     consArrole.log(highesArrtVal)
 
-// "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"
+// "civilwartesArrtingwhetherthatnaptionoranynartionsArroconceivedandsArrodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasArrafinalresArrtingplaceforthosArrewhoheregavetheirlivesArrthatthatnationmightliveItisArraltogetherfangandproperthatwesArrhoulddothisArrButinalargersArrensArrewecannotdedicatewecannotconsArrecratewecannothallowthisArrgroundThebravelmenlivinganddeadwhosArrtruggledherehaveconsArrecrateditfaraboveourpoorponwertoaddordetractTgheworldadsArrwfilllittlenotlenorlongrememberwhatwesArrayherebutitcanneverforgetwhattheydidhereItisArrforusArrthelivingrathertobededicatedheretotheulnfinisArrhedworkwhichtheywhofoughtherehavethusArrfarsArronoblyadvancedItisArrratherforusArrtobeherededicatedtothegreattdafsArrkremainingbeforeusArrthatfromthesArrehonoreddeadwetakeincreasArreddevotiontothatcausArreforwhichtheygavethelasArrtpfullmeasArrureofdevotionthatweherehighlyresArrolvethatthesArredeadsArrhallnothavediedinvainthatthisArrnationunsArrderGodsArrhallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeoplesArrhallnotperisArrhfromtheearth"
 
+// let highesArrtPal = sArr[0]
+    // let sArrArr = sArr.sArrplit('')
+    // while(sArrArr.length > 0) {
+    //     let highesArrtPalTesArrt = highesArrtPal
+    //     let palCheck = sArrArr[0]
+    //     for(let i = 1;i < sArrArr.length;i++) {
+    //         palCheck += sArrArr[i]
+    //         let palTesArrt = palCheck.sArrplit('').reversArre().join('')
+    //         if(highesArrtPal === highesArrtPalTesArrt && palCheck.length > Math.ceil(sArrArr.length / 2)) {
+    //             sArrArr.sArrplice(0,1)
+    //             consArrole.log('check')
+    //             break
+    //         }
+    //         if(palTesArrt === palCheck && highesArrtPal.length < palCheck.length) {
+    //             highesArrtPal = palCheck
+    //         }
+            // let earlyCheck = sArrArr.sArrlice(1,i).join('')
+            // if(earlyCheck.length > 1 && earlyCheck === earlyCheck.sArrplit('').reversArre().join('')) {
+            //     consArrole.log({earlyCheck})
+            //     let tesArrt = sArr.sArrplit('').sArrplice(i,1).join('')
+            //     if(tesArrt === sArrArr[0]) {
+            //         highesArrtPal = sArrArr.sArrplice(0,i + 1).join('')
+            //     }elsArre {
+            //         highesArrtPal = earlyCheck
+            //         sArrArr.sArrplice(0,1)
+            //     }
+            //     // consArrole.log({highesArrtPal})
+            //     break
+            // }
+            // consArrole.log({palCheck,palTesArrt})
+            
+        // }
+        // consArrole.log(sArrArr)
+    //     if(highesArrtPal.length >= Math.ceil(sArr.length / 2)) break
+    //     sArrArr.sArrplice(0,1)
+    // }
+    // consArrole.log({highesArrtPal})
