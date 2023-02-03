@@ -3,12 +3,17 @@
  * @return {string}
  */
 var longestPalindrome = function(s) {
-    console.log(s.length)
     if(s.length === 1) console.log(s)
     let highestPal = s[0]
-    if(s.split('').every(letter => letter === highestPal)) console.log(s)
+    let singlePal = s.split('').splice(0,s.length / 2).join('')
+    let otherHalf = s.split('').splice(s.length / 2).reverse().join('')
+    if(singlePal === otherHalf) console.log(s)
+    if(s.split('').every(letter => letter === highestPal)) {
+        // console.log(s)
+    }
     let palindromes = []    
     for(let i = 0;i < s.length;i++) {
+        // console.log(i)
         let left = i - 1
         let right = i + 1
         if(s[left] === s[right]) {
@@ -21,22 +26,22 @@ var longestPalindrome = function(s) {
                 right++
                 left--
             }
-        }else if(s[i] === s[right]) {
+        }
+        if(s[i] === s[right]) {
             let left = i
-            console.log(i)
-            if(i === 447) {
-                console.log({left,right})
-            }
+            let right = i + 1
+            console.log(i,right)
             while(s[left] !== undefined ||  s[right] !== undefined) {
                 if(s[left] !== s[right]) break
                 let evenPal = s.slice(left,right + 1)
-                // console.log(evenPal)
+                // console.log({evenPal})
                 if(highestPal.length < evenPal.length) {
                     highestPal = evenPal
                     palindromes.push(highestPal)
                 }
                 right++
                 left--
+                // console.log(left,right)
         }
         }
     }
@@ -44,9 +49,10 @@ var longestPalindrome = function(s) {
     console.log(palindromes)
 };
 
-let alphabet = "aabbccddefghijklmnopqrstuvwxyz"
-let alphaTest = alphabet + alphabet.split('').reverse().join('')
-let failTest = "aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa"
+let failTest = "pppp"
+
+//error is happening here because the odd palindrome section of code is firing in the a's
+//because the section containing the center is all a's the odd section fires because s[left] is equal to s[right]
 
 longestPalindrome(failTest)
 
