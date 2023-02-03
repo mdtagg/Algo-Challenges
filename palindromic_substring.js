@@ -3,8 +3,14 @@
  * @return {string}
  */
 var longestPalindrome = function(s) {
+    if(s.length === 1) console.log(s)
+    let sLen = s.split('').length / 2
+    let evenPalTest = s.split('').splice(0,sLen).join('')
+    if(evenPalTest === s.split('').splice(sLen).reverse().join('')) {
+        console.log(s)
+    }
     let highestPal = ''
-    let palindromes = []
+    let palindromes = []    
     for(let i = 0;i < s.length;i++) {
         let left = i - 1
         let right = i + 1
@@ -18,13 +24,23 @@ var longestPalindrome = function(s) {
                 right++
                 left--
             }
-        } 
+        }else if(s[i] === s[right]) {
+            while(s[i] === s[right]) {
+                let test = s.slice(i,right + 1)
+                right++
+                if(highestPal.length < test.length) {
+                    highestPal = test
+                }
+            }
+        }
     }
     console.log(highestPal)
     console.log(palindromes)
 };
 
-longestPalindrome("civilwartesArrtingwhetherthatnaptionoranynartionsArroconceivedandsArrodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasArrafinalresArrtingplaceforthosArrewhoheregavetheirlivesArrthatthatnationmightliveItisArraltogetherfangandproperthatwesArrhoulddothisArrButinalargersArrensArrewecannotdedicatewecannotconsArrecratewecannothallowthisArrgroundThebravelmenlivinganddeadwhosArrtruggledherehaveconsArrecrateditfaraboveourpoorponwertoaddordetractTgheworldadsArrwfilllittlenotlenorlongrememberwhatwesArrayherebutitcanneverforgetwhattheydidhereItisArrforusArrthelivingrathertobededicatedheretotheulnfinisArrhedworkwhichtheywhofoughtherehavethusArrfarsArronoblyadvancedItisArrratherforusArrtobeherededicatedtothegreattdafsArrkremainingbeforeusArrthatfromthesArrehonoreddeadwetakeincreasArreddevotiontothatcausArreforwhichtheygavethelasArrtpfullmeasArrureofdevotionthatweherehighlyresArrolvethatthesArredeadsArrhallnothavediedinvainthatthisArrnationunsArrderGodsArrhallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeoplesArrhallnotperisArrhfromtheearth")
+
+longestPalindrome("tattarrattat")
+
 
 
 // let highesArrtPal = ''
