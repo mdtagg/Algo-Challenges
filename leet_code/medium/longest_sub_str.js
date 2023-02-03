@@ -2,27 +2,33 @@
  * @param {string} s
  * @return {number}
  */
-// var lengthOfLongestSubstring = function(s) {
-//     // if(s === '') return 0
-//     let strArray = s.split('')
-//     let duplicates = []
-//     let highestVal = 0
-//     while(strArray.length) {
-//         for(let i = 0;i < strArray.length;i++) {
-//             if(!duplicates.includes(strArray[i])) {
-//                 duplicates.push(strArray[i])
-//             }else {
-//                 if(highestVal < duplicates.length) {
-//                     highestVal = duplicates.length
-//                 }
-//                 strArray.splice(0,1)
-//                 duplicates = []
-//                 break
-//             }
-//         }
-//     }
-//     console.log(highestVal)
-// };
+
+/*
+Given a string s, find the length of the longest 
+substring without repeating characters.
+*/
+
+var lengthOfLongestSubstring = function(s) {
+    // if(s === '') return 0
+    let strArray = s.split('')
+    let duplicates = []
+    let highestVal = 0
+    while(strArray.length) {
+        for(let i = 0;i < strArray.length;i++) {
+            if(!duplicates.includes(strArray[i])) {
+                duplicates.push(strArray[i])
+            }else {
+                if(highestVal < duplicates.length) {
+                    highestVal = duplicates.length
+                }
+                strArray.splice(0,1)
+                duplicates = []
+                break
+            }
+        }
+    }
+    console.log(highestVal)
+};
 
 //BEST SOLUTION
 
