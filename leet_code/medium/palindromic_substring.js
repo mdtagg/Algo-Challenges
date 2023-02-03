@@ -3,60 +3,72 @@
  * @return {string}
  */
 var longestPalindrome = function(s) {
-    if(s.length === 1) console.log(s)
-    let highestPal = s[0]
+    if(s.length === 1) return s
     let singlePal = s.split('').splice(0,s.length / 2).join('')
     let otherHalf = s.split('').splice(s.length / 2).reverse().join('')
-    if(singlePal === otherHalf) console.log(s)
-    if(s.split('').every(letter => letter === highestPal)) {
-        // console.log(s)
-    }
-    let palindromes = []    
+    if(singlePal === otherHalf) return s
+    let highestPal = s[0]
     for(let i = 0;i < s.length;i++) {
-        // console.log(i)
         let left = i - 1
         let right = i + 1
         if(s[left] === s[right]) {
             while(s[left] !== undefined ||  s[right] !== undefined) {
-                if(s[left] === undefined || s[right] === undefined || s[left] !== s[right]) break
-                if(s.slice(left,right + 1).length > highestPal.length) {
-                    highestPal = s.slice(left,right + 1)
-                    palindromes.push(highestPal)
+                if(s[left] !== s[right]) break
+                let oddPal = s.slice(left,right + 1)
+                if(oddPal.length > highestPal.length) {
+                    highestPal = oddPal
                 }
                 right++
                 left--
             }
         }
         if(s[i] === s[right]) {
-            let left = i
-            let right = i + 1
-            console.log(i,right)
+            left = i
+            right = i + 1
             while(s[left] !== undefined ||  s[right] !== undefined) {
                 if(s[left] !== s[right]) break
                 let evenPal = s.slice(left,right + 1)
-                // console.log({evenPal})
                 if(highestPal.length < evenPal.length) {
                     highestPal = evenPal
-                    palindromes.push(highestPal)
                 }
                 right++
                 left--
-                // console.log(left,right)
         }
         }
     }
-    console.log(highestPal)
-    console.log(palindromes)
+    return highestPal
 };
 
-let failTest = "pppp"
+let test = "aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa"
 
+longestPalindrome(test)
+
+//BEST SOLUTION FOUND
+
+var longestPalindrome = function(s) {
+    for (var v = s.length; v >= 1; --v) {
+        for (var k = 0; k <= s.length - v; ++k) {
+            let i = k;
+            let j = i + v - 1;
+            let yes = true;
+            for (; i < j; ++i, --j) {
+                if (s[i] != s[j]) {
+                    yes = false;
+                }
+            }
+            if (yes) {
+                return s.substr(k, v)
+            }
+        }
+    }
+    return "";
+};
+
+//CODE GRAVEYARD
+
+//"aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa"
 //error is happening here because the odd palindrome section of code is firing in the a's
 //because the section containing the center is all a's the odd section fires because s[left] is equal to s[right]
-
-longestPalindrome(failTest)
-
-
 // "aaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkkllllllllllmmmmmmmmmmnnnnnnnnnnooooooooooppppppppppqqqqqqqqqqrrrrrrrrrrssssssssssttttttttttuuuuuuuuuuvvvvvvvvvvwwwwwwwwwwxxxxxxxxxxyyyyyyyyyyzzzzzzzzzzyyyyyyyyyyxxxxxxxxxxwwwwwwwwwwvvvvvvvvvvuuuuuuuuuuttttttttttssssssssssrrrrrrrrrrqqqqqqqqqqppppppppppoooooooooonnnnnnnnnnmmmmmmmmmmllllllllllkkkkkkkkkkjjjjjjjjjjiiiiiiiiiihhhhhhhhhhggggggggggffffffffffeeeeeeeeeeddddddddddccccccccccbbbbbbbbbbaaaa"
 
 
