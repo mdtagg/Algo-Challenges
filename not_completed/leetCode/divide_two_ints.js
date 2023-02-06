@@ -1,6 +1,5 @@
 var divide = function(dividend, divisor) {
     let solution = 0
-    console.log(2**31)
     if(dividend > 0 && divisor > 0) {
         while(dividend > 0) {
             dividend -= divisor
@@ -39,6 +38,8 @@ var divide = function(dividend, divisor) {
         solution = 2**31 * -1
     }
     console.log(solution)
+    
 }
 
 divide(-2147483648,2)
+
