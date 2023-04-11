@@ -1,48 +1,48 @@
 function decodedResistorValue(colors) {
-    let resistorNumbers = []
+    colors = colors.splice(0,3)
+    let number = []
     let zeros = 0
-    const resistorValues = colors
-    .forEach((color,index) => {
-      if(index <= 1) {
-        resistorNumbers.push(getColorCodes(color))
-        return
-      }
-      const ohmNumber = parseInt(getColorCodes(color))
-      zeros += ohmNumber
+    colors.forEach((color,index) => {
+        if(index === 1 && color === 'black') {
+            zeros += 1
+            return
+        }
+        if(index === 2) {
+            zeros += parseInt(getColorCodes(color))
+            return
+        }
+        number.push(getColorCodes(color))
     })
-    resistorNumbers = resistorNumbers.join('')
-    const test = getLabel(zeros) 
-    console.log(resistorNumbers.concat(test))
+    const labelTest = getLabel(number,zeros)
+    const newNumber = labelTest.number.join('')
+    const fullNumber = newNumber.concat(' ').concat(labelTest.label)
+    console.log(fullNumber)
   }
   
-  decodedResistorValue(['blue','grey','brown'])
-  
-  function getLabel(zeros) {
-    const ohms = []
-    if(zeros % 3 !== 0) {
-      zeros -= 1
-      ohms.push('0 ')
-    }else {
-      ohms.push(' ')
+  decodedResistorValue(['blue', 'green', 'yellow', 'orange'])
+
+  function getLabel(number,zeros) {
+    let label
+    while(zeros % 3 !== 0) {
+        zeros -= 1
+        number.push('0')
     }
+    console.log(zeros)
     switch(zeros) {
-        case 0: 
-          ohms.push('ohms')
-          break;
-        case 1: 
-          ohms.push('ohms')
-          break;
-        case 3: 
-          ohms.push('megaohms')
-          break;
+        case 0:
+            label = 'ohms'
+            break;
+        case 3:
+            label = 'kiloohms'
+            break;
         case 6:
-          ohms.push('kiloohms')
-          break;
+            label = 'megaohms'
+            break;
         case 9:
-          ohms.push('gigaohms')
-          break;
-      }
-    return ohms.join('')
+            label = 'gigaohms'
+            break;
+    }
+    return { number, label }
   }
   
   function getColorCodes(color) {
@@ -70,6 +70,50 @@ function decodedResistorValue(colors) {
       };
     return color
   };
+
+
+  //   function getZeros(number) {
+//     let zeros = 0
+//     console.log(number)
+//     number
+//     .split('')
+//     .forEach(value => {
+//         if(value === '0') {
+//             zeros += 1
+//         }
+//     })
+//     return zeros
+//   }
+  // let resistorNumber = []
+    // let zeros = []
+    // colors.forEach((color,index) => {
+    //     if(index <= 1) {
+    //         resistorNumber.push(getColorCodes(color))
+    //         return
+    //     }
+    //     const zerosTest = '0'.repeat(parseInt(getColorCodes(color)))
+    //     zeros.push(zerosTest)
+    // })
+
+    // const zeros = getZeros(number.join(''))
+    // console.log(zeros)
+    // const testTwo = getLabel(zeros)
+    // console.log(testTwo)
+
+//   let resistorNumbers = []
+//     let zeros = 0
+//     const resistorValues = colors
+//     .forEach((color,index) => {
+//       if(index <= 1) {
+//         resistorNumbers.push(getColorCodes(color))
+//         return
+//       }
+//       const ohmNumber = parseInt(getColorCodes(color))
+//       zeros += ohmNumber
+//     })
+//     resistorNumbers = resistorNumbers.join('')
+//     const test = getLabel(zeros) 
+//     console.log(resistorNumbers.concat(test))
   
   // console.log(colorsTest)
   //   const numZeros = 0
