@@ -1,4 +1,4 @@
-export function toRna(dna) {
+function toRna(dna) {
     const rna = dna
       .split('')
       .map(letter => {
