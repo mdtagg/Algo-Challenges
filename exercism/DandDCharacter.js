@@ -1,21 +1,18 @@
+
+
 class DnDCharacter {
-    
-    static generateAbilityScore() {
-        const abilities = {}
-        const abilityNames = ['strength','dexterity','constitution','intelligence','wisdom','charisma','hitpoints']
-        while(abilityNames.length) {
-            const abilityName = abilityNames.shift()
-            if(abilityName !== 'hitpoints') {
-                abilities[abilityName] = this.rollAbility()
-            }else {
-                abilities[abilityName] = 10 + this.getModifierFor(abilities.constitution)
-            }
-        }
-        console.log(abilities)
-        return abilities
+
+    constructor() {
+        this.strength = DnDCharacter.generateAbilityScore()
+        this.intelligence = DnDCharacter.generateAbilityScore()
+        this.charisma = DnDCharacter.generateAbilityScore()
+        this.dexterity = DnDCharacter.generateAbilityScore()
+        this.wisdom = DnDCharacter.generateAbilityScore()
+        this.constitution = DnDCharacter.generateAbilityScore()
+        this.hitpoints = 10 + DnDCharacter.getModifierFor(this.constitution)
     }
-  
-    static rollAbility() {
+
+    static generateAbilityScore() {
         let rolls = 4
         const abilityScores = []
         while(rolls > 0) {
@@ -38,11 +35,24 @@ class DnDCharacter {
 
   }
 //   DnDCharacter.generateAbilityScore()
-const zidane = new DnDCharacter()
-zidane.constitution = DnDCharacter.generateAbilityScore('constitution')
-zidane.hitPoints = 10 + DnDCharacter.getModifierFor(zidane.constitution)
-console.log(zidane)
+// const zidane = new DnDCharacter()
+// zidane.constitution = DnDCharacter.generateAbilityScore()
+// // zidane.hitPoints = 10 + DnDCharacter.getModifierFor(zidane.constitution)
+// console.log(zidane)
 
+
+// const abilities = {}
+        // const abilityNames = ['strength','dexterity','constitution','intelligence','wisdom','charisma','hitpoints']
+        // while(abilityNames.length) {
+        //     const abilityName = abilityNames.shift()
+        //     if(abilityName !== 'hitpoints') {
+        //         abilities[abilityName] = this.rollAbility()
+        //     }else {
+        //         abilities[abilityName] = 10 + this.getModifierFor(abilities.constitution)
+        //     }
+        // }
+        // console.log(abilities)
+        // return abilities
 // console.log(DnDCharacter.getModifierFor(3))
 
 //   const abilities = {}
