@@ -1,30 +1,30 @@
-// var distinctNames = function(ideas) {
-//     let left = 0
-//     let right = left + 1
-//     let uniqueNames = []
-//     while(left < ideas.length - 1) {
-//         let firstLetter1 = ideas[left][0]
-//         let firstLetter2 = ideas[right][0]
-//         let body1 = ideas[left].slice(1)
-//         let body2 = ideas[right].slice(1)
-//         let uniqueTest1 = firstLetter1.concat(body2)
-//         let uniqueTest2 = firstLetter2.concat(body1)
-//         console.log({uniqueTest1,uniqueTest2})
-//         if(!ideas.includes(uniqueTest1) && 
-//             !ideas.includes(uniqueTest2)) {
-//                 uniqueNames.push(`${uniqueTest1} ${uniqueTest2}`)
-//                 uniqueNames.push(`${uniqueTest2} ${uniqueTest1}`)
-//         }
-//         if(right === ideas.length - 1) {
-//             left++
-//             right = left + 1
-//         }else {
-//             right++
+var distinctNames = function(ideas) {
+    let left = 0
+    let right = left + 1
+    let uniqueNames = []
+    while(left < ideas.length - 1) {
+        let firstLetter1 = ideas[left][0]
+        let firstLetter2 = ideas[right][0]
+        let body1 = ideas[left].slice(1)
+        let body2 = ideas[right].slice(1)
+        let uniqueTest1 = firstLetter1.concat(body2)
+        let uniqueTest2 = firstLetter2.concat(body1)
+        console.log({uniqueTest1,uniqueTest2})
+        if(!ideas.includes(uniqueTest1) && 
+            !ideas.includes(uniqueTest2)) {
+                uniqueNames.push(`${uniqueTest1} ${uniqueTest2}`)
+                uniqueNames.push(`${uniqueTest2} ${uniqueTest1}`)
+        }
+        if(right === ideas.length - 1) {
+            left++
+            right = left + 1
+        }else {
+            right++
 
-//         }
-//     }
-//     console.log(uniqueNames)
-// }
+        }
+    }
+    console.log(uniqueNames)
+}
 
 
 
@@ -80,18 +80,7 @@
 //     return result;
 //  };
 
-var distinctNames = (ideas) => {
-    let duplicates = []
-    for(let i = 0;i < ideas.length;i++) {
-        duplicates.includes(ideas[i]) ? 
-        ideas.splice(i,1) :
-        duplicates.push(ideas[i])
-    
-    }
-    console.log(ideas)
-}
-
- distinctNames(["coffee","donuts","time","toffee",'coffee'])
+ distinctNames(["coffee","donuts","time","toffee"])
 
 // let uniqueNames = []
 //     ideas.forEach((idea,index) => {
