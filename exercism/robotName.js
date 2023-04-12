@@ -44,6 +44,7 @@ class Robot {
     const randomNumber = (Math.ceil(Math.random() * 10)).toString()
     return randomNumber
   }
+  
 const robot = new Robot()
 robot.name
 robot.name
