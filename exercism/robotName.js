@@ -3,20 +3,16 @@ class Robot {
     static robotNames
 
     constructor() {
-      Robot.robotNames = new Map()
+      Robot.robotNames = new Set()
       this.robotName = this.generateName(0)
-      this.mapIndex = 0
     }
   
     get name() {
         return this.robotName
     }
 
-    generateName(mapIndex) {
+    generateName() {
       
-      if(mapIndex !== 0) {
-        mapIndex = this.mapIndex
-      }
       const roboName = 
         [
             getRandomLetter(),
@@ -26,23 +22,17 @@ class Robot {
             getRandomNumber()
         ]
         .join('')
-
-        Robot.robotNames.set(mapIndex,roboName)
-        this.mapIndex += 1
-
+        if(Robot.robotNames.has(roboName)) {
+          return this.generateName()
+        }
+        Robot.robotNames.add(roboName)
         return roboName
     }
   
     resetName() {
-        const newName = this.generateName()
-        const listOfNames = Array.from(Robot.robotNames.values())
-        console.log(newName,listOfNames)
-        // if(listOfNames.includes(newName)) {
-        //   this.resetName()
-        //   return
-        // }
-        // this.robotName = this.generateName()
-        // return this.name
+
+      this.robotName = this.generateName()
+      return this.name
     }
   
     static releaseNames() {
@@ -69,7 +59,7 @@ robot.generateName()
 // robot.generateName()
 // robot.generateName()
 robot.resetName()
-
+console.log(robot.name)
 console.log(Robot.robotNames)
 // console.log(Array.from(Robot.robotNames.values()))
 // console.log(Robot.robotNames)
