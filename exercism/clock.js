@@ -3,8 +3,11 @@ class Clock {
       this.parsedTime = this.parseTime(hours,minutes) 
     }
 
-    parseTime(hours,minutes) {
-        const hoursToAdjust = Math.floor(minutes / 60)
+    parseTime(hours,minutes,operation) {
+        let hoursToAdjust = Math.floor(minutes / 60)
+        // if(operation === 'plus') {
+        //     hoursToAdjust = Math.floor(minutes / 60)
+        // }
         let adjustedHours = (hours + hoursToAdjust) % 24
         let adjustedMinutes = minutes % 60
 
