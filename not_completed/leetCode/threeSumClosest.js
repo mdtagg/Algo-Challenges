@@ -36,6 +36,10 @@ const threeSumClosest = (nums, target) => {
         return a - b
     })
     console.log(nums)
+    for(let i = 0;i < nums.length - 2;i++) {
+        let start = i + 1
+        let end = nums.length - 1
+    }
 }
 
 
