@@ -7,10 +7,38 @@
     <title>Document</title>
 </head>
 <body>
-
+    <div class="square turq left"></div>
+    <div class="square white left"></div>
+    <div class="square yellow"></div>
 </body>
 
 <style>
-
+body {
+      background:#E3516E;
+      margin:0
+  }
+  .left {
+    left:100;
+    top:50
+}
+  .turq {
+    background:#51B5A9;
+  }
+  .white {
+    background:#F7F3D7;
+    rotate:-90deg;
+}
+  .yellow {
+    background:#FADE8B;
+    bottom:150px;
+    left:200;
+    rotate:90deg
+}
+  .square {
+    height:100px;
+    width:100px;
+    border-radius:100% 0 0 0;
+    position:relative;
+}
 </style>
 </html>
