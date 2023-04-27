@@ -7,10 +7,21 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="bar one"></div>
-    <div class="bar two"></div>
-    <div class="bar three"></div>
-    <div class="bar four"></div>
+<div class="cap"></div>
+<div class="container">
+  <div class="bar one"></div>
+  <div class="square square-one"></div>
+</div>
+<div class="container">
+  <div class="bar two"></div>
+  <div class="square square-two"></div>
+</div>
+<div class="container">
+  <div class="bar three"></div>
+  <div class="square square-three"></div>
+  <div class="bar four"></div>
+  <div class="cap end"></div>
+</div>
 </body>
 
 <style>
@@ -19,29 +30,69 @@
      position:absolute;
      margin:0;
    }
+  .cap {
+    height:30px;
+    width:40px;
+    top:100px;
+    position:relative;
+    background:#FFFBDA;
+    border-radius:90px 90px 0 0;
+  }
   .bar {
     background-color:#FFFBDA;
-    height:120px;
-    width:40px;
+    height:90px;
+    width:80px;
     position:relative;
-    border-radius:90px 90px 90px 90px;    
   }
+  .container {
+    display:flex;
+  }
+  .square {
+    height:70px;
+    width:51px;
+    background:#E38F66;
+    position:absolute;
+    z-index:1;
+    border-radius:0 0 0 10px
+}
   .one {
     top:100px;
+    border-radius:0 0 0 20px;
   }
+  .square-one {
+    left:40;
+    top:110;
+}
   .two {
-    top:20px;
+    top:60px;
     left:40px;
+    border-radius:0 20px 0 0
+  }
+  .square-two {
+    top:220;
+    left:29;
+    border-radius:10px 10px 0 0
+}
+  .three {
+    bottom:10px;
+    left: 85;
     transform:rotate(90deg);
   }
-  .three {
-    left:80px;
-    bottom:60px;
+  .square-three {
+    left:120;
+    bottom:40
   }
   .four {
-    bottom:140px;
-    left: 120px;
+    top:5;
+    left: 5px;
     transform:rotate(90deg);
+    border-radius:20px 0 20px;
+}
+  .end {
+    position:absolute;
+    left:165;
+    top:265;
+    rotate:90deg
 }
 </style>
 </html>
