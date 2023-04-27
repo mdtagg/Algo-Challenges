@@ -7,10 +7,34 @@
     <title>Document</title>
 </head>
 <body>
-
+    <div class="square"></div>
+    <div class="cap"></div>
+    <div class="cap side"></div>
 </body>
 
 <style>
-
+body {
+    background-color:#4F77FF;
+    margin:0;
+}
+  .square {
+    height:150px;
+    width:150px;
+    background-color:#1038BF;
+    position:relative;
+  }
+  .cap {
+    height:50px;
+    width:50px;
+    background-color:#1038BF;
+    border-radius:0 0 100% 100%;
+    position:relative;
+    left: 100;
+}
+  .side {
+    transform:rotate(-90deg);
+    left:150;
+    bottom:100
+  }
 </style>
 </html>

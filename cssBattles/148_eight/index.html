@@ -7,10 +7,35 @@
     <title>Document</title>
 </head>
 <body>
-
+    <div class="container">
+        <div class="circle"></div>
+        <div class="circle bottom"></div>
+      </div>
 </body>
 
 <style>
-
+body {
+    background-color:#926927;
+    margin:0;
+    position:absolute;
+}
+  .container {
+    width:min-content;
+    position:relative;
+    left:173;
+    transform-origin:top left;
+    transform:rotate(-45deg)
+}
+  .circle {
+    height:100px;
+    width:100px;
+    background-color:transparent;
+    border-radius:100%;
+    border:40px solid #6D480A
+}
+  .bottom {
+    position:relative;
+    bottom:40
+  }
 </style>
 </html>

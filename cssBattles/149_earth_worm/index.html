@@ -7,10 +7,41 @@
     <title>Document</title>
 </head>
 <body>
-
+    <div class="bar one"></div>
+    <div class="bar two"></div>
+    <div class="bar three"></div>
+    <div class="bar four"></div>
 </body>
 
 <style>
-
+    body {
+     background-color:#E38F66;
+     position:absolute;
+     margin:0;
+   }
+  .bar {
+    background-color:#FFFBDA;
+    height:120px;
+    width:40px;
+    position:relative;
+    border-radius:90px 90px 90px 90px;    
+  }
+  .one {
+    top:100px;
+  }
+  .two {
+    top:20px;
+    left:40px;
+    transform:rotate(90deg);
+  }
+  .three {
+    left:80px;
+    bottom:60px;
+  }
+  .four {
+    bottom:140px;
+    left: 120px;
+    transform:rotate(90deg);
+}
 </style>
 </html>
