@@ -8,13 +8,13 @@ const threeSumClosest = (nums, target) => {
     nums.sort((a,b) => {
         return a - b
     })
-    console.log(nums)
+    // console.log(nums)
     let solution = nums[0] + nums[1] + nums[nums.length - 1]
     for(let i = 0;i < nums.length - 2;i++) {
         let start = i + 1
-        let end = nums.length -1
+        let end = nums.length - 1
         while(start < end) {
-            let sum = nums[i] + nums[start] + nums[end]
+            const sum = nums[i] + nums[start] + nums[end]
             if(sum > target) {
                 end--
             }else {
@@ -23,37 +23,23 @@ const threeSumClosest = (nums, target) => {
             if(Math.abs(sum - target) < Math.abs(solution - target)) {
                 solution = sum
             }
-            console.log(solution)
         }
     }
+    return solution
 }
 threeSumClosest([-1,2,1,-4],1)
 
+/*
+WHAT I LEARNED 
+
+This solution is much faster than my first attempt with nested loops. This
+is because a two pointer solution is used. The number set is gradually decreased
+from its ends based on wether or not the sum of the three numbers is less than
+or greater than the target. 
+*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//CODE GRAVEYARD
 //nums.sort((a,b) => {
     //     return a - b
     // })
