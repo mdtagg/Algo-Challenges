@@ -1,68 +1,115 @@
-
 var UndergroundSystem = function() {
-    this.travelLog = {}
+    this.avg = new Map();
+    this.train = new Map();
 };
 
-UndergroundSystem.prototype.checkIn = function(id, stationName, t) {
-    if(!this.travelLog.hasOwnProperty(id)) {
-        this.travelLog[id] = {"entries":[]}
-    } 
-    this.travelLog[id]["checkIn"] = [stationName,t]
+UndergroundSystem.prototype.checkIn = function(id, start, t) {
+    this.train.set(id, [start, t]);
+    // console.log(this.train.get(id))
 };
 
-UndergroundSystem.prototype.checkOut = function(id, stationName, t) {
-    if(this.travelLog.hasOwnProperty(id)) {
-        const [checkInStation,time] = this.travelLog[id]["checkIn"]
-        const rideEntry = {
-            [checkInStation]: time,
-            [stationName]:t
-        }
-        this.travelLog[id]["entries"].push(rideEntry)
+UndergroundSystem.prototype.checkOut = function(id, end, t) {
+    //destructures the starting station and the starting time
+    const [start, s] = this.train.get(id);
+    // joins starting and ending station names with a ,
+    const key = [start, end].join();
+
+    //if the rider has a start and stop that has been logged before
+    if (this.avg.has(key)) {
+        let [avg, cnt] = this.avg.get(key);
+
+        console.log('cnt before', cnt)
+
+        this.avg.set(key, [avg * (cnt/++cnt) + ((t - s)/cnt), cnt]);
+
+        console.log('cnt after', cnt)
+        
+    } else {
+        //sets the avg object with the time spent traveling and an initial counter
+        this.avg.set(key, [(t - s), 1]);
     }
-    console.log(this.travelLog)
+    this.train.delete(id);
+    // console.log(this.avg)
 };
 
-UndergroundSystem.prototype.getAverageTime = function(startStation, endStation) {
-    let test = []
-    for(id in this.travelLog) {
-        const rider = this.travelLog[id]
-        rider.entries.forEach(entry => {
-            const [checkInStation,checkOutStation] = Object.getOwnPropertyNames(entry)
-            if(checkInStation === startStation && checkOutStation === endStation) {
-                const startTime = entry[checkInStation]
-                const endTime = entry[checkOutStation]
-                const travelTime = Math.abs(startTime - endTime)
-                console.log(travelTime)
-                test.push(travelTime)
-            }
-        })
-        this.travelLog[id]['entries'] = []
-    }
-    const numberOfEntries = test.length
-    test = test.reduce((total,amt) => {
-        return total + amt
-    })
-    console.log(test / numberOfEntries)
+UndergroundSystem.prototype.getAverageTime = function(start, end) {
+    return this.avg.get([start, end].join())[0];
 };
 
 const test = new UndergroundSystem()
 
-test.checkIn(1,"newbury",4)
-test.checkOut(1,'thousand oaks',5)
-
-test.checkIn(1,"newbury",5)
+test.checkIn(1,'newbury',5)
 test.checkOut(1,'thousand oaks',6)
 
-test.getAverageTime('newbury','thousand oaks')
+test.checkIn(1,'newbury',6)
+test.checkOut(1,'thousand oaks',8)
 
-test.checkIn(1,"newbury",4)
-test.checkOut(1,"thousand oaks",5)
+//THIRD TRY
 
-test.checkIn(1,"westlake",8)
-test.checkOut(1,"camarillo",9)
+// var UndergroundSystem = function() {
+//     this.travelLog = {}
+// };
 
-test.checkIn(2,"thousand oaks",1)
-test.checkOut(2,"westlake",2)
+// UndergroundSystem.prototype.checkIn = function(id, stationName, t) {
+//     if(!this.travelLog.hasOwnProperty(id)) {
+//         this.travelLog[id] = {"entries":[]}
+//     } 
+//     this.travelLog[id]["checkIn"] = [stationName,t]
+// };
+
+// UndergroundSystem.prototype.checkOut = function(id, stationName, t) {
+//     if(this.travelLog.hasOwnProperty(id)) {
+//         const [checkInStation,time] = this.travelLog[id]["checkIn"]
+//         const rideEntry = {
+//             [checkInStation]: time,
+//             [stationName]:t
+//         }
+//         this.travelLog[id]["entries"].push(rideEntry)
+//     }
+//     console.log(this.travelLog)
+// };
+
+// UndergroundSystem.prototype.getAverageTime = function(startStation, endStation) {
+//     let test = []
+//     for(id in this.travelLog) {
+//         const rider = this.travelLog[id]
+//         rider.entries.forEach(entry => {
+//             const [checkInStation,checkOutStation] = Object.getOwnPropertyNames(entry)
+//             if(checkInStation === startStation && checkOutStation === endStation) {
+//                 const startTime = entry[checkInStation]
+//                 const endTime = entry[checkOutStation]
+//                 const travelTime = Math.abs(startTime - endTime)
+//                 console.log(travelTime)
+//                 test.push(travelTime)
+//             }
+//         })
+//         this.travelLog[id]['entries'] = []
+//     }
+//     const numberOfEntries = test.length
+//     test = test.reduce((total,amt) => {
+//         return total + amt
+//     })
+//     console.log(test / numberOfEntries)
+// };
+
+// const test = new UndergroundSystem()
+
+// test.checkIn(1,"newbury",4)
+// test.checkOut(1,'thousand oaks',5)
+
+// test.checkIn(1,"newbury",5)
+// test.checkOut(1,'thousand oaks',6)
+
+// test.getAverageTime('newbury','thousand oaks')
+
+// test.checkIn(1,"newbury",4)
+// test.checkOut(1,"thousand oaks",5)
+
+// test.checkIn(1,"westlake",8)
+// test.checkOut(1,"camarillo",9)
+
+// test.checkIn(2,"thousand oaks",1)
+// test.checkOut(2,"westlake",2)
 
 // test.getAverageTime('newbury','thousand oaks')
 /** 
