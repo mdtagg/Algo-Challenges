@@ -11,27 +11,44 @@ unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
 
 */
 
-const fourSum = () => {
+const fourSum = (nums,target) => {
 
+    nums = nums.sort((a,b) => a - b)
+    console.log(nums)
+    const quadruplets = []
+
+    for(let i = 0;i < nums.length - 3;i++) {
+        for(let j = i + 1;j < nums.length - 2;j++) {
+            let low = j + 1
+            let high = nums.length - 1
+
+            while(low < high) {
+                //ERROR had these two variables in the j loop
+                const numberSet = [nums[i],nums[j],nums[low],nums[high]]
+                const sum = numberSet.reduce((total,amt) => total + amt)
+                if(sum === target) {
+                    quadruplets.push(numberSet)
+                    while(nums[low + 1] === nums[low]) low++;
+                    while(nums[high + 1] === nums[high]) high++;
+                    low++
+                    high--
+                }
+                else if(sum < target) {
+                    low++
+                }
+                else {
+                    high--
+                }
+            }
+            while(nums[j + 1] === nums[j]) j++;
+        }
+        while(nums[i + 1] === nums[i]) i++;
+    }
+    console.log(quadruplets)
+    return quadruplets
 }
 
 fourSum([1,0,-1,0,-2,2],0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // REDO 1
