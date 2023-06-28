@@ -10,42 +10,8 @@ smallest sums.
 */
 
 var kSmallestPairs = function(nums1, nums2, k) {
-    if(!nums1.length || !nums2.length) return 
-
-    const kPairArray = []
-    let max = -Infinity
-
-    for(let i = 0;i < nums1.length;i++) {
-        for(let j = 0;j < nums2.length;j++) {
-
-            let sum = nums1[i] + nums2[j]
-            let nums = [nums1[i],nums2[j]]
-
-            if(sum >= max && kPairArray.length >= k) break
-            else if(sum > max && kPairArray.length < k) {
-                kPairArray.push({sum,nums})
-                max = sum
-            }else if(sum <= max && kPairArray.length < k) {
-                kPairArray.push({sum,nums})
-            }else if(sum < max && kPairArray.length >= k) {
-                let newMax = -Infinity
-                let replace = false
-
-                for(let i = 0;i < kPairArray.length;i++) {
-                    if(!replace && kPairArray[i].sum === max) {
-                        kPairArray[i] = {sum,nums}
-                        replace = true
-                    }
-                    if(kPairArray[i].sum > newMax) newMax = kPairArray[i].sum;
-                }
-                max = newMax
-            }
-        }
-    }
-    const test = kPairArray.map(pair => pair.nums)
-    console.log(test)
-    return kPairArray.map(pair => pair.nums)
-};
+    
+}
 
 kSmallestPairs([0,0,0,0,0],[-3,22,35,56,76],22)
 
@@ -65,13 +31,87 @@ kSmallestPairs([0,0,0,0,0],[-3,22,35,56,76],22)
 
 
 
+//REDO 2
+
+// if(!nums1.length || !nums2.length) return
+
+//     const kPairsArray = []
+//     let max = -Infinity
+    
+//     //ERROR did nums1.length - 3
+//     for(let i = 0;i < nums1.length;i++) {
+//         //ERROR did nums2.length - 2 also had j + 1
+//         for(let j = 0;j < nums2.length;j++) {
+//             const sum = nums1[i] + nums2[j]
+//             const nums = [nums1[i],nums2[j]]
+//             const obj = {sum,nums}
+
+//             if(sum >= max && kPairsArray.length >= k) break
+//             if(sum > max && kPairsArray.length < k) {
+//                 kPairsArray.push(obj)
+//                 max = sum
+//             }
+//             else if(sum <= max && kPairsArray.length < k) {
+//                 kPairsArray.push(obj)
+//             }
+//             else if(kPairsArray.length >= k && sum < max) {
+//                 let newMax = -Infinity
+//                 let replaced = false 
+
+//                 for(let i = 0;i < kPairsArray.length;i++) {
+//                     if(!replaced && kPairsArray[i].sum === max) {
+//                         replaced = true
+//                         kPairsArray[i] = obj
+//                     }
+//                     //ERROR should be equal to kPairsArray.sum not current sum
+//                     if(kPairsArray[i].sum > newMax) newMax = kPairsArray[i].sum;
+//                 }
+//                 //ERROR should be max = newMax not newMax = max
+//                 max = newMax
+//             }
+//             console.log(kPairsArray)
+//         }
+//     }
+//     console.log(kPairsArray.map(pair => pair.nums))
+//     return kPairsArray.map(pair => pair.nums)
 
 
 
+// if(!nums1.length || !nums2.length) return 
 
+//     const kPairArray = []
+//     let max = -Infinity
 
+//     for(let i = 0;i < nums1.length;i++) {
+//         for(let j = 0;j < nums2.length;j++) {
 
+//             let sum = nums1[i] + nums2[j]
+//             let nums = [nums1[i],nums2[j]]
 
+//             if(sum >= max && kPairArray.length >= k) break
+//             else if(sum > max && kPairArray.length < k) {
+//                 kPairArray.push({sum,nums})
+//                 max = sum
+//             }else if(sum <= max && kPairArray.length < k) {
+//                 kPairArray.push({sum,nums})
+//             }else if(sum < max && kPairArray.length >= k) {
+//                 let newMax = -Infinity
+//                 let replace = false
+
+//                 for(let i = 0;i < kPairArray.length;i++) {
+//                     if(!replace && kPairArray[i].sum === max) {
+//                         kPairArray[i] = {sum,nums}
+//                         replace = true
+//                     }
+//                     if(kPairArray[i].sum > newMax) newMax = kPairArray[i].sum;
+//                 }
+//                 max = newMax
+//             }
+//         }
+//     }
+//     const test = kPairArray.map(pair => pair.nums)
+//     console.log(test)
+//     return kPairArray.map(pair => pair.nums)
 
 
 //EXPLANATION
