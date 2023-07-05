@@ -20,9 +20,6 @@ function ListNode(val, next) {
 const node3 = new ListNode(4)
 const node2 = new ListNode(2,node3)
 const l1 = new ListNode(1,node2)
-// const l1 = new ListNode([node1,node2,node3],node2)
-
-// console.log(l1)
 
 const node2_3 = new ListNode(4)
 const node2_2 = new ListNode(3,node2_3)
@@ -30,31 +27,8 @@ const l2 = new ListNode(1,node2_2)
 
 console.log(mergeTwoLists(l1,l2))
 
-// console.log()
+// - In this challenge we are using recursion to merge the two lists
+// - We do this by redefining what the next value in the linked list is on each recursion. 
+// - The first equality comparison chooses what the head of the linked list will be and then 
+//  each recursion resets the value of .next until we hit the tail of the list. 
 
-
-// let node1 = new ListNode(1)
-// let node2 = new ListNode(2)
-// let node3 = new ListNode(4)
-
-// node1.next = node2
-// node2.next = node3
-
-// let list1 = new LinkedList(node1)
-// console.log(list1)
-
-// {
-//     val: { value: 1 },
-//     next: {
-//       value: [2,4],
-//     }
-//   }
-//   {
-//     val: { value: 2 },
-//     next: { value: [4] }
-//   }
-//   {
-//     val: { value: 4 },
-//     next: { value: null }
-//   }
-  
