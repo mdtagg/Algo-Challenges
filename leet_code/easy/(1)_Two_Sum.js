@@ -4,6 +4,7 @@ You may assume that each input would have exactly one solution,
 and you may not use the same element twice.
 You can return the answer in any order.*/ 
 
+//REDO 1
 
 var twoSum = (nums,target) => {
   const map = new Map()
@@ -16,9 +17,6 @@ var twoSum = (nums,target) => {
     map.set(nums[i],i)
   }
 }
-
-
-
 
 console.log(twoSum([3,2,4],6))
 
@@ -49,6 +47,8 @@ console.log(twoSum([3,2,4],6))
 //   let map = new Map();
 
 //   for (let i = 0; i<nums.length; i++){
+  //diff is used to find the first number in the correct solution
+    //and store it in the map for later use
 //       let diff = target - nums[i];
 //       if (map.has(diff)){
 //           return [map.get(diff), i];
