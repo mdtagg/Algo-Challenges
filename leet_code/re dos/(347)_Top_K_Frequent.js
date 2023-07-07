@@ -1,17 +1,47 @@
+/*
 
+Given an integer array nums and an integer k, return the k most 
+frequent elements. You may return the answer in any order.
+
+ex: 
+
+Input: nums = [1,1,1,2,2,3], k = 2
+Output: [1,2]
+ 
+
+*/
 
 var topKFrequent = function(nums, k) {
     
+    const freqMap = new Map()
+    const numberArray = []
+    const results = []
 
+    for(let i = 0;i < nums.length;i++) {
+        if(freqMap.has(nums[i])) {
+            freqMap.set(nums[i],freqMap.get(nums[i]) + 1)
+        } else {
+            freqMap.set(nums[i],1)
+        }
+    }
+    
+    for(let entry of freqMap) {
+        const [ num, freq ] = entry 
+        //ERROR: forgot to return the set at numberArray[freq] or a new set with the added number
+        //numberArray[freq] = num
+        numberArray[freq] = (numberArray[freq] || new Set()).add(num)
+    }
 
+    for(let i = numberArray.length - 1;i >= 0;i--) {
+        //ERROR: now that you introduced sets you just need check if the value is there
+        // if(results.length >= k) break;
+        // results.push(numberArray[i])
 
+        if(numberArray[i]) results.push(...numberArray[i])
+        if(results.length === k) break;
+    }
 
-
-
-
-
-
-
+    console.log(results)
 
 
 
@@ -26,7 +56,7 @@ var topKFrequent = function(nums, k) {
     
 };
 
-console.log(topKFrequent([1,2],2))
+console.log(topKFrequent([1,1,1,2,2,3],2))
 
 /*
 
