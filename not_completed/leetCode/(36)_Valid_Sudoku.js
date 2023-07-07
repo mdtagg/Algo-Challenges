@@ -12,6 +12,12 @@ const validSudoku = (board) => {
           //indexs
           let _col = board[j][i];
           console.log(Math.floor(i/3))
+          //3*Math.floor(i/3) + Math.floor(j/3) is determining the row of the 
+          //board in two parts. The first part is determining which set of
+          //blocks were in ie. 1-3 4-6 or 7-9. The second part is which block
+          //in the set were in ie are we in 1 or 2 or 3 etc. 
+
+          //Here the first 
           let _box = board[3*Math.floor(i/3)+Math.floor(j/3)][3*(i%3)+(j%3)]
         //   console.log(_row,_col,_box)
           
