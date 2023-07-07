@@ -19,6 +19,23 @@ var plusOne = function(digits) {
 console.log(plusOne([8,9,9]))
 
 
+/*
+
+WHAT I LEARNED
+
+- Be careful if the requirments of the problem have numbers that exceed the max
+safe integer 
+
+- BigInt can be used to get those numbers but you have to convert it back to a string
+
+- When you convert it back to a string it loses accuracy if need to conduct further
+operations on that number
+
+*/
+
+// return (BigInt(digits.join('')) + BigInt(1)).toString().split('')
+
+
 // for(let i = digits.length-1; i>=0; i--){
 //     if(digits[i] < 9){
 //         digits[i]++;
