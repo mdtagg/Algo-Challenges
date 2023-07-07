@@ -1,33 +1,68 @@
 
 
 var topKFrequent = function(nums, k) {
-    const map = new Map()
-    const numberArray = []
-    const result = []
+    
 
-    for(let i = 0;i < nums.length;i++) {
-        if(map.has(nums[i])) {
-            map.set(nums[i],map.get(nums[i]) + 1)
-        }else {
-            map.set(nums[i],1)
-        }
-    }
-    console.log(map)
 
-    //this is the key, we set the index as the value of frequency which 
-    //sorts the array in ascending order
-    for(let [number, frequency] of map) {
-        numberArray[frequency] = (numberArray[frequency] || new Set()).add(number)
-    }
 
-    for(let i = numberArray.length - 1;i >= 0;i--) {
-        if(numberArray[i]) result.push(...numberArray[i])
-        if(result.length === k) break;
-    }
-    return result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 };
 
 console.log(topKFrequent([1,2],2))
+
+/*
+
+WHAT I LEARNED
+
+- You can use a for of loop to iterate through a map object to create 
+a sorted array. By destructuring the key and values from the map you can then
+set the index of the seperate array as the value in the map entry
+
+*/
+
+//MY SOLUTION
+
+// const map = new Map()
+//     const numberArray = []
+//     const result = []
+
+//     for(let i = 0;i < nums.length;i++) {
+//         if(map.has(nums[i])) {
+//             map.set(nums[i],map.get(nums[i]) + 1)
+//         }else {
+//             map.set(nums[i],1)
+//         }
+//     }
+
+//     //this is the key, we set the index as the value of frequency which 
+//     //sorts the array in ascending order
+//     for(let [number, frequency] of map) {
+//         numberArray[frequency] = (numberArray[frequency] || new Set()).add(number)
+//     }
+
+//     for(let i = numberArray.length - 1;i >= 0;i--) {
+//         if(numberArray[i]) result.push(...numberArray[i])
+//         if(result.length === k) break;
+//     }
+//     return result
 
 
 // var topKFrequent = function(nums, k) {
