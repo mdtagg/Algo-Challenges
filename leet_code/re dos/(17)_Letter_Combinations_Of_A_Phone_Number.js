@@ -8,37 +8,74 @@ A mapping of digits to letters (just like on the telephone buttons) is given bel
 
 
 var letterCombinations = function(digits) {
-    if(!digits.length) return []
-    let digitsMap = {
+    const digitsObject = {
         2: ['a','b','c'],
         3: ['d','e','f'],
         4: ['g','h','i'],
         5: ['j','k','l'],
-        6: ['m','n','0'],
+        6: ['m','n','o'],
         7: ['p','q','r','s'],
         8: ['t','u','v'],
         9: ['w','x','y','z']
     }
-    let possibleLetters = []
-    function permute(string,index) {
-        console.log({string,index})
-        if(index === digits.length) {
-            possibleLetters.push(string)
-            return
-        }
-        for(let x of digitsMap[digits[index]]) {
-            //if digits has a length of 2, there are two layers to the recursion (not counting)
-            //the entry or first layer). The first layer is a b c. The second layer happens while
-            //each of the first layers is being iterated over, ad ae af then on to b layer. 
-            //for more each increase in length the branches increase exponentially. 
-            permute(string + x,index + 1)
-        }
+
+    const digitsMap = new Set()
+
+    for(let index of digitsObject) {
+        console.log(digitsObject[index])
     }
-    permute('',0)
-    console.log(possibleLetters)
 };
 
 letterCombinations('234')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// if(!digits.length) return []
+//     let digitsMap = {
+//         2: ['a','b','c'],
+//         3: ['d','e','f'],
+//         4: ['g','h','i'],
+//         5: ['j','k','l'],
+//         6: ['m','n','0'],
+//         7: ['p','q','r','s'],
+//         8: ['t','u','v'],
+//         9: ['w','x','y','z']
+//     }
+//     let possibleLetters = []
+//     function permute(string,index) {
+//         console.log({string,index})
+//         if(index === digits.length) {
+//             possibleLetters.push(string)
+//             return
+//         }
+//         for(let x of digitsMap[digits[index]]) {
+//             //if digits has a length of 2, there are two layers to the recursion (not counting)
+//             //the entry or first layer). The first layer is a b c. The second layer happens while
+//             //each of the first layers is being iterated over, ad ae af then on to b layer. 
+//             //for more each increase in length the branches increase exponentially. 
+//             permute(string + x,index + 1)
+//         }
+//     }
+//     permute('',0)
+//     console.log(possibleLetters)
 
 
 // digits = digits.split('')

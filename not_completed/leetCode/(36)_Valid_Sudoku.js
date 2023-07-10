@@ -11,15 +11,37 @@ const validSudoku = (board) => {
           //the column values are got here by reversing the value of the 
           //indexs
           let _col = board[j][i];
-          console.log(Math.floor(i/3))
-          //3*Math.floor(i/3) + Math.floor(j/3) is determining the row of the 
-          //board in two parts. The first part is determining which set of
-          //blocks were in ie. 1-3 4-6 or 7-9. The second part is which block
-          //in the set were in ie are we in 1 or 2 or 3 etc. 
-
+          /*
+          
+          start the box section by tracking what j is doing. Until j hits index 3
+          the row will remain 0. Once j hits three Math.floor(j/3) goes to 1. The row 
+          increments up by one every 3 movements by j. After the first row is done
+          the first box in the upper left has been checked. 
+          
+          */
+         //rowStart changes which level of boxes we are checking. If i is less than 
+         //3 we are checking the first three boxes going left to right. If i is 3 - 5
+         //we are checking the second three boxes left to right etc. 
+          let rowStart = 3*Math.floor(i/3)
+          /*
+          rowModifier changes the row level within the box we are checking. Once 
+          j is 3 - 5 for example, the row within the first box goes down one level
+          */
+          let rowModifier = Math.floor(j/3)
+          /*
+          columnStart changes which box we start at when checking a row of boxes for
+          example, when i goes above 3
+          */
+          let columnStart = 3*(i%3)
+          /*
+          columnModifier changes how far in to the box we are checking to go. 
+          */
+          let columnModifier = (j%3)
+          
           //Here the first 
-          let _box = board[3*Math.floor(i/3)+Math.floor(j/3)][3*(i%3)+(j%3)]
-        //   console.log(_row,_col,_box)
+          let _box = board[rowStart + rowModifier][columnStart + columnModifier]
+          // let _box = board[3*Math.floor(i/3)+Math.floor(j/3)][3*(i%3)+(j%3)]
+          console.log({_box})
           
           if (_row != '.') {
             if (row.has(_row)) return false;
@@ -38,6 +60,9 @@ const validSudoku = (board) => {
       }
       return true
 }
+
+// console.log(Math.floor(0%3))
+console.log(1%3)
 
 console.log(validSudoku(
 [["5","3",".",".","7",".",".",".","."]
