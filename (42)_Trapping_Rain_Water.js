@@ -18,7 +18,7 @@ const trap = (height) => {
         console.log({diff,left,right,volume,volumeAdjust})
         console.log(height[left],height[right])
         
-        if(diff === 0 || height[right] < height[left]) {
+        if((diff === 0 || height[right] < height[left]) && right !== height.length - 1) {
             volumeAdjust += height[right]
         }
     
@@ -31,10 +31,12 @@ const trap = (height) => {
         }
         
         if(right === height.length - 1 && height[left] > height[right]) {
-            volumeAdjust = 0
-            height[left]--
-            while(height[left] === height[left + 1]) left++;
             
+            height[left]--
+            if(height[left] === height[left + 1]) {
+                left++
+                volumeAdjust -= height[left]
+            }
         }else {
             right++
         }
@@ -42,7 +44,7 @@ const trap = (height) => {
     console.log({volume})
 }
 
-trap([5,4,1,2])
+trap([0,1,0,2,1,0,1,3,2,1,2,1])
 
 // let left = 0
     // let right = left + 1
