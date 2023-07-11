@@ -1,25 +1,89 @@
-//this challenge is incorrectly described. Water volume has nothing to do with the challenge, 
-// [1,2,1] expects an output of 2, so for this to work there has a to be a hole in the middle wall
-//to allow for water to fill the 1 chambers. 
+
+
+/*
+
+You are given an integer array height of length n. There are n 
+vertical lines drawn such that the two endpoints of the ith 
+line are (i, 0) and (i, height[i]).
+
+Find two lines that together with the x-axis form a container, 
+such that the container contains the most water.
+
+Return the maximum amount of water a container can store.
+
+Notice that you may not slant the container.
+
+this challenge is incorrectly described. Water volume has nothing to do with the challenge, 
+[1,2,1] expects an output of 2, so for this to work there has a to be a hole in the middle wall
+to allow for water to fill the 1 chambers. 
+
+*/
 
 
 var maxArea = function(height) {
-
-    let maxArea = 0
     let left = 0
     let right = height.length - 1
+    let max = 0
+    
     while(left < right) {
-        maxArea = Math.max(maxArea,Math.min(height[left],height[right]) * (right - left))
+        // console.log(height[left],height[right])
+        const min = Math.min(height[left],height[right])
+        const volume = min * (right - left)
+        // console.log(min)
+        if(volume > max) max = volume;
         if(height[left] < height[right]) {
             left++
         }else {
             right--
         }
     }
-    return maxArea
+    console.log(max)
 };
 
-maxArea([1,8,6,2,5,4,8,3,7])
+maxArea([2,3,4,5,18,17,6])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// for(let i = 0;i < height.length;i++) {
+    //     let test = Math.min(height[i],height[height.length - 1])
+    //     let area = test * (height.length - i - 1)
+    //     if(area > max) {
+    //         max = area
+    //     }
+    //     // console.log(max)
+    //     console.log({test,area})
+    // }
+
+// let maxArea = 0
+//     let left = 0
+//     let right = height.length - 1
+//     while(left < right) {
+//         maxArea = Math.max(maxArea,Math.min(height[left],height[right]) * (right - left))
+//         if(height[left] < height[right]) {
+//             left++
+//         }else {
+//             right--
+//         }
+//     }
+//     return maxArea
 
 
 // let containerHeights = []
