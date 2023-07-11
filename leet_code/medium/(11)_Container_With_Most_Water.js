@@ -26,10 +26,8 @@ var maxArea = function(height) {
     let max = 0
     
     while(left < right) {
-        // console.log(height[left],height[right])
         const min = Math.min(height[left],height[right])
         const volume = min * (right - left)
-        // console.log(min)
         if(volume > max) max = volume;
         if(height[left] < height[right]) {
             left++
