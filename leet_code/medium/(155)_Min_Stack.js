@@ -9,9 +9,6 @@ MinStack.prototype.push = function(val) {
 };
 
 MinStack.prototype.pop = function() {
-    // const lastValue = this.stack[this.stack.length - 1]
-    // this.stack = this.stack.slice(0,this.stack.length - 1)
-    // return lastValue
     return this.stack.splice(this.stack.length - 1)
 };
 
