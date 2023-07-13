@@ -9,58 +9,117 @@ Every close bracket has a corresponding open bracket of the same type.
 
 */
 
-//MY ANSWER
+/*
+
+Stack solution
+
+function isValid(s) {
+    const stack = [];
+  
+    for (let i = 0; i < s.length; i++) {
+      const char = s[i];
+      if (char === '(' || char === '{' || char === '[') {
+        stack.push(char);
+      } else {
+        const top = stack.pop();
+        if (
+          (char === ')' && top !== '(') ||
+          (char === '}' && top !== '{') ||
+          (char === ']' && top !== '[')
+        ) {
+          return false;
+        }
+      }
+    }
+  
+    return stack.length === 0;
+  }
+
+  console.log(isValid("()")); 
+
+*/
+
+/*
+Updated solution 7/13/23
+
+const isValid = (s) => {
+  s = s.split('')
+  const validParens = ['{}','[]','()']
+  let index = 0
+
+  while(index < s.length - 1) {
+    const parensTest = s[index] + s[index + 1]
+    if(validParens.includes(parensTest)) {
+      s.splice(index,2)
+      index--
+    }else {
+      index++
+    }
+  }
+  return s.length ? false : true
+}
+
+console.log(isValid("{(()[]{})}))"))
+*/
+
+/*
+
+MY ANSWER
 
 var isValid = function(s) {
 
-    let stringArray = s.split('')
+  let stringArray = s.split('')
     
-    if(s.length % 2 !== 0) return false
-  
-    while(stringArray.length > 0) {
-        
-        let testStringArray = stringArray.join('')
-        let curlyIndex = testStringArray.search('\\{\\}')
-        let parsIndex = testStringArray.search('\\(\\)')
-        let squaresIndex = testStringArray.search('\\[\\]')
-        let deleteIndex = Math.max(curlyIndex,parsIndex,squaresIndex)
+  if(s.length % 2 !== 0) return false
+
+  while(stringArray.length > 0) {
       
-      if(curlyIndex !== -1 || parsIndex !== -1 || squaresIndex !== -1) {
-        stringArray.splice(deleteIndex,2)
-     }else {
-        return false
-     }
-    }
-    if(stringArray.length === 0) return true
+      let testStringArray = stringArray.join('')
+      let curlyIndex = testStringArray.search('\\{\\}')
+      let parsIndex = testStringArray.search('\\(\\)')
+      let squaresIndex = testStringArray.search('\\[\\]')
+      let deleteIndex = Math.max(curlyIndex,parsIndex,squaresIndex)
+    
+    if(curlyIndex !== -1 || parsIndex !== -1 || squaresIndex !== -1) {
+      stringArray.splice(deleteIndex,2)
+   }else {
+      return false
+   }
+  }
+  if(stringArray.length === 0) return true
   }
 
+*/
+
+
+
   
 
-  // BEST SOLUTION FOUND
+//   // BEST SOLUTION FOUND
 
-  var isValid = function(s) {
+//   var isValid = function(s) {
   
-    let stack = []
+//     let stack = []
     
-    let a = {
-      ')': '(',
-      ']': '[',
-      '}': '{'
-    }
+//     let a = {
+//       ')': '(',
+//       ']': '[',
+//       '}': '{'
+//     }
     
-    for (let i of s) {
-      if ('([{'.includes(i)) {
-        stack.push(i)
-      } else if (a[i] === stack[stack.length - 1]) {
-        stack.pop()
-      }else{
-        stack.push(i)
-      }
-    }
+//     for (let i of s) {
+//       if ('([{'.includes(i)) {
+//         stack.push(i)
+//       } else if (a[i] === stack[stack.length - 1]) {
+//         stack.pop()
+//       }else{
+//         stack.push(i)
+//       }
+//     }
     
-    if (stack.length)return false
-    return true
-    };
+//     if (stack.length)return false
+//     return true
+//     };
 
     /* 
   WHAT I LEARNED
@@ -88,4 +147,23 @@ var isValid = function(s) {
 
     */
 
+
+    // const validParens = ['{}','[]','()']
+  // const left = []
+  // const right = []
+  // const medianIndex = s.length / 2 - 1
+  
+  // for(let i = 0;i <= medianIndex;i++) {
+  //   left.push(s[i])
+  // }
+  
+  // for(let i = s.length - 1;i > medianIndex;i--) {
+  //   right.push(s[i])
+  // }
+
+  // for(let i = 0;i < left.length;i++) {
+  //   if(!validParens.includes(left[i] + right[i])) return false
+  // }
+  // return true
+  // console.log({right,left})
 
