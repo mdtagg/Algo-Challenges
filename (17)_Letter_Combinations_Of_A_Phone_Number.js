@@ -13,26 +13,94 @@ that the number could represent. Return the answer in any order.
 */
 
 
-var letterCombinations = function(digits) {
-    const digitMap = {
-        2: ['a','b','c'],
-        3: ['d','e','f'],
-        4: ['g','h','i'],
-        5: ['j','k','l'],
-        6: ['m','n','0'],
-        7: ['p','q','r','s'],
-        8: ['t','u','v'],
-        9: ['w','x','y','z']
-    }
-    const individualDigits = digits.split('').map(digit => {
-        return digitMap[digit]
-    })
-    
-    
+/*
+This solution uses recursion to create the strings we need for the solution
 
+Using '2,3,7' as an example, first we need to associate each number with
+its corresponding value, this is the digits map object. 
+
+Then we create an empty array to store our possible combos. 
+After that the trick is to create a recursive function that builds the 
+strings we need. 
+
+Our base case is met when the index is equal to the length of our initial
+input. Each time we recurse the permute function we are pulling the array of
+values out of the digit map, then we are iterating through each value in 
+the for loop. 
+
+The sequence here goes a,d,p then a,d,q then a,d,r and so on all the way back
+to c,f,s
+*/
+
+var letterCombinations = function(digits) {
+
+    
 };
 
-letterCombinations('234')
+console.log(letterCombinations('237'))
+
+
+
+
+
+
+
+
+
+
+//REDO 2
+
+// const digitsMap = {
+//     2: ['a','b','c'],
+//     3: ['d','e','f'],
+//     4: ['g','h','i'],
+//     5: ['j','k','l'],
+//     6: ['m','n','0'],
+//     7: ['p','q','r','s'],
+//     8: ['t','u','v'],
+//     9: ['w','x','y','z']
+// }
+
+// let possibleLetters = []
+
+// function permute(string,index) {
+//     if(index === digits.length) {
+//         possibleLetters.push(string)
+//         return
+//     }
+//     for(let x of digitsMap[digits[index]]) {
+//         permute(string + x,index + 1)
+//     }
+// }
+
+// permute('',0)
+// return possibleLetters
+
+// function permute(string,index) {
+//     if(index === digits.length) {
+//         possibleLetters.push(string)
+//         return
+//     }
+//     for(let x of digitsMap[digits[index]]) {
+//         permute(string + x,index + 1)
+        
+//     }
+// }
+// permute('',0)
+// return possibleLetters
+
+// for(let i = 0;i < digitArray.length;i++) {
+//     for(let j = 0;j < digitArray[i].length;j++) {
+//         const possibleCombo = `${digitArray[currentIndex][i]}${digitArray[index + 1][j]}`
+//         console.log(possibleCombo)
+//         if(combos.has(possibleCombo)) {
+//             continue
+//         }else {
+//             combos.add(possibleCombo)
+//         }
+//     }
+// }
+// index++
 
 
 
@@ -77,6 +145,7 @@ letterCombinations('234')
 //             //the entry or first layer). The first layer is a b c. The second layer happens while
 //             //each of the first layers is being iterated over, ad ae af then on to b layer. 
 //             //for more each increase in length the branches increase exponentially. 
+
 //             permute(string + x,index + 1)
 //         }
 //     }
