@@ -15,17 +15,18 @@ Output: [1,1,4,2,1,1,0,0]
 
 
 var dailyTemperatures = function(temps) {
+    
     const stack = []
-    const result = new Array(temps.length).fill(0)
+    const results = new Array(temps.length).fill(0)
 
     for(let i = 0;i < temps.length;i++) {
         while(stack.length && temps[i] > temps[stack[stack.length - 1]]) {
             let temp = stack.pop()
-            result[temp] = i - temp
+            results[temp] = i - temp
         }
         stack.push(i)
     }
-    return result
+    return results
  };
 
 
@@ -68,6 +69,20 @@ off each index in the stack until the stack has nothing in it.
 stack will have no length until a higher value is hit. 
 
 */
+
+//REDO 3
+
+// const stack = []
+//     const result = new Array(temps.length).fill(0)
+
+//     for(let i = 0;i < temps.length;i++) {
+//         while(stack.length && temps[i] > temps[stack[stack.length - 1]]) {
+//             let temp = stack.pop()
+//             result[temp] = i - temp
+//         }
+//         stack.push(i)
+//     }
+//     return result
 
 //REDO 2
 

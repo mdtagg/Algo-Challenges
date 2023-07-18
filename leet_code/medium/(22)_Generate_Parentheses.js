@@ -53,7 +53,33 @@ console.log(generateParentheses(3))
 
 
 
+/*
 
+REDO 3
+
+const stack = []
+    const results = []
+
+    function permute(open,close) {
+        if(open === n && close === open) {
+            results.push(stack.join(''))
+            return
+        }
+        if(open < n) {
+            stack.push('(')
+            permute(open + 1,close)
+            stack.pop()
+        }
+        if(close < open) {
+            stack.push(')')
+            permute(open,close + 1)
+            stack.pop()
+        }
+    }
+    permute(0,0)
+    return results
+
+*/
 
 //REDO 2
 

@@ -18,15 +18,13 @@ const validSudoku = (board) => {
 
         const _row = new Set()
         const _column = new Set()
-        // console.log(_column)
         const _box = new Set()
 
         for(let j = 0;j < board[i].length;j++) {
-    
+
             const row = board[i][j]
             const column = board[j][i]
             const box = board[3 * Math.floor(i/3) + Math.floor(j/3)][3 * (i%3) + (j%3)]
-            console.log({row,column,box})
 
             if(row !== '.') {
                 if(_row.has(row)) {
@@ -37,15 +35,14 @@ const validSudoku = (board) => {
                 if(_column.has(column)) {
                     return false
                 }
-            }
-            if(box !== '.') {
+            }if(box !== '.') {
                 if(_box.has(box)) {
                     return false
                 }
             }
-                _row.add(row)
-                _column.add(column)
-                _box.add(box)
+            _row.add(row)
+            _column.add(column)
+            _box.add(box)
         }
     }
     return true
@@ -81,7 +78,42 @@ console.log(validSudoku(
 
 
 
+//REDO 2
 
+// for(let i = 0;i < board.length;i++) {
+
+//     const _row = new Set()
+//     const _column = new Set()
+//     const _box = new Set()
+
+//     for(let j = 0;j < board[i].length;j++) {
+
+//         const row = board[i][j]
+//         const column = board[j][i]
+//         const box = board[3 * Math.floor(i/3) + Math.floor(j/3)][3 * (i%3) + (j%3)]
+//         console.log({row,column,box})
+
+//         if(row !== '.') {
+//             if(_row.has(row)) {
+//                 return false
+//             }
+//         }
+//         if(column !== '.') {
+//             if(_column.has(column)) {
+//                 return false
+//             }
+//         }
+//         if(box !== '.') {
+//             if(_box.has(box)) {
+//                 return false
+//             }
+//         }
+//             _row.add(row)
+//             _column.add(column)
+//             _box.add(box)
+//     }
+// }
+// return true
 
   // for(let i = 0;i < board.length;i++) {
 
