@@ -11,11 +11,11 @@ Output: ["((()))","(()())","(())()","()(())","()()()"]
 const generateParentheses = (n) => {
 
     const stack = []
-    const result = []
+    const results = []
 
     function permute(open,close) {
-        if(open === n && open === close) {
-            result.push(stack.join(''))
+        if(open === n && close === open) {
+            results.push(stack.join(''))
             return
         }
         if(open < n) {
@@ -30,7 +30,7 @@ const generateParentheses = (n) => {
         }
     }
     permute(0,0)
-    return result
+    return results
 }
 
 console.log(generateParentheses(3))
@@ -55,11 +55,29 @@ console.log(generateParentheses(3))
 
 
 
+//REDO 2
 
+// const stack = []
+    // const result = []
 
-
-
-
+    // function permute(open,close) {
+    //     if(open === n && open === close) {
+    //         result.push(stack.join(''))
+    //         return
+    //     }
+    //     if(open < n) {
+    //         stack.push('(')
+    //         permute(open + 1,close)
+    //         stack.pop()
+    //     }
+    //     if(close < open) {
+    //         stack.push(')')
+    //         permute(open,close + 1)
+    //         stack.pop()
+    //     }
+    // }
+    // permute(0,0)
+    // return result
 
 
 /*

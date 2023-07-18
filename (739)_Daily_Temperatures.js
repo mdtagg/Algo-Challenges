@@ -1,5 +1,81 @@
-var dailyTemperatures = function(T) {
-    let stack = [];
+
+/*
+
+Given an array of integers temperatures represents 
+the daily temperatures, return an array answer such 
+that answer[i] is the number of days you have to wait 
+after the ith day to get a warmer temperature. If there 
+is no future day for which this is possible, keep
+ answer[i] == 0 instead.
+
+Input: temperatures = [73,74,75,71,69,72,76,73]
+Output: [1,1,4,2,1,1,0,0]
+
+*/
+
+
+var dailyTemperatures = function(temps) {
+
+    
+ };
+
+
+console.log(dailyTemperatures([73,74,75,71,69,72,76,73]))
+
+/*
+This problem uses a stack of index values to backtrack once the temperature
+gets higher than previous temperature. 
+
+Using [73,74,75,71,69,72,76,73] as an example
+
+A stack array is created to keep track of the index values
+A result array is created with the number of positions equal to 
+the number of inputs all filled as zeros
+
+We then iterate through the input array
+on each iteration two conditions must be met to change a position value
+in the results array 
+
+First the stack must have at least one value. 
+This prevents the while loop from executing on the first iteration and 
+prevents it again at the end if there are no hotter days from the last
+high value
+
+After the first iteration we compare the current value in the temp array 
+to the value in the temp array associated with last index value in the stack
+(after each iteration the stack gets the current index value)
+
+The latest value in the stack is popped off and is subtracted from the current
+index position. (1 - 0 is 1, 2 - 1 is 1)
+
+When the current value is less than the previous value the while loop gets 
+skipped until the current value is higher. However, stack still gets each index
+pushed. 
+
+When the next highest value is crossed the while loop activated and pops
+off each index in the stack until the stack has nothing in it. 
+(5 - 4 is 1 5 - 3 is 2 then 6 - 2 is 4)
+
+stack will have no length until a higher value is hit. 
+
+*/
+
+//REDO 2
+
+// const stack = []
+    // let result = new Array(temps.length).fill(0)
+
+    // for(let i = 0;i < temps.length;i++) {
+    //     while(stack.length && temps[i] > temps[stack[stack.length - 1]]) {
+    //         let temp = stack.pop()
+    //         result[temp] = i - temp
+    //     }
+    //     stack.push(i)
+    // }
+    // return result
+
+/*
+let stack = [];
     let result = new Array(T.length).fill(0);
      for(let i=0; i < T.length; i++){
          while(stack.length && T[i] > T[stack[stack.length-1]]){
@@ -10,12 +86,8 @@ var dailyTemperatures = function(T) {
          stack.push(i)
      }
      return result;
- };
 
 
-dailyTemperatures([73,74,75,71,69,72,76,73])
-
-/*
 
 // const obj = {}
     const tempStack = []

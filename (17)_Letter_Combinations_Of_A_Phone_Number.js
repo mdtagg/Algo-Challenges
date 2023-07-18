@@ -13,6 +13,23 @@ that the number could represent. Return the answer in any order.
 */
 
 
+var letterCombinations = function(digits) {
+
+};
+
+console.log(letterCombinations('237'))
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 This solution uses recursion to create the strings we need for the solution
 
@@ -31,22 +48,6 @@ the for loop.
 The sequence here goes a,d,p then a,d,q then a,d,r and so on all the way back
 to c,f,s
 */
-
-var letterCombinations = function(digits) {
-
-    
-};
-
-console.log(letterCombinations('237'))
-
-
-
-
-
-
-
-
-
 
 //REDO 2
 
