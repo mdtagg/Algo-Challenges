@@ -15,8 +15,17 @@ Output: [1,1,4,2,1,1,0,0]
 
 
 var dailyTemperatures = function(temps) {
+    const stack = []
+    const result = new Array(temps.length).fill(0)
 
-    
+    for(let i = 0;i < temps.length;i++) {
+        while(stack.length && temps[i] > temps[stack[stack.length - 1]]) {
+            let temp = stack.pop()
+            result[temp] = i - temp
+        }
+        stack.push(i)
+    }
+    return result
  };
 
 

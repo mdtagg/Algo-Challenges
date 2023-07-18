@@ -15,20 +15,10 @@ that the number could represent. Return the answer in any order.
 
 var letterCombinations = function(digits) {
 
+
 };
 
 console.log(letterCombinations('237'))
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 This solution uses recursion to create the strings we need for the solution
@@ -48,6 +38,33 @@ the for loop.
 The sequence here goes a,d,p then a,d,q then a,d,r and so on all the way back
 to c,f,s
 */
+
+//redo 3
+
+// const results = []
+
+//    const digitsMap = {
+//     2: ['a','b','c'],
+//     3: ['d','e','f'],
+//     4: ['g','h','i'],
+//     5: ['j','k','l'],
+//     6: ['m','n','0'],
+//     7: ['p','q','r','s'],
+//     8: ['t','u','v'],
+//     9: ['w','x','y','z']
+//    } 
+
+//    function permute(string,index) {
+//     if(index === digits.length) {
+//         results.push(string)
+//         return
+//     }
+//     for(let x of digitsMap[digits[index]]) {
+//         permute(string + x, index + 1)
+//     }
+//    }
+//    permute("",0)
+//    return results
 
 //REDO 2
 

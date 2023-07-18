@@ -1,17 +1,68 @@
+
+/*
+
+Determine if a 9 x 9 Sudoku board is valid. Only 
+the filled cells need to be validated according to the following rules:
+
+Each row must contain the digits 1-9 without repetition.
+Each column must contain the digits 1-9 without repetition.
+Each of the nine 3 x 3 sub-boxes of the grid must contain
+the digits 1-9 without repetition.
+
+*/
+
+
 const validSudoku = (board) => {
+
+    for(let i = 0;i < board.length;i++) {
+
+        const _row = new Set()
+        const _column = new Set()
+        // console.log(_column)
+        const _box = new Set()
+
+        for(let j = 0;j < board[i].length;j++) {
     
+            const row = board[i][j]
+            const column = board[j][i]
+            const box = board[3 * Math.floor(i/3) + Math.floor(j/3)][3 * (i%3) + (j%3)]
+            console.log({row,column,box})
+
+            if(row !== '.') {
+                if(_row.has(row)) {
+                    return false
+                }
+            }
+            if(column !== '.') {
+                if(_column.has(column)) {
+                    return false
+                }
+            }
+            if(box !== '.') {
+                if(_box.has(box)) {
+                    return false
+                }
+            }
+                _row.add(row)
+                _column.add(column)
+                _box.add(box)
+        }
+    }
+    return true
 }
 
 console.log(validSudoku(
-  [["5","3",".",".","7",".",".",".","."]
-  ,["6",".",".","1","9","5",".",".","."]
-  ,[".","9","8",".",".",".",".","6","."]
-  ,["8",".",".",".","6",".",".",".","3"]
-  ,["4",".",".","8",".","3",".",".","1"]
-  ,["7",".",".",".","2",".",".",".","6"]
-  ,[".","6",".",".",".",".","2","8","."]
-  ,[".",".",".","4","1","9",".",".","5"]
-  ,[".",".",".",".","8",".",".","7","9"]]
+    [
+    [".",".",".",".","5",".",".","1","."],
+    [".","4",".","3",".",".",".",".","."],
+    [".",".",".",".",".","3",".",".","1"],
+    ["8",".",".",".",".",".",".","2","."],
+    [".",".","2",".","7",".",".",".","."],
+    [".","1","5",".",".",".",".",".","."],
+    [".",".",".",".",".","2",".",".","."],
+    [".","2",".","9",".",".",".",".","."],
+    [".",".","4",".",".",".",".",".","."]
+]
   ))
 
 
