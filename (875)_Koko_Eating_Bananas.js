@@ -17,33 +17,54 @@ all the bananas within h hours.
 
  
 */
-
- 
-
 const minEatingSpeed = (piles,h) => {
-    let min = 1,
-        max = Math.max(...piles),
-        best = max
-
-    const time = speed => piles.reduce((sum, pile) => sum + Math.ceil(pile/speed), 0)
-
-    while (min <= max) {
-        const mid = Math.floor((min + max) / 2)
-        console.log(min)
-        if (time(mid) <= h) {
-            best = mid
-            max = mid - 1
-            console.log(time(mid))
-        } else
-            min = mid + 1
-    }
-
-    return best
     
     
 }
 
 console.log(minEatingSpeed([30,11,23,4,20],5))
+
+
+//REDO 2
+
+// let min = 1
+//     let max = Math.max(...piles)
+//     let best = max
+//    
+
+//                                                       ERROR: forgot total
+//     const time = (speed) => piles.reduce((total,amt) => total + Math.ceil(amt / speed),0)
+//     while(min <= max) {
+//         const mid = Math.floor((min + max) / 2)
+//         if(time(mid) <= h) {
+//             best = mid
+
+//         ERROR: max should equal MID - 1
+
+//             max = min - 1
+//         }else {
+//             min = mid + 1
+//         }
+//     }
+//     return best
+
+// let min = 1,
+//         max = Math.max(...piles),
+//         best = max
+
+//     const time = speed => piles.reduce((sum, pile) => sum + Math.ceil(pile/speed), 0)
+
+//     while (min <= max) {
+//         const mid = Math.floor((min + max) / 2)
+//         const test = time(mid)
+//         if (test <= h) {
+//             best = mid
+//             max = mid - 1
+//         } else
+//             min = mid + 1
+//     }
+
+//     return best
 
 // piles = piles.sort((a,b) => a - b)
 //     const total = piles.reduce((total,amt) => total + amt)

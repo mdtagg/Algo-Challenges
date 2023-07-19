@@ -15,10 +15,11 @@ You must write an algorithm that runs in O(log n) time.
 */
 
 const findMin = (nums) => {
+
     
 }
 
-console.log(findMin([1,2,3,4,5]))
+console.log(findMin([3,4,5,1,2]))
 
 
 
@@ -37,7 +38,21 @@ console.log(findMin([1,2,3,4,5]))
 
 
 
+//REDO 2
 
+// let left = 0
+//     let right = nums.length - 1
+//ERROR mid goes inside while loop
+//     const mid = Math.floor((left + right) / 2)
+
+//     while(left < right) {
+//         if(nums[mid] > nums[right]) {
+//             left = mid + 1
+//         }else {
+//             right = mid
+//         }
+//     }
+//     return nums[left]
 
 /*
 

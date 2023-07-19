@@ -33,18 +33,9 @@ Note that no other cars meet these fleets before the destination, so the answer 
 */
 
 const carFleet = (target,position,speed) => {
-    const stack = []
-    const pair = position.map((pos,index) => [pos,speed[index]])
-    pair.sort((a,b) => a[0] - b[0])
-    console.log(pair)
-    for(let i = pair.length - 1;i >= 0;i--) {
-        const [pos,speed] = pair[i]
-        stack.push((target - pos) / speed)
-        if(stack.length >= 2 && stack[stack.length - 1] <= stack[stack.length - 2]) {
-            stack.pop()
-        }
-    }
-return stack.length
+    
+    
+
 }
 
 console.log(carFleet(12,[10,8,0,5,3],[2,4,1,1,3]))
@@ -52,6 +43,26 @@ console.log(carFleet(12,[10,8,0,5,3],[2,4,1,1,3]))
 
 
 
+
+
+
+
+
+
+
+
+// const stack = []
+//     const pair = position.map((pos,index) => [pos,speed[index]])
+//     pair.sort((a,b) => a[0] - b[0])
+//     console.log(pair)
+//     for(let i = pair.length - 1;i >= 0;i--) {
+//         const [pos,speed] = pair[i]
+//         stack.push((target - pos) / speed)
+//         if(stack.length >= 2 && stack[stack.length - 1] <= stack[stack.length - 2]) {
+//             stack.pop()
+//         }
+//     }
+// return stack.length
 
 
 
@@ -92,6 +103,7 @@ console.log(carFleet(12,[10,8,0,5,3],[2,4,1,1,3]))
 //         }
 //     }
 //     console.log(stack)
+
 
 // if(stack.length) {
 //     let car2 = stack.pop()
