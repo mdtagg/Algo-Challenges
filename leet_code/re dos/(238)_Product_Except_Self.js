@@ -1,15 +1,77 @@
+/*
 
+Given an integer array nums, return an array answer such that answer[i]
+ is equal to the product of all the elements of nums except nums[i].
+
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+You must write an algorithm that runs in O(n) time and without using the division operation.
+
+Input: nums = [1,2,3,4]
+Output: [24,12,8,6]
+
+*/
 
 const productExceptSelf = (nums) => {
-    
-    
-
 
 }
 
 console.log(productExceptSelf([1,2,3,4]))
 
 
+/*
+
+OPTIMAL MEMORY
+
+var productExceptSelf = function(nums) {
+    let multiple = 1;
+    let multipleWithoutZero = 1;
+    let numOfZeros = 0;
+    for (let num of nums) {
+        if (num === 0) numOfZeros++;
+        if (num !== 0) multipleWithoutZero *= num;
+        multiple *= num;
+    }
+    if (numOfZeros > 1) return nums.map(e => 0);
+    return nums.map((num) => {
+        if (num === 0) return multipleWithoutZero;
+        return multiple/num;
+    });
+};
+
+OPTIMAL PERFORMANCE
+
+const result = []
+    
+    let prefix = 1
+
+    for(let i = 0; i<nums.length; i++) {
+        result[i] = prefix
+        prefix *= nums[i]
+    }
+
+    let suffix = 1
+
+    for(let i = nums.length - 1; i >= 0; i--) {
+        result[i] *= suffix
+        suffix *= nums[i]
+    }
+
+    return result
+
+
+SECOND ATTEMPT (times out not O(n))
+
+const result = []
+
+    for(let i = 0;i < nums.length;i++) {
+        const slice = nums.slice(0,i).concat(nums.slice(i + 1))
+        result.push(slice.reduce((total,amt) => total * amt))
+    }
+    console.log(result)
+    return result
+
+*/
 
 
 
@@ -24,9 +86,19 @@ console.log(productExceptSelf([1,2,3,4]))
 
 
 
+//FIRST SOLUTION
 
+// const recurse = (nums,index) => {
+//     if(index === nums.length) return;
+//     const product = nums.slice(0,index).concat(nums.slice(index + 1)).reduce((total,amt) => total * amt)
+//     return [product,recurse(nums,index + 1)]
+// }
 
-
+// const productExceptSelf = (nums,index=0) => {
+//     const products = [recurse(nums,index)].flat(nums.length)
+//     products.pop()
+//     return products
+// }
 
 
 

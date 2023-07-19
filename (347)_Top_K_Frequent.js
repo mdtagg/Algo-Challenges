@@ -1,5 +1,4 @@
 /*
-
 Given an integer array nums and an integer k, return the k most 
 frequent elements. You may return the answer in any order.
 
@@ -7,16 +6,13 @@ ex:
 
 Input: nums = [1,1,1,2,2,3], k = 2
 Output: [1,2]
- 
-
 */
 
 var topKFrequent = function(nums, k) {
     
-    
 };
 
-console.log(topKFrequent([1,1,1,2,2,3],2))
+console.log(topKFrequent([1,1,2,2,2,3],3))
 
 /*
 
@@ -26,7 +22,65 @@ WHAT I LEARNED
 a sorted array. By destructuring the key and values from the map you can then
 set the index of the seperate array as the value in the map entry
 
+PERFORMANCE SOLUTION
 
+var topKFrequent = function(nums, k) {
+    let res = [], map = new Map();
+    
+    nums.forEach(n => map.set(n, map.get(n) + 1 || 1));
+    
+    let sortedArray = [...map.entries()].sort((a, b) => b[1] - a[1]);
+    
+    for(let i = 0; i < k; i++) {
+        res.push(sortedArray[i][0]);
+    }
+    
+    return res;
+};
+
+MEMORY SOLUTION 
+
+var topKFrequent = function(nums, k) {
+    var map = new Map();
+
+    for(var i = 0; i < nums.length; i++) {
+        
+        if(!map.has(nums[i])){
+           map.set(nums[i], 0); 
+        }
+        map.set(nums[i], map.get(nums[i]) + 1);
+ 
+     }
+    let sotArr = Array.from(map.keys()).sort((a,b)=> map.get(b) - map.get(a));
+   
+    return sotArr.slice(0,k);
+};
+
+FIRST SOLUTION
+
+var topKFrequent = function(nums, k) {
+    const result = []
+    const arr = []
+    const freqMap = new Map()
+
+    for(let i = 0;i < nums.length;i++) {
+        if(freqMap.has(nums[i])) {
+            freqMap.set(nums[i],freqMap.get(nums[i]) + 1)
+        }else {
+            freqMap.set(nums[i],1)
+        }
+    }
+
+    for(let [key,value] of freqMap) {
+        console.log(key,value)
+        arr[value] = (arr[value] || new Set()).add(key)
+    }
+  
+    for(let i = arr.length - 1;i >= 0;i--) {
+        if(arr[i]) result.push(...arr[i])
+        if(result.length === k) return result 
+    }
+};
 
 REDO 1
 
