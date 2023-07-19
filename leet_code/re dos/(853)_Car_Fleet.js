@@ -34,13 +34,84 @@ Note that no other cars meet these fleets before the destination, so the answer 
 
 const carFleet = (target,position,speed) => {
     
-    
-
 }
 
 console.log(carFleet(12,[10,8,0,5,3],[2,4,1,1,3]))
 
 
+
+
+
+/*
+
+ALTERNATE SOLUTION
+
+    const stack = [];
+    if(position.length === 1) {
+        return 1;
+    }
+
+    const road = Array(target+1).fill(null);
+    for(let i=0; i<position.length; i++) {
+        road[position[i]] = (target - position[i]) / speed[i];
+    }
+
+    for(let i=target; i>=0; i--) {
+        if(road[i] !== null) {
+            stack.push(road[i]);
+            if(stack.length >= 2) {
+                const prevTimeToTarget = stack[stack.length - 2];
+                if(prevTimeToTarget >= road[i]) {
+                    stack.pop();
+                }
+            }
+        }
+    }
+    return stack.length;
+*/
+
+// const stack = []
+//     const pair = position.map((pos,index) => [pos,speed[index]])
+//     pair.sort((a,b) => a[0] - b[0])
+
+//     for(let i = pair.length - 1;i >= 0;i--) {
+//         const [pos,speed] = pair[i]
+//         /*
+//         (target - pos) / speed is giving us our relative distance left to cover.
+//         If the current value is less than the previous it means the current value
+//         will catch up to the previous value. 
+
+//         The stack.length >= 2 is checking to make sure there are two values to compare.
+//         This is how we catch lone cars that are their own fleet. 
+//         */
+//         stack.push((target - pos) / speed)
+//         if(stack.length >= 2 && stack[stack.length - 1] <= stack[stack.length - 2]) {
+//             stack.pop()
+//         }
+//     }
+// return stack.length
+
+// const stack = []
+//     const pair = position.map((pos,index) => [pos,speed[index]])
+//     pair.sort((a,b) => a[0] - b[0])
+
+//     for(let i = pair.length - 1;i >= 0;i--) {
+//         const [pos,speed] = pair[i]
+//         /*
+//         (target - pos) / speed is giving us our relative distance left to cover.
+//         If the current value is less than the previous it means the current value
+//         will catch up to the previous value. 
+
+//         The stack.length >= 2 is checking to make sure there are two values to compare.
+//         This is how we catch lone cars that are their own fleet. 
+//         */
+//         stack.push((target - pos) / speed)
+//         if(stack.length >= 2 && stack[stack.length - 1] <= stack[stack.length - 2]) {
+//             stack.pop()
+//         }
+//     }
+// return stack.length
+    
 
 
 
