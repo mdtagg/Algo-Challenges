@@ -13,12 +13,101 @@ var kSmallestPairs = function(nums1, nums2, k) {
     
 }
 
-kSmallestPairs([0,0,0,0,0],[-3,22,35,56,76],22)
+kSmallestPairs([1,7,11],[2,4,6],3)
 
 // [[1,1],[1,1],[2,1],[1,2],[1,2],[2,2],[1,3],[1,3],[2,3]]
 
 
+/*
 
+PERFORMANCE SOLUTION
+
+class MinHeap { 
+    constructor() { 
+        this.heap = []; 
+    } 
+    size() { 
+        return this.heap.length; 
+    } 
+    peek() { 
+        return this.heap[0]; 
+    } 
+    add(val) { 
+        this.heap.push(val); 
+        this.bubbleUp(); 
+    } 
+    bubbleUp() { 
+        let cIndex = this.heap.length-1; 
+        while(cIndex > 0) { 
+            let pIndex = Math.floor((cIndex-1)/2); 
+            let parent = this.heap[pIndex]; 
+            let child = this.heap[cIndex]; 
+            if(child.sum >= parent.sum) break; 
+            this.heap[cIndex] = parent; 
+            this.heap[pIndex] = child; 
+            cIndex = pIndex; 
+        } 
+    } 
+    remove() { 
+        let min = this.heap[0]; 
+        let pop = this.heap.pop(); 
+        if(this.heap.length) { 
+            this.heap[0] = pop; 
+            this.sinkDown(); 
+        } 
+        return min; 
+    } 
+    sinkDown() { 
+        let pIndex = 0; 
+        let parent = this.heap[pIndex]; 
+        let len = this.heap.length; 
+        let lIndex, rIndex, lChild, rChild, swapIndex; 
+        while(true) { 
+            lIndex = 2*pIndex + 1; 
+            rIndex = 2*pIndex + 2; 
+            swapIndex = null; 
+            if(lIndex < len) { 
+                lChild = this.heap[lIndex]; 
+                if(lChild.sum < parent.sum) swapIndex = lIndex; 
+            } 
+            if(rIndex < len) { 
+                rChild = this.heap[rIndex]; 
+                if((swapIndex===null && rChild.sum < parent.sum) || (swapIndex!==null && rChild.sum < lChild.sum)) swapIndex = rIndex; 
+            } 
+            if(swapIndex === null) break; 
+            this.heap[pIndex] = this.heap[swapIndex]; 
+            this.heap[swapIndex] = parent; 
+            pIndex = swapIndex; 
+        } 
+    } 
+}; 
+
+class Obj {
+    constructor(num1, num2, ind2) {
+        this.num1 = num1;
+        this.num2 = num2;
+        this.sum = num1+num2;
+        this.ind2 = ind2;
+    }
+}
+var kSmallestPairs = function(nums1, nums2, k) {
+    const output = [];
+    const heap = new MinHeap();
+    for(let i=0; i<nums1.length && i<k; i++) {
+        heap.add(new Obj(nums1[i], nums2[0], 0));
+    }
+    for(let i=0; i<k && heap.size(); i++) {
+        const cur = heap.remove();
+        output.push([cur.num1, cur.num2]);
+        const nextInd2 = cur.ind2+1;
+        if(nextInd2 < nums2.length) {
+            heap.add(new Obj(cur.num1, nums2[nextInd2], nextInd2));
+        }
+    }
+    return output;
+};
+
+*/
 
 
 
