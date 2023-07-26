@@ -14,17 +14,18 @@ Output: [24,12,8,6]
 
 const productExceptSelf = (nums) => {
     let prefix = 1
-    let test = []
+    let result = []
     for(let i = 0;i < nums.length;i++) {
-        test[i] = prefix
+        result[i] = prefix
         prefix *= nums[i]
     }
     let suffix = 1
     for(let i = test.length - 1;i >= 0;i--) {
-        test[i] *= suffix
+        result[i] *= suffix
         suffix *= nums[i]
     }
-    console.log(test)
+    console.log(result)
+    return result
 }
 
 console.log(productExceptSelf([1,2,3,4]))
