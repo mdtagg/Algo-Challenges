@@ -33,12 +33,102 @@ Note that no other cars meet these fleets before the destination, so the answer 
 */
 
 const carFleet = (target,position,speed) => {
-    
+    const stack = []
+    const road = Array(target + 1).fill(null)
+    for(let i = 0;i < position.length;i++) {
+        road[position[i]] = (target - position[i]) / speed[i]
+    }
+    for(let i = target;i >= 0;i--) {
+        if(road[i] !== null) {
+            stack.push(road[i])
+            if(stack.length >= 2) {
+                const prevTime = stack[stack.length - 2]
+                if(prevTime >= road[i]) {
+                    stack.pop()
+                }
+            }
+        }
+    }
+    return stack.length
 }
 
 console.log(carFleet(12,[10,8,0,5,3],[2,4,1,1,3]))
 
+/*
 
+PERFORMANCE SOLUTION
+
+var carFleet = function(target, position, speed) {
+
+    const stack = [];
+    if(position.length === 1) {
+        return 1;
+    }
+
+    const road = Array(target+1).fill(null);
+    for(let i=0; i<position.length; i++) {
+        road[position[i]] = (target - position[i]) / speed[i];
+    }
+
+    for(let i=target; i>=0; i--) {
+        if(road[i] !== null) {
+            stack.push(road[i]);
+            if(stack.length >= 2) {
+                const prevTimeToTarget = stack[stack.length - 2];
+                if(prevTimeToTarget >= road[i]) {
+                    stack.pop();
+                }
+            }
+        }
+    }
+    return stack.length;
+
+INITIAL SOLUTION
+
+const stack = []
+const map = position.map((entry,index) => [entry,speed[index]])
+map.sort((a,b) => a[0] - b[0])
+for(let i = map.length - 1;i >= 0;i--) {
+    const [pos,speed] = map[i]
+    stack.push((target - pos) / speed)
+    if(stack.length >= 2 && stack[stack.length - 1] <= stack[stack.length - 2]) {
+        stack.pop()
+    }
+}
+return stack.length
+
+
+*/
+
+// const stack = []
+//     const carMap = position.map((pos,index) => [pos,speed[index]])
+//     carMap.sort((a,b) => a[0] - b[0])
+//     console.log(carMap)
+//     for(let i = carMap.length - 1;i >= 0;i--) {
+//         const [pos,speed] = carMap[i]
+//         stack.push((target - pos) / speed)
+//         if(stack.length >= 2 && stack[stack.length - 1] <= stack[stack.length - 2]) {
+//             stack.pop()
+//         }
+//     }
+//     return stack.length
+
+// if(position.length === 1) return 1
+//     let fleets = 0
+//     const miles = position.map((entry,index) => Math.ceil((target - entry) / speed[index]))
+//     console.log(miles)
+//     const cache = [miles.shift()]
+
+//     while(miles.length) {
+//         if(miles[0] <= cache[cache.length - 1]) {
+//             fleets++
+//         }else {
+//             fleets++
+//             cache.push(miles.shift())
+//         }
+//         cache.push(miles.shift())
+//     }
+//     return fleets
 
 
 
@@ -111,6 +201,20 @@ ALTERNATE SOLUTION
 //         }
 //     }
 // return stack.length
+
+// const stack = []
+//     const hours = position
+//     .map((entry,i) => [entry,Math.ceil((target - entry) / speed[i])])
+//     .sort((a,b) => a[0] - b[0])
+//     .map(entry => entry[1])
+//     console.log(hours)
+//     for(let i = hours.length - 1;i >= 0 ;i--) {
+//         stack.push(hours[i])
+//         if(stack.length >= 2 && stack[stack.length - 1] <= stack[stack.length - 2]) {
+//             stack.pop()
+//         }
+//     }
+//     console.log(stack)
     
 
 
