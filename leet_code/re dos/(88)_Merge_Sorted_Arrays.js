@@ -18,17 +18,7 @@ The final sorted array should not be returned by
 
 const merge = (nums1, m, nums2, n) => {
     
-    let cache = 0
-
-    nums1.forEach((item,index) => {
-        if((item === 0 || item === '') && (cache < n)) {
-            nums1[index] = nums2[cache]
-            cache++
-        }
-    })
-
-    nums1.sort((a,b) => a - b)
-    return nums1
+    
 
 
 
