@@ -13,7 +13,7 @@ Output: [24,12,8,6]
 */
 
 const productExceptSelf = (nums) => {
-
+    
 }
 
 console.log(productExceptSelf([1,2,3,4]))
