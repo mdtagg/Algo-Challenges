@@ -6,10 +6,34 @@ rectangle in the histogram.
 */
 
 const largestRectangleArea = (heights) => {
-    
+
+    const stack = []
+    heights.push(0)
+    let result = 0
+
+    for(let i = 0;i < heights.length;i++) {
+        let heightStart = i
+        while(stack.length && stack[stack.length - 1][1] >= heights[i]) {
+            const [ pos, height ] = stack.pop()
+            result = Math.max(result,(i - pos) * height)
+            heightStart = pos
+        }
+        stack.push([heightStart,heights[i]])
+    }
+    console.log(result)
 }
 
 largestRectangleArea([2,1,5,6,2,3])
+
+
+
+
+
+
+
+
+
+
 
 /*
 INITIAL SOLUTION
