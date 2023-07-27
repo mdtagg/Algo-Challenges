@@ -33,12 +33,55 @@ Note that no other cars meet these fleets before the destination, so the answer 
 */
 
 const carFleet = (target,position,speed) => {
-    
+    const stack = []
+    const road = Array(target + 1).fill(null)
+    for(let i = 0;i < position.length;i++) {
+        road[position[i]] = (target - position[i]) / speed[i]
+    }
+    console.log(road)
+    for(let i = road.length - 1;i >= 0;i--) {
+        if(road[i] !== null) {
+            stack.push(road[i])
+            if(stack.length >= 2) {
+                const prevTime = stack[stack.length - 2]
+                if(road[i] <= prevTime) {
+                    stack.pop()
+                }
+            }
+        }
+    }
+    return stack
 }
 
 console.log(carFleet(12,[10,8,0,5,3],[2,4,1,1,3]))
 
+
+
+
+
+
+
+
+
+
+
 /*
+REDO 3
+
+const stack = []
+    const carMap = position.map((entry,index) => [entry,speed[index]])
+    carMap.sort((a,b) => a[0] - b[0])
+    // console.log(carMap)
+    for(let i = carMap.length - 1;i >= 0;i--) {
+        const [pos,speed] = carMap[i]
+        const hours = (target - pos) / speed
+        stack.push(hours)
+        if(stack.length >= 2 && stack[stack.length - 2] >= stack[stack.length - 1]) {
+            stack.pop()
+        }
+    }
+    console.log(stack)
+    return stack.length
 
 REDO 2
 

@@ -21,6 +21,7 @@ const largestRectangleArea = (heights) => {
         stack.push([heightStart,heights[i]])
     }
     console.log(result)
+    return result
 }
 
 largestRectangleArea([2,1,5,6,2,3])
