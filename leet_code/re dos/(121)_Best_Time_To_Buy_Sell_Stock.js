@@ -13,24 +13,30 @@ any profit, return 0.
 
 var maxProfit = function(prices) {
 
+    
+};
+
+console.log(maxProfit([3,2,6,5,0,3]))
+
+/*
+
+INITIAL SOLUTION
+
+var maxProfit = function(prices) {
+
     let profit = 0
 
     for(let i = 0;i < prices.length;i++) {
         let left = i 
         let right = i + 1
 
-        while(prices[right] - prices[left] > profit) {
+        while(prices[left] < prices[right]) {
             profit = Math.max(profit,prices[right] - prices[left])
             right++
         }
     }
-    console.log(profit)
-
+    return profit
 };
-
-console.log(maxProfit([3,2,6,5,0,3]))
-
-/*
 
 let low = Infinity
     let high = -Infinity
