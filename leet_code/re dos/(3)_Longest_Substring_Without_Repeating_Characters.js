@@ -5,7 +5,73 @@ substring without repeating characters.
 */
 
 var lengthOfLongestSubstring = function(s) {
-    if(s === '') return 0
+
+    
+};
+
+console.log(lengthOfLongestSubstring("abcabcdbbc"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+PERFORMANCE SOLUTION
+
+let left = 0
+    let right = 0
+    let stack = []
+    let longest = 0
+
+    while(right < s.length) {
+        if(stack.includes(s[right])) {
+            left++
+            stack.shift()
+        }else {
+            stack.push(s[right])
+            right++
+        }
+        longest = Math.max(longest,stack.length)
+    }
+    return longest
+
+SLIDING WINDOW SOLUTION 
+
+if(s === '') return 0
+    let left = 0
+    let right = 0
+    let arr = []
+    let longest = 0
+
+    while(right < s.length) {
+        if(arr.includes(s[right])) {
+            left++
+            right = left
+            arr = [s[left]]
+        }else {
+            arr.push(s[right])
+        }
+        longest = Math.max(longest,arr.length)
+        right++
+    }
+    return longest
+
+
+if(s === '') return 0
     if(s.length === 1) return 1
     let longestStr = 0
 
@@ -18,16 +84,14 @@ var lengthOfLongestSubstring = function(s) {
         while(!strArray.includes(s[right]) && right < s.length) {
             strArray.push(s[right])
             right++
-            console.log(strArray)
         }
         if(strArray.length > longestStr) {
             longestStr = strArray.length
         }
     }
     return longestStr
-};
 
-console.log(lengthOfLongestSubstring("pwwkew"))
+*/
 
 // if(s === '') return 0
 //     // if(s.length === 1) return 1
