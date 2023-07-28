@@ -11,8 +11,77 @@ containing the same letter you can get after
 
 */
 
-var characterReplacement = function(s, k) {
-    //key is the longest substring is going to be the size of the window
+const characterReplacement = (s, k) => {
+    
+};
+
+console.log(characterReplacement("ABBBAAB",2))
+
+/*
+INITIAL SOLUTION
+
+let left = 0
+    let right = 0
+    let maxCharCount = 0
+    const visited = {}
+    
+    while(right < s.length) {
+        const char = s[right]
+        visited[char] = (visited[char] || 0) + 1
+
+        if(visited[char] > maxCharCount) maxCharCount = visited[char];
+
+        if(right - left + 1 - maxCharCount > k) {
+            visited[s[left]]--
+            left++
+        }
+        right++
+    }
+    return right - left
+
+
+
+let left = 0;
+    let right = 0;
+    let maxCharCount = 0;
+    const visited = {};
+  
+    while (right < s.length) {
+      const char = s[right];
+      visited[char] = visited[char] ? visited[char] + 1 : 1;
+  
+      if (visited[char] > maxCharCount) maxCharCount = visited[char];
+  
+      if (right - left + 1 - maxCharCount > k) {
+        visited[s[left]]--;
+        left++;
+      }
+  
+      right++;
+    }
+  
+    return right - left;
+
+let map = Array(26).fill(Infinity)
+    let left = 0
+    let right = 0
+    let longest = 0
+    
+    while(right < s.length) {
+        let idx = s.charCodeAt(right) - 65
+        map[idx] = map[idx] === Infinity ? 1 : map[idx] + 1
+        let min = Math.min(...map)
+        if(k - min < 0) {
+            let idx = s.charCodeAt(left) - 65
+            map[idx] -= 1
+            left++
+        }
+        longest = Math.max(longest,(right - left) + 1)
+        right++
+    }
+    return longest
+
+//key is the longest substring is going to be the size of the window
       let letterMap = []
       let longest = 0
       let left = 0
@@ -24,11 +93,6 @@ var characterReplacement = function(s, k) {
         console.log(letterMap)
         right++
       }
-};
-
-console.log(characterReplacement("AABABBA",1))
-
-/*
 
 if(letterMap.has(s[right])) {
             letterMap.set(s[right],letterMap.get(s[right]) + 1)
