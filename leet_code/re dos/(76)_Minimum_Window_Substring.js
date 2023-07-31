@@ -2,20 +2,19 @@
 
 var minWindow = function(s, t) {
 
-    if(t.length > s.length) return ""
     const neededChars = {}
-    let minStr = ''
 
     for(let char of t) {
         neededChars[char] = (neededChars[char] || 0) + 1
     }
 
+    let neededLength = Object.keys(neededChars).length
     let left = 0
     let right = 0
-    let neededLength = Object.keys(neededChars).length;
+    let minStr = ""
 
     while(right < s.length) {
-        let currentChar = s[right]
+        let currentChar = neededChars[right]
         neededChars[currentChar]--
         if(neededChars[currentChar] === 0) {
             neededLength--
@@ -31,10 +30,35 @@ var minWindow = function(s, t) {
             neededChars[leftChar]++
             left++
         }
-        right++
     }
+    return minStr
 };
 minWindow("ADOBECODEBANC","ABC")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 

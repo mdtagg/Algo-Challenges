@@ -11,6 +11,27 @@ var lengthOfLongestSubstring = function(s) {
 
 console.log(lengthOfLongestSubstring("abcabcdbbc"))
 
+//REDO 3
+
+// const visited = {}
+//     let minLen = 0
+
+//     let left = 0
+//     let right = 0
+
+//     while(right < s.length) {
+//         if(visited[s[right]] === 1) {
+//             // visited[s[right]]--
+//             left++
+//         }else {
+//             visited[s[right]] = (visited[s[right]] || 0) + 1
+//         }
+//         if(!minLen || right - left + 1 > minLen) {
+//             minLen = right - left + 1
+//         }
+//         right++
+//     }
+//     return minLen
 
 
 
