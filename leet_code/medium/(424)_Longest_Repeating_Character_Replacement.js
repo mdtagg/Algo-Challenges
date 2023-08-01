@@ -12,11 +12,30 @@ containing the same letter you can get after
 */
 
 const characterReplacement = (s, k) => {
+
+    let left = 0
+    let right = 0
+    let maxCharCount = 0
+    const visited = {}
     
-    
+    while(right < s.length) {
+        visited[s[right]] = (visited[s[right]] || 0) + 1
+        if(visited[s[right]] > maxCharCount) maxCharCount = visited[s[right]]
+        if(right - left + 1 - maxCharCount > k) {
+            visited[s[left]]--
+            left++
+        }
+        right++
+    }
+    return right - left
 };
 
-console.log(characterReplacement("ABAB",2))
+console.log(characterReplacement("AAAAB",2))
+
+
+
+
+
 
 
 
