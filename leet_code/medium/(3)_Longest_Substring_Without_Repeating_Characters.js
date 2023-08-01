@@ -6,12 +6,44 @@ substring without repeating characters.
 
 var lengthOfLongestSubstring = function(s) {
 
-    
+    let left = 0
+    let right = 0
+    let stack = []
+    let longest = 0
+
+    while(right < s.length) {
+        if(stack.includes(s[right])) {
+            stack.shift()
+            left++
+        }else {
+            stack.push(s[right])
+            right++
+        }
+        longest = Math.max(longest,stack.length)
+    }
+    return longest
 };
 
 console.log(lengthOfLongestSubstring("abcabcdbbc"))
 
-//REDO 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//REDO 4
 
 // const visited = {}
 //     let minLen = 0

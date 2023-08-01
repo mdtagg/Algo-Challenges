@@ -13,9 +13,19 @@ containing the same letter you can get after
 
 const characterReplacement = (s, k) => {
     
+    
 };
 
-console.log(characterReplacement("ABBBAAB",2))
+console.log(characterReplacement("ABAB",2))
+
+
+
+
+
+
+
+
+
 
 /*
 INITIAL SOLUTION
