@@ -12,10 +12,20 @@ any profit, return 0.
 */
 
 var maxProfit = function(prices) {
-  
+
 };
 
 console.log(maxProfit([3,2,6,5,0,3]))
+
+//
+
+
+
+
+
+
+
+
 
 
 
