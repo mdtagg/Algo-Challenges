@@ -12,10 +12,26 @@ Return the max sliding window.
 
 const maxSlidingWindow = (nums,k) => {
 
-   
+    let stack = []
+    let result = []
+
+    for(let i = 0;i < nums.length;i++) {
+
+        while(stack.length && nums[stack.length - 1] <= nums[i]) {
+            stack.pop()
+        }
+        stack.push(i)
+        if(stack[0] === i - k) {
+            stack.shift()
+        }
+        if(i >= k - 1) {
+            result.push(nums[stack[0]])
+        }
+    }
+    return result
 }
 
-console.log(maxSlidingWindow([1,3,-1,-3,5,3,6,7],3))
+console.log(maxSlidingWindow([7,2,4],2))
 
 
 
