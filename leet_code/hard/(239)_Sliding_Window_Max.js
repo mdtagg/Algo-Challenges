@@ -17,7 +17,7 @@ const maxSlidingWindow = (nums,k) => {
 
     for(let i = 0;i < nums.length;i++) {
 
-        while(stack.length && nums[stack.length - 1] <= nums[i]) {
+        while(stack.length && nums[stack[stack.length - 1]] <= nums[i]) {
             stack.pop()
         }
         stack.push(i)
