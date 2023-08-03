@@ -4,7 +4,6 @@ function ListNode(val,next,random) {
     this.random = random
 }
 
-// const node5 = new ListNode(5)
 const node4 = new ListNode(4,undefined,1)
 const node3 = new ListNode(3,node4,0)
 const node2 = new ListNode(2,node3,3)
