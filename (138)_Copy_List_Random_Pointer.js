@@ -11,27 +11,60 @@ const node2 = new ListNode(2,node3,3)
 const node1 = new ListNode(1,node2,2)
 
 const copyRandomList = (head) => {
-    if(!head) {
+    if(!head){
         return null;
       }
-      const clones = new Map();
-      let n = head;
-      while(n) {
-        clones.set(n, new ListNode(n.val));
-        n = n.next
+    
+      const map = new Map();
+      function helper(head){
+        if(!head){
+          return null;
+        }
+    
+        if(map.has(head)){
+          return map.get(head);
+        }
+    
+        const newNode = new ListNode(head.val);
+        map.set(head, newNode);
+    
+        newNode.next = helper(head.next);
+        newNode.random = helper(head.random);
+    
+        return newNode;
       }
-      n = head;
-      while(n) {
-        clones.get(n).next = clones.get(n.next) || null;
-        clones.get(n).random = clones.get(n.random) || null;
-        n = n.next
-      }
-      return clones.get(head);
+      return helper(head);
 }
 
-copyRandomList(node1)
+console.log(copyRandomList(node1))
 
 /*
+PERFORMANCE SOLUTION
+
+if(!head){
+    return null;
+  }
+
+  const map = new Map();
+  function helper(head){
+    if(!head){
+      return null;
+    }
+
+    if(map.has(head)){
+      return map.get(head);
+    }
+
+    const newNode = new Node(head.val);
+    map.set(head, newNode);
+
+    newNode.next = helper(head.next);
+    newNode.random = helper(head.random);
+
+    return newNode;
+  }
+  return helper(head);
+
 INITIAL SOLUTION
 
 if(!head) {
@@ -40,7 +73,7 @@ if(!head) {
     const clones = new Map();
     let n = head;
     while(n) {
-      clones.set(n, new Node(n.val));
+      clones.set(n, new ListNode(n.val));
       n = n.next
     }
     n = head;
@@ -50,5 +83,33 @@ if(!head) {
       n = n.next
     }
     return clones.get(head);
+
+
+CODE GRAVEYARD
+
+if(!head) return null 
+
+    let newList = new ListNode(head.val)
+    let pointer = newList
+    let left = head.next
+
+    let stack = []
+    let counter = 0
+
+    while(left) {
+        let val = left.val
+        let index = left.random
+        if(stack.length && stack[0][1] === counter) {
+            let newPointer = stack.pop()
+            newPointer.random = stack[0][0]
+        }
+        pointer.next = new ListNode(val)
+        stack.push(pointer,index)
+        pointer = pointer.next
+        left = left.next
+        counter++
+    }
+    console.log(newList)
+
 
 */
