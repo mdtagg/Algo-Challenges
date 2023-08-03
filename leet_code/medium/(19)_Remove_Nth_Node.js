@@ -12,7 +12,23 @@ const node1 = new ListNode(1,node2)
 
 const removeNthFromEnd = (head,n) => {
 
-    
+    let dummyNode = new ListNode(0,head)
+    let left = dummyNode 
+    let right = head 
+
+    while(n > 0 && right) {
+        right = right.next
+        n -= 1
+    }
+
+    while(right) {
+        right = right.next 
+        left = left.next
+    }
+
+    left.next = left.next.next 
+
+    return dummyNode.next
 }
 
 removeNthFromEnd(node1,2)
