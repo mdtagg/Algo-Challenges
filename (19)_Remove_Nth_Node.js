@@ -12,22 +12,7 @@ const node1 = new ListNode(1,node2)
 
 const removeNthFromEnd = (head,n) => {
 
-    let dummyNode = new ListNode(0,head)
-    let left = dummyNode
-    let right = head 
-
-    while(n > 0 && right) {
-        right = right.next 
-        n -= 1
-    }
-
-    while(right) {
-        right = right.next
-        left = left.next
-    }
-
-    left.next = left.next.next
-    return dummyNode.next
+    
 }
 
 removeNthFromEnd(node1,2)
@@ -36,21 +21,28 @@ removeNthFromEnd(node1,2)
 PERFORMANCE SOLUTION
 
 var removeNthFromEnd = function(head, n) {
-    let dummyNode = new ListNode(0, head);
 
+    //create dummyNode for space to find left and right nodes
+    let dummyNode = new ListNode(0, head);
     let left = dummyNode;
     let right = head;
 
+    //move right to starting position
     while (n > 0 && right) {
         right = right.next;
         n -= 1;
     }
 
+    //move left to left position 
     while (right) {
         right = right.next;
         left = left.next;
     }
 
+    //because left is pointing to dummyNode which has the head pointer
+    //as its second value, we are able to traverse into the head node 
+    // when left.next is set its set to a pointer within the head node
+    //so head is changed and dummyNode is changed
     left.next = left.next.next;
 
     return dummyNode.next;

@@ -21,42 +21,14 @@ list and the second section.
  */
 
 const reorderList = (head) => {
-    let slow = head 
-    let fast = head 
-
-    while(fast.next && fast.next.next) {
-        slow = slow.next 
-        fast = fast.next.next
-    }
-
-    let prev = null 
-    let curr = slow.next
-
-    while(curr) {
-        let temp = curr.next
-        curr.next = prev
-        prev = curr
-        curr = temp
-    }
-
-    slow.next = null 
-
-    let h1 = head 
-    let h2 = prev
-
-    while(h2) {
-        let temp = h1.next 
-        h1.next = h2 
-        h1 = h2 
-        h2 = temp
-    }
+  
 } 
 
 reorderList(node1)
 
 /*
 
-REDOS: 2
+REDOS: 3
 
 //1. find middle
     let slow = head

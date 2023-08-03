@@ -1,12 +1,6 @@
 /*
-You are given the head of a singly linked-list. 
-The list can be represented as:
-
-L0 → L1 → … → Ln - 1 → Ln
-
-Reorder the list to be on the following form:
-
-L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
+Given the head of a singly linked list, 
+reverse the list, and return the reversed list.
 */
 
 function ListNode(val,next) {
@@ -21,7 +15,17 @@ const node2 = new ListNode(2,node3)
 const node1 = new ListNode(1,node2)
 
 const reverseList = (head) => {
-    
+    let prev = null
+    let curr = head 
+    let next = null 
+
+    while(curr) {
+        next = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next
+    }
+    return prev
 }
 
 console.log(reverseList(node1))
