@@ -25,17 +25,26 @@ const n2 = new ListNode(6,n3)
 const l2 = new ListNode(5,n2)
 
 var addTwoNumbers = function(l1, l2) {
-
+    
+    
 }
 addTwoNumbers(l1,l2)
 
+
+
+
+
+
+
 /*
+REDOS 3
+
 PERFORMANCE SOLUTION
 
 let dummy = new ListNode();
     let curr = dummy;
     let carry = 0;
-    while(l1 || l2) {
+    while(l1 || l2 || carry) {
         let val1 = 0;
         let val2 = 0;
         if(l1) {
@@ -102,4 +111,36 @@ with digit as the value. Then we set previousNode.next to point to the current n
 node is set to current node. Basically previous node is acting as a dummy node, being loaded with
 pointers to current nodes we generate and then head node is pointing to the most current 
 previous node. 
+
+REDOS
+
+let prevNode = new ListNode()
+    let dummy = prevNode
+    let carry = 0
+
+    while(l1 || l2 || carry) {
+
+        let val1 // = 0
+        let val2 // = 0
+
+        if(l1) {
+            val1 = l1.val 
+            l1 = l1.next
+        }
+
+        if(l2) {
+            val2 = l2.val 
+            l2 = l2.next
+        }
+
+        let sum = val1 + val2 + carry
+        let digit = sum % 10
+        carry = Math.floor(sum / 10)
+
+        let nextNode = new ListNode(digit)
+        dummyNode.next = nextNode //prevNode.next = nextNode
+        dummyNode = nextNode //prevNode = nextNode
+    }
+    //return dummy.next
+
 */

@@ -7,10 +7,10 @@ const node4 = new ListNode(-4)
 const node3 = new ListNode(0,node4)
 const node2 = new ListNode(2,node3)
 const l1 = new ListNode(3,node2)
-// node4.next = node2
+node4.next = node2
 
 const hasCycle = (head) => {
-
+    
 }
 
 hasCycle(l1)

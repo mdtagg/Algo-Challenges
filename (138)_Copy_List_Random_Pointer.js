@@ -10,34 +10,15 @@ const node2 = new ListNode(2,node3,3)
 const node1 = new ListNode(1,node2,2)
 
 const copyRandomList = (head) => {
-    if(!head){
-        return null;
-      }
+
     
-      const map = new Map();
-      function helper(head){
-        if(!head){
-          return null;
-        }
-    
-        if(map.has(head)){
-          return map.get(head);
-        }
-    
-        const newNode = new ListNode(head.val);
-        map.set(head, newNode);
-    
-        newNode.next = helper(head.next);
-        newNode.random = helper(head.random);
-    
-        return newNode;
-      }
-      return helper(head);
 }
 
 console.log(copyRandomList(node1))
 
 /*
+REDOS 2
+
 PERFORMANCE SOLUTION
 
 if(!head){
