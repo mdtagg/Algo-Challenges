@@ -39,7 +39,33 @@ const l2 = new ListNode(5,n2)
 
 var addTwoNumbers = function(l1, l2) {
     
-    
+    let dummy = new ListNode()
+    let pointer = dummy 
+    let carry = 0
+
+    while(l1 || l2 || carry) {
+        let val1 = 0
+        let val2 = 0
+
+        if(l1) {
+            val1 = l1.val 
+            l1 = l1.next
+        }
+
+        if(l2) {
+            val2 = l2.val 
+            l2 = l2.next
+        }
+
+        let sum = val1 + val2 + carry 
+        let digit = sum % 10
+        carry = Math.floor(sum / 10)
+
+        let newNode = new ListNode(digit)
+        dummy.next = newNode 
+        dummy = newNode
+    }
+    return pointer.next
 }
 addTwoNumbers(l1,l2)
 
