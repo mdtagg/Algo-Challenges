@@ -23,37 +23,60 @@ l2.next.next = new ListNode(4)
 const l3 = new ListNode(2)
 l3.next = new ListNode(6)
 
-function mergeTwoLists() {
 
-    
-}
-
-function mergeKLists() {
+function mergeKLists(lists) {
 
 }
 
 mergeKLists([l1,l2,l3])
 
 /*
-if (!l1) {
-        return l2;
-    }
-    if (!l2) {
-        return l1;
-    }
-    if (l1.val < l2.val) {
-        l1.next = mergeTwoLists(l1.next, l2);
-        return l1;
-    } else {
-        l2.next = mergeTwoLists(l1, l2.next);
-        return l2;
-    }
-};
+PERFORMANCE SOLUTION
 
 var mergeKLists = function(lists) {
-    let ans = null;
-    for (let i = 0; i < lists.length; i++) {
-        ans = mergeTwoLists(ans, lists[i]);
+    const allNodes = [];
+    for(let list of lists){
+        while(list){
+            allNodes.push(list.val);
+            list = list.next;
+        }
     }
-    return ans;
+    allNodes.sort((a,b)=>a-b);
+    const res = new ListNode(-1,null);
+    let curr = res;
+    for(let val of allNodes){
+        const node = new ListNode(val);
+        curr.next = node;
+        curr = node;
+    }
+    return res.next;
+
+};
+
+INITIAL SOLUTION
+
+function mergeTwoLists(l1,l2) {
+    if(!l1) {
+        return l2
+    }
+    if(!l2) {
+        return l1
+    }
+    if(l1.val < l2.val) {
+        l1.next = mergeTwoLists(l1.next,l2)
+        return l1
+    }
+    else {
+        l2.next = mergeTwoLists(l1,l2.next)
+        return l2
+    }
+}
+
+function mergeKLists(lists) {
+    let answer = null
+    for(let i = 0;i < lists.length;i++) {
+        answer = mergeTwoLists(answer,lists[i])
+    }
+    return answer
+}
  */
