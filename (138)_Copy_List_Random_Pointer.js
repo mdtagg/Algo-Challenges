@@ -44,17 +44,42 @@ Your code will only be given the head
 function ListNode(val,next,random) {
     this.val = val
     this.next = next
-    this.random = random
+    this.random = null
 }
 
-const node4 = new ListNode(4,undefined,1)
-const node3 = new ListNode(3,node4,0)
-const node2 = new ListNode(2,node3,3)
-const node1 = new ListNode(1,node2,2)
+const node4 = new ListNode(4,undefined)
+const node3 = new ListNode(3,node4)
+const node2 = new ListNode(2,node3)
+const node1 = new ListNode(1,node2)
+
+node1.random = node4
+node1.next.random = node1 
+node1.next.next.random = node3 
+node1.next.next.next.random = node2
+
+
 
 const copyRandomList = (head) => {
 
-    
+  if(!head) return null;
+
+  const clones = new Map()
+  let n = head 
+
+  while(n) {
+    clones.set(n,new ListNode(n.val))
+    n = n.next
+  }
+
+  n = head 
+
+  while(n) {
+    clones.get(n).next = clones.get(n.next) || null 
+    clones.get(n).random = clones.get(n.random) || null 
+    n = n.next
+  }
+  
+  return clones.get(head)
 }
 
 console.log(copyRandomList(node1))
