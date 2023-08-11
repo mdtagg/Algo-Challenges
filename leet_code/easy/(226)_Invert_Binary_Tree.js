@@ -4,8 +4,6 @@ function TreeNode(val,left,right) {
     this.right = (right===undefined ? null : right)
 }
 
-
-
 const tree = new TreeNode(4)
 tree.left = new TreeNode(2)
 tree.left.left = new TreeNode(1)
