@@ -27,7 +27,27 @@ const l1 = new ListNode(1,node2)
 
 function reverseKGroup(list,k) {
 
-    
+    const stack = []
+    let newNode = new ListNode(null)
+    let headNode = newNode
+
+    while(list) {
+        stack.push(list.val)
+        if(stack.length === k) { 
+            while(stack.length) {
+                let node = new ListNode(stack.pop())
+                newNode.next = node 
+                newNode = node
+            }
+        }
+        list = list.next
+    }
+    while(stack.length) {
+        let node = new ListNode(stack.shift())
+        newNode.next = node 
+        newNode = node
+    }
+    return headNode.next
 }
 
 reverseKGroup(l1,3)
