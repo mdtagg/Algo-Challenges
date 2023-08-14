@@ -30,7 +30,7 @@ tree.left.right = new TreeNode(5)
 
 
 const diameterOfBinaryTree = (tree) => {
-    let diameter = 1
+    let diameter = 0
 
     function dfs(tree) {
 
