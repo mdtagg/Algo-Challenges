@@ -43,6 +43,7 @@ const isBalanced = (tree) => {
 
     dfs(tree)
     
+    return balanced
 }
 
 isBalanced(tree)
