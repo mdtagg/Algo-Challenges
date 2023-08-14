@@ -1,3 +1,14 @@
+/*
+Given the roots of two binary trees 
+p and q, write a function to check 
+if they are the same or not.
+
+Two binary trees are considered 
+the same if they are structurally 
+identical, and the nodes have the 
+same value.
+*/
+
 function TreeNode(val,left,right) {
     this.val = (val===undefined ? 0 : val)
     this.left = (left===undefined ? null : left)
@@ -17,6 +28,30 @@ const isSameTree = (root1,root2) => {
     let same = true
 
     function dfs(root1,root2) {
+        if(!root1 && !root2) return
+        if(root1.val !== root2.val || !root1 || !root2) same = false;
+        dfs(root1.left,root2.left)
+        dfs(root1.right,root2.right)
+    }
+
+    dfs(root1,root2)
+
+    return same
+}
+
+isSameTree(root1,root2)
+
+/*
+
+if (!p && !q) return true;
+  if (!p || !q || p.val !== q.val) return false;
+  
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+
+
+  let same = true
+
+    function dfs(root1,root2) {
         if(!root1 || !root2) {
             same = false 
             return
@@ -33,11 +68,8 @@ const isSameTree = (root1,root2) => {
     dfs(root1,root2)
     
     return same
-}
 
-isSameTree(root1,root2)
 
-/*
 let same = true 
     
     function dfs(root) {
