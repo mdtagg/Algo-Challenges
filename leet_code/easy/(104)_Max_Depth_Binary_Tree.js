@@ -15,7 +15,12 @@ tree.right.right = new TreeNode(9)
 
 const maxDepth = (tree) => {
 
-    
+    if(!tree) return 0
+
+    let left = maxDepth(tree.left)
+    let right = maxDepth(tree.right)
+
+    return Math.max(left,right) + 1
     
 }
 
