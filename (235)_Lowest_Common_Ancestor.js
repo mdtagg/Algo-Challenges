@@ -19,8 +19,27 @@ root.right.left = new TreeNode(7)
 root.right.right = new TreeNode(9)
 
 function lowestCommonAncestor(root,q,p) {
+    
+}
 
-    let min = Math.min(p.val,q.val)
+lowestCommonAncestor(root,q,p)
+
+/*
+PERFORMANCE SOLUTION 
+
+if (!root) return root;
+
+    if (p.val < root.val && q.val < root.val) {
+        return lowestCommonAncestor(root.left, p, q);
+    } else if (p.val > root.val && q.val > root.val) {
+        return lowestCommonAncestor(root.right, p, q);
+    } else {
+        return root;
+    }
+
+INITIAL SOLUTION
+
+let min = Math.min(p.val,q.val)
     let max = Math.max(p.val,q.val)
 
     while(root) {
@@ -28,23 +47,6 @@ function lowestCommonAncestor(root,q,p) {
         else if(root.val < min) root = root.right;
         else return root;
     }
-
-}
-
-lowestCommonAncestor(root,q,p)
-
-/*
-while (root) {
-        if (root.val < p.val && root.val < q.val) {
-            root = root.right;
-        }
-        else if (root.val > p.val && root.val > q.val) {
-            root = root.left;
-        } else {
-            break;
-        }
-    }
-    return root;
 
 
 CODE GRAVEYARD
