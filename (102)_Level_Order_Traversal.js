@@ -17,31 +17,91 @@ const root = new TreeNode(1)
 root.left = new TreeNode(2)
 root.right = new TreeNode(3)
 root.left.left = new TreeNode(4)
-root.left.right = new TreeNode(5)
+root.right.right = new TreeNode(5)
 
-const levelOrder = (root) => {
+var levelOrder = function(root) {
+    // If root is null return an empty array
     if(!root) return []
-    const arr = []
-
-    function dfs(node) {
-        if(!node) return null
-        let left = dfs(node.left)
-        let right = dfs(node.right)
-        const stack = []
-        if(left) stack.push(left)
-        if(right) stack.push(right)
-        if(stack.length) arr.unshift(stack)
-        return node.val
-    }
-    let test = dfs(root)
-    arr.unshift([test])
-    return arr
+    
+    const queue = [root] // initialize the queue with root
+    const levels = [] // declare output array
+    
+    while(queue.length !== 0){
+       const queueLength = queue.length // Get the length prior to dequeueing
+       const currLevel = [] // Declare this level
+       // loop through to exhaust all options and only to include nodes at currLevel
+       for(let i = 0; i < queueLength; i++){
+           // Get next node
+           const current = queue.shift()
+           
+           if(current.left){
+               queue.push(current.left)
+           }
+           if(current.right){
+               queue.push(current.right)
+           }
+           // After we add left and right for current, we add to currLevel
+           currLevel.push(current.val)
+       }
+       // Level has been finished. Push into output array
+       levels.push(currLevel)
+   }
+    return levels
 }
 
 levelOrder(root)
 
 /*
+INITIAL SOLUTION
+
+var levelOrder = function(root) {
+    // If root is null return an empty array
+    if(!root) return []
+    
+    const queue = [root] // initialize the queue with root
+    const levels = [] // declare output array
+    
+    while(queue.length !== 0){
+       const queueLength = queue.length // Get the length prior to dequeueing
+       const currLevel = [] // Declare this level
+       // loop through to exhaust all options and only to include nodes at currLevel
+       for(let i = 0; i < queueLength; i++){
+           // Get next node
+           const current = queue.shift()
+           
+           if(current.left){
+               queue.push(current.left)
+           }
+           if(current.right){
+               queue.push(current.right)
+           }
+           // After we add left and right for current, we add to currLevel
+           currLevel.push(current.val)
+       }
+       // Level has been finished. Push into output array
+       levels.push(currLevel)
+   }
+    return levels
+}
+
 CODE GRAVEYARD
+
+let left,right
+        if(node.left) left = dfs(node.left,level + 1)
+        if(node.right) right = dfs(node.right,level + 1)
+        if(left) arr[level].unshift(left)
+        if(right) arr[level].push(right)
+
+// if(node.left) arr[level].unshift(dfs(node.left,level+1))
+        // if(node.right) arr[level].push(dfs(node.right,level+1))
+        // let left = dfs(node.left,level + 1)
+        // let right = dfs(node.right,level + 1)
+
+        // const stack = []
+        // if(left) stack.push(left)
+        // if(right) stack.push(right)
+        // if(stack.length) arr.unshift(stack)
+
 
 const levelOrder = (root) => {
     if(!root) return []
