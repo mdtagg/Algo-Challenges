@@ -9,7 +9,14 @@ The matching should cover the entire input string (not partial).
 
 
 var isMatch = function(s, p) {
-    const cache = new Map();
+    
+};
+
+isMatch('aa','a*')
+/*
+PERFORMANCE SOLUTION
+
+const cache = new Map();
     return dp(0, 0);
     function dp(i, j) {
         const key = `${i}-${j}`;
@@ -29,11 +36,18 @@ var isMatch = function(s, p) {
             return match;
         }
     }
-};
 
-isMatch('aa','a*')
-/*
-The key to this challenge was to find a way to incorporate string interpolation into the regex
-to account for the changing p. Instead of declaring a regex and assigning to a variable we 
-concatanate the starting flag with the p string with the ending bling flag. 
+INITIAL SOLUTION
+
+const isMatch = (string, pattern) => {
+    if (!pattern) return !string;
+    const hasFirstCharMatch = string && (pattern[0] === '.' || pattern[0] === string[0]);
+    if (pattern[1] === '*') {
+        return (
+            isMatch(string, pattern.slice(2)) || 
+            (hasFirstCharMatch && isMatch(string.slice(1), pattern))
+        );
+    }
+    return hasFirstCharMatch ? isMatch(string.slice(1), pattern.slice(1)) : false;
+}
 */
