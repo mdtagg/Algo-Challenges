@@ -4,14 +4,16 @@ function TreeNode(val, left, right) {
     this.right = (right===undefined ? null : right)
 }
 
-const pre1 = [3,9,20,15,7]
-const in1 = [9,3,15,20,7]
+const pre1 = [3,9,4,5,20,15,7]
+const in1 = [4,9,5,3,15,20,7]
 
 var buildTree = function(preorder, inorder) {
-    p = i = 0
-    build = function(stop) {
-        if (inorder[i] != stop) {
-            var root = new TreeNode(preorder[p++])
+    let p = 0
+    let i = 0
+
+    function build(stop) {
+        if(inorder[i] !== stop) {
+            let root = new TreeNode(preorder[p++])
             root.left = build(root.val)
             i++
             root.right = build(stop)
@@ -22,7 +24,7 @@ var buildTree = function(preorder, inorder) {
     return build()
 };
 
-buildTree(pre1,in1)
+console.log(buildTree(pre1,in1))
 
 /*
 CODE GRAVEYARD
