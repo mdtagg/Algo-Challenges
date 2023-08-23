@@ -1,4 +1,6 @@
-
+/*
+Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.
+*/
 function TreeNode(val, left, right) {
     this.val = (val===undefined ? 0 : val)
     this.left = (left===undefined ? null : left)
@@ -14,7 +16,25 @@ root.left.left.left = new TreeNode(1)
 
 const kthSmallest = (root,k) => {
 
-    let numbers = []
+    let stack = []
+
+    function dfs(node) {
+        if(!node) return null
+        if(stack.length === k) return 
+        stack.unshift(node.val)
+        dfs(node.left)
+        dfs(node.right)
+    }
+    dfs(root)
+    
+}
+
+kthSmallest(root,3)
+
+/*
+INITIAL SOLUTION
+
+let numbers = []
     
     function dfs(node) {
         if(numbers.length === k) return
@@ -24,11 +44,7 @@ const kthSmallest = (root,k) => {
     }
     dfs(root)
     return numbers[k - 1]
-}
 
-kthSmallest(root,3)
-
-/*
 CODE GRAVEYARD
 
 let count = 0
