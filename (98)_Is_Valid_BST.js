@@ -35,7 +35,7 @@ root.right.right = new TreeNode(6)
 
 var isValidBST = function(root, min=null, max=null) {
 
-
+    
 
 
 
