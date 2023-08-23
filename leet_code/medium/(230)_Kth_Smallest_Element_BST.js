@@ -21,12 +21,12 @@ const kthSmallest = (root,k) => {
     function dfs(node) {
         if(!node) return null
         if(stack.length === k) return 
-        stack.unshift(node.val)
         dfs(node.left)
+        stack.push(node.val)
         dfs(node.right)
     }
     dfs(root)
-    
+    return stack[k-1]
 }
 
 kthSmallest(root,3)
