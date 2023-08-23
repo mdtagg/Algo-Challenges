@@ -1,41 +1,105 @@
 
 
-const mostFrequent = (str) => {
+const topThreeWords = (str) => {
 
     str = str.toLowerCase().split(' ')
     let uniqueWords = new Map()
     const regex = /^[a-z']*[a-z](?:'[a-z])*[a-z']*$/
-    let high = mid = low = 0
-    let first,middle,last
-
+    
     for(let i = 0;i < str.length;i++) {
         if(!regex.test(str[i])) {
             str[i] = str[i].split('').filter(character => regex.test(character)).join('')
         }
         if(str[i]) {
             uniqueWords.set(str[i], (uniqueWords.has(str[i]) ? uniqueWords.get(str[i]) : 0) + 1)
-            let currentWordCount = uniqueWords.get(str[i])
-            if(currentWordCount > high) {
-                high = currentWordCount 
-                first = str[i]
-            }else if(currentWordCount > mid) {
-                mid = currentWordCount
+        }
+    }
+
+    let max = mid = min = 0
+    let highest,middle,lowest
+
+    for(let pair of uniqueWords) {
+        const [key,value] = pair
+        
+        if(value > max) {
+            lowest = middle 
+            middle = highest
+            max = value
+            highest = key
+        }else if(value > mid) {
+            lowest = middle 
+            middle = key
+            mid = value
+        }else if(value > min) {
+            min = value
+            lowest = key
+        }
+    }
+    
+    return [highest,middle,lowest].filter(entry => entry != undefined)
+}
+
+console.log(topThreeWords("  //wont won't won't "))
+
+/*
+
+let currentWordNumber = uniqueWords.get(str[i])
+            if(currentWordNumber > max) {
+                lowest = middle 
+                middle = highest
+                max = currentWordNumber
+                highest = str[i]
+            }else if(currentWordNumber > mid) {
+                lowest = middle
+                mid = currentWordNumber
                 middle = str[i]
-            }else if(currentWordCount > low) {
-                low = currentWordCount 
-                last = str[i]
+            }else {
+                min = currentWordNumber
+                lowest = str[i]
             }
         }
 
-    }
-    
-    
-    return uniqueWords
-}
+//     let currentWordNumber = uniqueWords.get(str[i])
+        //     if(currentWordNumber > max) {
+        //         min = mid
+        //         mid = max 
+        //         max = currentWordNumber
+        //         highest = str[i]
+        //     }else if(currentWordNumber > mid) {
+        //         min = mid 
+        //         mid = currentWordNumber
+        //         middle = str[i]
+        //     }else if(currentWordNumber > min) {
+        //         min = currentWordNumber
+        //         lowest = str[i]
+        //     }
+// for(let key of uniqueWords) {
+    //     sorted.push(key)
+    // }
+    // console.log(sorted)
+    // sorted.sort((a,b) => a[1] - b[1])
 
-console.log(mostFrequent("a a a  b  c c  d d d d  e e e e e"))
+    // for(let i = sorted.length - 1;i >= 0;i--) {
+    //     if(result.length === 3) break
+    //     result.push(sorted[i][0])
+    // }
+    // console.log(result)
 
-/*
+// let high = mid = low = 0
+    // let first,middle,last
+
+
+//     let currentWordCount = uniqueWords.get(str[i])
+        //     if(currentWordCount > high) {
+        //         high = currentWordCount 
+        //         first = str[i]
+        //     }else if(currentWordCount > mid) {
+        //         mid = currentWordCount
+        //         middle = str[i]
+        //     }else if(currentWordCount > low) {
+        //         low = currentWordCount 
+        //         last = str[i]
+        //     }
 
 // let keys = uniqueWords.keys()
     // let max = mid = low = 0
