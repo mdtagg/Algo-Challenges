@@ -2,6 +2,49 @@
 
 const knight = (start,finish) => {
 
+    let chessMatrix = createChessMatrix()
+    console.log(chessMatrix)
+
+    const [letter,number] = start.split('')
+    const [endLetter,endNumber] = finish.split('')
+    const alphabet = 'abcdefgh'
+    // const previousPositions = new Set()
+    const endPosition = chessMatrix[endNumber][endLetter.charCodeAt(0) - 97]
+    
+    let result = 0
+    let done = false
+    function move(letter,number,min=0,direction,horizontalDist) {
+
+        if(!letter || number > 8 || done) return
+        let letterIndex = letter.charCodeAt(0) - 97
+        let startPosition = chessMatrix[number][letterIndex]
+        let horizontalDistance = (endLetter.charCodeAt(0) - 97) - letterIndex
+        console.log(horizontalDist)
+        // if(previousPositions.has(startPosition)) return
+        if( startPosition === endPosition || !startPosition) {
+            done = true
+            result = min
+            return
+        }
+        // previousPositions.add(startPosition)
+        
+        number = parseInt(number)
+        
+        move(alphabet[letterIndex + 1],number + 2,++min,'upRight',horizontalDistance)
+        move(alphabet[letterIndex - 1],number + 2,++min,'upLeft',horizontalDistance)
+        move(alphabet[letterIndex + 2],number + 1,++min,'rightUp',horizontalDistance)
+        // move(alphabet[letterIndex + 2],number - 1,++min,'rightDown')
+        // move(alphabet[letterIndex + 1],number - 2,++min,'downRight')
+        // move(alphabet[letterIndex - 1],number - 2,++min,'downLeft')
+        // move(alphabet[letterIndex - 2],number - 1,++min,'leftDown')
+        // move(alphabet[letterIndex - 2],number + 1,++min,'leftUp')
+        
+    }
+    move(letter,number)
+    console.log(result)
+}
+
+function createChessMatrix() {
     let total = 0
     let row = 1
 
@@ -12,43 +55,12 @@ const knight = (start,finish) => {
         total++
     }
 
-    console.log(chessMatrix)
-
-    const [letter,number] = start.split('')
-    const [endLetter,endNumber] = finish.split('')
-    const alphabet = 'abcdefgh'
-    const previousPositions = new Set()
-    const endPosition = chessMatrix[endNumber][endLetter.charCodeAt(0) - 97]
-    
-    let result = 0
-    let done = false
-    function move(letter,number,min=0) {
-
-        if(!letter || !number) return
-        let startPosition = chessMatrix[number][letter.charCodeAt(0) - 97]
-        if(previousPositions.has(startPosition)) return
-        let letterIndex = letter.charCodeAt(0) - 97
-        if( startPosition === endPosition || !startPosition) {
-            done = true
-            result = min
-            return
-        }
-        previousPositions.add(startPosition)
-        if(!done) {
-            number = parseInt(number)
-            move(alphabet[letterIndex - 1],number + 2,++min)
-            move(alphabet[letterIndex + 1],number + 2,++min)
-
-        }
-        
-    }
-    move(letter,number)
-
+    return chessMatrix
 }
 
 
 
-knight('a3','c7')
+knight('a3','e3')
 
 /*
 // let letterIndex = letter.charCodeAt(0) - 97
