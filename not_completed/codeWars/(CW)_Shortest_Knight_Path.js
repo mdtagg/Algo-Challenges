@@ -8,7 +8,6 @@ const knight = (start,finish) => {
     const [letter,number] = start.split('')
     const [endLetter,endNumber] = finish.split('')
     const alphabet = 'abcdefgh'
-    // const previousPositions = new Set()
     const endPosition = chessMatrix[endNumber][endLetter.charCodeAt(0) - 97]
     
     let result = 0
@@ -18,15 +17,12 @@ const knight = (start,finish) => {
         if(!letter || number > 8 || done) return
         let letterIndex = letter.charCodeAt(0) - 97
         let startPosition = chessMatrix[number][letterIndex]
-        let horizontalDistance = (endLetter.charCodeAt(0) - 97) - letterIndex
-        console.log(horizontalDist)
-        // if(previousPositions.has(startPosition)) return
+        
         if( startPosition === endPosition || !startPosition) {
             done = true
             result = min
             return
         }
-        // previousPositions.add(startPosition)
         
         number = parseInt(number)
         
@@ -63,6 +59,9 @@ function createChessMatrix() {
 knight('a3','e3')
 
 /*
+let horizontalDistance = (endLetter.charCodeAt(0) - 97) - letterIndex
+        console.log(horizontalDist)
+
 // let letterIndex = letter.charCodeAt(0) - 97
 
     // let min = 0
