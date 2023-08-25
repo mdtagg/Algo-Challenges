@@ -18,8 +18,9 @@ const root = new TreeNode(-2)
 root.right = new TreeNode(-3)
 
 const maxPathSum = (root) => {
-    let max = -Number.MAX_VALUE
+    let max = -Infinity
     getMax(root)
+    return max
     function getMax(node) {
         if(!node) return 0
         let left = getMax(node.left)
