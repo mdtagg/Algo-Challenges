@@ -21,8 +21,6 @@ function serialize(root) {
     return result
 }
 
-const data = serialize(root)
-
 function deserialize(data) {
     if(!data) return null 
 
