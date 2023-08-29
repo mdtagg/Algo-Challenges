@@ -1,5 +1,31 @@
 
 function WordDictionary() {
+    
+}
+
+WordDictionary.prototype.addWord = function(word) {
+    
+}
+
+WordDictionary.prototype.search = function(word) {
+    
+}
+
+const obj = new WordDictionary()
+obj.addWord('bad')
+obj.addWord('dad')
+obj.addWord('mad')
+obj.search('pad')
+obj.search('bad')
+obj.search(".ad")
+console.log(obj.search("b.."))
+// const param2 = obj.search()
+
+/*
+INITIAL SOLUTION 
+
+
+function WordDictionary() {
     this.words = new Set()
 }
 
@@ -19,17 +45,6 @@ WordDictionary.prototype.search = function(word) {
     return false
 }
 
-const obj = new WordDictionary()
-obj.addWord('bad')
-obj.addWord('dad')
-obj.addWord('mad')
-obj.search('pad')
-obj.search('bad')
-obj.search(".ad")
-console.log(obj.search("b.."))
-// const param2 = obj.search()
-
-/*
 PERFORMANCE SOLUTION 
 
 var WordDictionary = function() {

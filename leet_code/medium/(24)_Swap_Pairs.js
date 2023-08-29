@@ -9,16 +9,23 @@ l1.next.next = new ListNode(3)
 l1.next.next.next = new ListNode(4)
 
 var swapPairs = function(head) {
-    
-
-
-
-
-
-
-
-
-    
+    var out = new ListNode(0);
+    var now = out;
+  
+    out.next = head;
+  
+    while (now.next && now.next.next) {
+      now = swap(now, now.next, now.next.next);
+    }
+  
+    return out.next;
+  };
+  
+  var swap = function (a, b, c) {
+    a.next = c;
+    b.next = c.next;
+    c.next = b;
+    return b;
   };
 
 console.log(swapPairs(l1))
