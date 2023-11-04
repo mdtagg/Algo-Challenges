@@ -2,6 +2,24 @@
 
 const buildArray = (target,n) => {
     const output = []
+    let j = 0
+
+    for(let i = 1;i <= n;i++) {
+        if(target[j] === i) {
+            output.push('Push')
+            j++
+        }else output.push(...['Push','Pop']);
+        
+        if(j === target.length) return output
+    }
+    return output
+}
+
+console.log(buildArray([1,2],4))
+
+/*
+const buildArray = (target,n) => {
+    const output = []
     const stream = []
     const newTarget = []
     const match = target.join('')
@@ -26,17 +44,4 @@ const buildArray = (target,n) => {
     }
     return output
 }
-
-console.log(buildArray([1,2],4))
-
-/*
-// for(let i = 0;i < stream.length;i++) {
-    //     newTarget.push(stream[i])
-    //     output.push("Push")
-    //     if(match === newTarget.join('')) return output;
-    //     if(newTarget[i] !== target[i]) {
-    //         newTarget.pop()
-    //         output.push("Pop")
-    //     }
-    // }
 */

@@ -2,7 +2,59 @@
 
 const nextPermutation = (arr) => {
 
-    let min = parseInt(arr.join(''))
+  const min = parseInt(arr.join(''))
+  arr.sort((a,b) => b - a)
+  let max = parseInt(arr.join(''))
+  if(min === max) return arr.reverse()
+
+  function switchNums(arr,i,j) {
+    let temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+  }
+
+  for(let i = 0;i < arr.length - 1;i++) {
+    for(let j = i + 1;j < arr.length;j++) {
+      switchNums(arr,i,j)
+      const num = parseInt(arr.join(''))
+      num <= max && num > min ? max = num : switchNums(arr,i,j)
+    }
+  }
+}
+//3,2,1
+
+console.log(nextPermutation([1,3,2]))
+
+/*
+const nextPermutation = (arr) => {
+
+  const min = parseInt(arr.join(''))
+  const arr = Array.from(arr.sort((a,b) => b - a))
+  // arr.sort((a,b) => b - a)
+  let max = parseInt(arr.join(''))
+
+  for(let i = 0;i < arr.length - 1;i++) {
+    for(let j = i + 1;j < arr.length;j++) {
+      let temp = arr[i]
+      arr[i] = arr[j]
+      arr[j] = temp
+      const num = parseInt(arr.join(''))
+      if(num <= max && num > min) {
+        max = num 
+
+      }else {
+        let temp = arr[i]
+        arr[i] = arr[j]
+        arr[j] = temp
+      }
+    }
+  }
+    
+}
+
+
+
+let min = parseInt(arr.join(''))
     let maxArray = Array.from(arr).sort((a,b) => b - a)
     let max = parseInt(maxArray.join('')) + 1
     console.log(maxArray)
@@ -16,20 +68,8 @@ const nextPermutation = (arr) => {
     }
 
 
-    // let max = parseInt(maxArray.join(''))
 
-    // for(let i = 0;i < arr.length - 1;i++) {
-    //     for(let j = i + 1;j < arr.length;j++) {
-    //       const test = Array.from(maxArray)
-          
-    //     }
-    // }
-}
-//3,2,1
 
-console.log(nextPermutation([1,3,2]))
-
-/*
 test[i] = arr[j]
           test[j] = arr[i]
             // function switchNums(arr,i,j) {
