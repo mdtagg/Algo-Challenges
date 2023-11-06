@@ -1,8 +1,65 @@
 
 
-const nextPermutation = (arr) => {
+const nextPermutation = (N) => {
+  const swap = (a, b) => [N[a],N[b]] = [N[b],N[a]]
+    let len = N.length - 1, i, j
+    for (i = len - 1; N[i] >= N[i+1];) i--
+    for (let k = i+1; len > k; k++, len--) swap(k,len)
+    if (~i) {
+        for (j = i + 1; N[i] >= N[j];) j++
+        swap(i,j)
+    }
+}
 
-  const min = parseInt(arr.join(''))
+function swapNums(arr,i,lastIndex) {
+  let temp = arr[i]
+  arr[i] = arr[lastIndex]
+  arr[lastIndex] = temp
+}
+//3,2,1
+
+console.log(nextPermutation([1,2,3,4,2]))
+
+/*
+const swap = (a, b) => [N[a],N[b]] = [N[b],N[a]]
+    let len = N.length - 1, i, j
+    for (i = len - 1; N[i] >= N[i+1];) i--
+    for (let k = i+1; len > k; k++, len--) swap(k,len)
+    if (~i) {
+        for (j = i + 1; N[i] >= N[j];) j++
+        swap(i,j)
+    }
+
+
+const lastIndex = arr.length - 1
+  
+  for(let i = lastIndex;i >= 0;i--) {
+    if(arr[i] < arr[lastIndex]) {
+      swapNums(arr,i,lastIndex)
+      for(let j = i + 1;j < arr.length;j++) {
+        if(arr[j] > arr[j + 1]) {
+          swapNums(arr,j,j+1)
+        }
+      }
+      break
+    }
+    break
+  }
+
+for(let i = arr.length - 1;i > 0;i--) {
+    for(let j = i - 1;j >= 0;j--) {
+      if(arr[j] < arr[i]) {
+
+        let temp = arr[j]
+        arr[j] = arr[i]
+        arr[i] = temp
+        
+        
+      }
+    }
+  }
+
+const min = parseInt(arr.join(''))
   arr.sort((a,b) => b - a)
   let max = parseInt(arr.join(''))
   if(min === max) return arr.reverse()
@@ -20,12 +77,7 @@ const nextPermutation = (arr) => {
       num <= max && num > min ? max = num : switchNums(arr,i,j)
     }
   }
-}
-//3,2,1
 
-console.log(nextPermutation([1,3,2]))
-
-/*
 const nextPermutation = (arr) => {
 
   const min = parseInt(arr.join(''))
