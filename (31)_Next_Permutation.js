@@ -1,26 +1,79 @@
 
 
-const nextPermutation = (N) => {
-  const swap = (a, b) => [N[a],N[b]] = [N[b],N[a]]
-    let len = N.length - 1, i, j
-    for (i = len - 1; N[i] >= N[i+1];) i--
-    for (let k = i+1; len > k; k++, len--) swap(k,len)
-    if (~i) {
-        for (j = i + 1; N[i] >= N[j];) j++
-        swap(i,j)
-    }
-}
+var nextPermutation = function(nums) {
+    
+  for(let i = nums.length-1; i >= 0; i--) {
+      if(nums[i] < nums[i+1]) {
+          const large = nextLarge(i);
+          swap(i, large);
+          reverse(i+1);
+          return;
+      }
+  }
 
-function swapNums(arr,i,lastIndex) {
-  let temp = arr[i]
-  arr[i] = arr[lastIndex]
-  arr[lastIndex] = temp
-}
+// If there is no next permutation reverse the arr
+  nums.reverse()
+  
+  function swap(i, j) {
+      [nums[i], nums[j]] = [nums[j], nums[i]];
+  }
+  
+  function reverse(idx) {
+      let start = idx, end = nums.length-1;
+      
+      while(start < end) {
+          swap(start, end);
+          start++;
+          end--;
+      }
+  }
+  
+  function nextLarge(idx) {
+      for(let i = nums.length-1; i > idx; i--) {
+          if(nums[i] > nums[idx]) return i;
+      }
+  }
+};
 //3,2,1
 
-console.log(nextPermutation([1,2,3,4,2]))
+console.log(nextPermutation([1,3,6,4]))
 
 /*
+var nextPermutation = function(nums) {
+    
+    for(let i = nums.length-1; i >= 0; i--) {
+        if(nums[i] < nums[i+1]) {
+            const large = nextLarge(i);
+            swap(i, large);
+            reverse(i+1);
+            return;
+        }
+    }
+	
+	// If there is no next permutation reverse the arr
+    nums.reverse()
+    
+    function swap(i, j) {
+        [nums[i], nums[j]] = [nums[j], nums[i]];
+    }
+    
+    function reverse(idx) {
+        let start = idx, end = nums.length-1;
+        
+        while(start < end) {
+            swap(start, end);
+            start++;
+            end--;
+        }
+    }
+    
+    function nextLarge(idx) {
+        for(let i = nums.length-1; i > idx; i--) {
+            if(nums[i] > nums[idx]) return i;
+        }
+    }
+};
+
 const swap = (a, b) => [N[a],N[b]] = [N[b],N[a]]
     let len = N.length - 1, i, j
     for (i = len - 1; N[i] >= N[i+1];) i--

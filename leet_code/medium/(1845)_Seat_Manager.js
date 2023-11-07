@@ -2,22 +2,24 @@
 
 var SeatManager = function(n) {
     this.seats = []
-    this.num = 1
+    this.last = 0
 }
 
 SeatManager.prototype.reserve = function() {
     if(!this.seats.length) {
-        this.seats.push(this.num)
-        this.num++
+        return ++this.last
+    }else {
+        this.seats.sort((a,b) => a - b)
+        return this.seats.shift()
     }
-    this.seats.sort((a,b) => a - b)
-    return this.seats.shift()
 };
 
 SeatManager.prototype.unreserve = function(seatNumber) {
-    // this.seats.unshift(seatNumber)
-    // this.seats.sort((a,b) => a - b)
-    this.seats.unshift(seatNumber)
+    if(seatNumber === this.last) {
+        this.last--
+    }else {
+        this.seats.push(seatNumber)
+    }
 };
 
 const test = new SeatManager(18)
