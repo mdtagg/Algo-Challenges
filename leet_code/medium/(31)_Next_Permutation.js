@@ -2,43 +2,53 @@
 
 var nextPermutation = function(nums) {
     
-  for(let i = nums.length-1; i >= 0; i--) {
-      if(nums[i] < nums[i+1]) {
-          const large = nextLarge(i);
-          swap(i, large);
-          reverse(i+1);
-          return;
-      }
+  for(let i = nums.length - 1;i >= 0;i--) {
+    if(nums[i] < nums[i + 1]) {
+      const largest = findLargest(i)
+      swapNums(i,largest)
+      reverse(i+1)
+      return
+    }
   }
 
-// If there is no next permutation reverse the arr
   nums.reverse()
-  
-  function swap(i, j) {
-      [nums[i], nums[j]] = [nums[j], nums[i]];
+
+  function reverse(i) {
+    let start = i, end = nums.length - 1
+
+    while(start < end) {
+      swapNums(start,end) 
+      start++
+      end--
+    }
   }
-  
-  function reverse(idx) {
-      let start = idx, end = nums.length-1;
-      
-      while(start < end) {
-          swap(start, end);
-          start++;
-          end--;
-      }
+
+  function swapNums(i,largest) {
+    [nums[i],nums[largest]] = [nums[largest],nums[i]]
   }
-  
-  function nextLarge(idx) {
-      for(let i = nums.length-1; i > idx; i--) {
-          if(nums[i] > nums[idx]) return i;
-      }
+
+  function findLargest(idx) {
+    for(let i = nums.length - 1;i >= idx;i--) {
+      if(nums[i] > nums[idx]) return i
+    }
   }
+
 };
 //3,2,1
 
 console.log(nextPermutation([1,3,6,4]))
 
 /*
+The solution to this problem is tricky. 
+Have to find the first descending number in relation to the number next to it
+For 1,3,2 one is the first descending number since 3 is greater
+Then the first number higher than the last number we found needs to be swapped with that number
+In this example that number is 2
+Lastly we have to reverse sort the numbers after the left number of the  swap in ascending order
+
+
+CODE GRAVEYARD
+
 var nextPermutation = function(nums) {
     
     for(let i = nums.length-1; i >= 0; i--) {
@@ -73,16 +83,6 @@ var nextPermutation = function(nums) {
         }
     }
 };
-
-const swap = (a, b) => [N[a],N[b]] = [N[b],N[a]]
-    let len = N.length - 1, i, j
-    for (i = len - 1; N[i] >= N[i+1];) i--
-    for (let k = i+1; len > k; k++, len--) swap(k,len)
-    if (~i) {
-        for (j = i + 1; N[i] >= N[j];) j++
-        swap(i,j)
-    }
-
 
 const lastIndex = arr.length - 1
   
