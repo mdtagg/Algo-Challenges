@@ -17,6 +17,19 @@ getWinner([99999,1,3,5,4,6,7],20)
 
 /*
 
+BEST SOLUTION
+
+let maxVal = arr[0];
+    let count = 0;
+    for (let i = 1; i < arr.length && count < k; ++i) {
+        if (maxVal < arr[i]) {
+            maxVal = arr[i];
+            count = 0;
+        }
+        ++count;
+    }
+    return maxVal;
+
 OG SOLUTION
 
 const getWinner = (arr,k) => {
