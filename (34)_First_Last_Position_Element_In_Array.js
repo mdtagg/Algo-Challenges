@@ -2,28 +2,28 @@
 
 var searchRange = function(nums, target) {
 
-    const result = [,]
-    let start = binSearchStart(nums,target) + 1
-    let end = binSearchEnd(nums,target)
-};
+    let result = [-1,-1]
 
-function binSearchStart(nums,target) {
-    const mid = Math.floor(nums.length /2)
-    let positions = 0
-    if(nums[mid] === target && nums.length === 1) return 0
-    if(nums[mid] <= target) {
-        positions += nums.slice(0,mid).length + binSearchStart(nums.slice(mid),target)
+    if(!nums.includes(target)) return result 
 
-    }else if(nums[mid] > target) {
-        positions += binSearchStart(nums.slice(0,mid),target)
+    let start = binSearch(nums,target)
+}
+
+function binSearch(nums,target) {
+    let left = 0
+    let right = nums.length - 1
+
+    while(left < right) {
+        const mid = Math.floor(left + right / 2)
+        if(nums[mid] < target) {
+            left += mid + 1
+        }else {
+            right = mid
+        }
     }
-    return positions
+    return left
 }
-
-function binSearchEnd(nums,target) {
-    
-}
-    console.log(searchRange([5,6,6,6,7,7,8,9,10,10],8))
+    console.log(searchRange([5,7,7,8,8,10],8))
 
 /*
 Plan: take nums and binary sort to find target
@@ -33,6 +33,43 @@ ORIGINAL SOLUTION
     return [nums.indexOf(target),nums.lastIndexOf(target)]
 
 CODE GRAVEYARD
+
+
+
+var searchRange = function(nums, target) {
+
+    let result = [-1,-1]
+    let start = binSearchStart(nums,target)
+    let end = nums.length - binSearchEnd(nums,target) - 1
+    
+};
+
+function binSearchStart(nums,target) {
+    const mid = Math.floor(nums.length / 2)
+    let positions = 0
+    if(nums[mid] === target && nums.length === 1) return 0
+    else if(nums.length === 1) return 1
+    if(nums[mid] < target) {
+        positions += nums.slice(0,mid).length + binSearchStart(nums.slice(mid),target)
+
+    }else {
+        positions += binSearchStart(nums.slice(0,mid),target)
+    }
+    return positions
+}
+
+function binSearchEnd(nums,target) {
+    const mid = Math.floor(nums.length / 2)
+    let positions = 0
+    if(nums[mid] === target && nums.length === 1) return 0
+    else if(nums.length === 1) return 1
+    if(nums[mid] > target) {
+        positions += nums.slice(mid).length + binSearchEnd(nums.slice(0,mid),target)
+    }else {
+        positions += binSearchEnd(nums.slice(mid),target)
+    }
+    return positions
+}
 
 const searchRange = (nums,target) => {
 
