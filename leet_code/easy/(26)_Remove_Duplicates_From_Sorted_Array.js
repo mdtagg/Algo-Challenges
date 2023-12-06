@@ -2,43 +2,62 @@
  * @param {number[]} nums
  * @return {number}
  */
-var removeDuplicates = function(nums) {
-    let duplicates = []
+
+
+const removeDuplicates = (nums) => {
+    const dups = new Set()
     let k = 0
+
     for(let i = 0;i < nums.length;i++) {
-        if(!duplicates.includes(nums[i])) {
-            duplicates.push(nums[i])
-            k++
+        if(dups.has(nums[i])) {
+            nums[i] = Infinity
         }else {
-            nums[i] = '_'
+            dups.add(nums[i])
+            k++
         }
     }
-    nums.sort()
-    nums.sort(function(a,b) {return a-b})
-    // console.log(k)
+    nums.sort((a,b) => a - b)
     return k
-};
+}
+
+removeDuplicates([1,1,2])
+// var removeDuplicates = function(nums) {
+//     let duplicates = []
+//     let k = 0
+//     for(let i = 0;i < nums.length;i++) {
+//         if(!duplicates.includes(nums[i])) {
+//             duplicates.push(nums[i])
+//             k++
+//         }else {
+//             nums[i] = '_'
+//         }
+//     }
+//     nums.sort()
+//     nums.sort(function(a,b) {return a-b})
+//     // console.log(k)
+//     return k
+// };
 
 
 
-//BEST SOLUTION...? this was the top performing answer on leetcode but doesnt seem to work. 
+// //BEST SOLUTION...? this was the top performing answer on leetcode but doesnt seem to work. 
 
-var removeDuplicates = function(nums) {
-    let k = 0;
+// var removeDuplicates = function(nums) {
+//     let k = 0;
     
-    for (j = 1; j < nums.length; j++) {
-        if (nums[k] != nums[j]) {
-            k += 1;
-            nums[k] = nums[j];
-        }
-        // console.log(nums)
-    }
-    console.log(nums)
-    console.log(k)
-    return k + 1;
-};
+//     for (j = 1; j < nums.length; j++) {
+//         if (nums[k] != nums[j]) {
+//             k += 1;
+//             nums[k] = nums[j];
+//         }
+//         // console.log(nums)
+//     }
+//     console.log(nums)
+//     console.log(k)
+//     return k + 1;
+// };
 
-removeDuplicates([-1,-2,-3,0,0,1,1,1,2,2,3,3,4])
+// removeDuplicates([-1,-2,-3,0,0,1,1,1,2,2,3,3,4])
 
 //let temp = 0
     // while(!nums.slice(0,duplicates.length).every(number => typeof(number) === 'number')) {
