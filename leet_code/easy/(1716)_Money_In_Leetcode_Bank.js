@@ -15,6 +15,7 @@ const totalMoney = (n) => {
         }
         money += day
     }
+    return money
 }
 
 totalMoney(4)
