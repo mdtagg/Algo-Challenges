@@ -11,28 +11,28 @@ root.right = new TreeNode('3')
 // root.right.right.right.right = new TreeNode('5')
 // root.right.right.right.right.right = new TreeNode('6')
 
-var tree2str = function(t) {
-    let res = [];
-    dfs(t, res);
-    return res.join('');
+const tree2str = (root) => {
+    let result = [];
+    dfs(root, result);
+    return result.join('');
 
-    function dfs(t, res) {
-        if (t === null)
+    function dfs(node, result) {
+        if (node === null)
             return;
 
-        res.push(t.val);
+        result.push(node.val);
 
-        if (t.left === null && t.right === null)
+        if (node.left === null && node.right === null)
             return;
 
-        res.push('(');
-        dfs(t.left, res);
-        res.push(')');
+        result.push('(');
+        dfs(node.left, result);
+        result.push(')');
 
-        if (t.right !== null) {
-            res.push('(');
-            dfs(t.right, res);
-            res.push(')');
+        if (node.right !== null) {
+            result.push('(');
+            dfs(node.right, result);
+            result.push(')');
         }
     }
 };
@@ -40,6 +40,16 @@ var tree2str = function(t) {
 console.log(tree2str(root))
 
 /*
+PERFORMANCE SOLUTION
+
+var tree2str = function(root) {
+    if(!root) return '';
+    if(!root.left && !root.right) return root.val + '';
+    if(!root.right) return root.val + '(' + tree2str(root.left) + ')';
+    return root.val + '(' + tree2str(root.left) + ')(' + tree2str(root.right) + ')';
+};
+
+
 const tree2str = (root) => {
 
     let left = ""
