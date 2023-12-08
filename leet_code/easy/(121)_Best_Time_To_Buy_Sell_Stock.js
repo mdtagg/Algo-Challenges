@@ -14,6 +14,27 @@ any profit, return 0.
 var maxProfit = function(prices) {
 
     let left = 0
+    let right = 1
+    let maxProfit = 0
+
+    while(right < prices.length) {
+        if(prices[left] > prices[right]) {
+            left = right
+        }else {
+            let profit = prices[right] - prices[left]
+            maxProfit = Math.max(profit,maxProfit)
+        }
+        right++
+    }
+    return maxProfit
+};
+
+console.log(maxProfit([7,1,5,3,6,4]))
+
+/*
+var maxProfit = function(prices) {
+
+    let left = 0
     let right = 0
     let maxProfit = 0
 
@@ -28,11 +49,7 @@ var maxProfit = function(prices) {
     }
     return maxProfit
 };
-
-console.log(maxProfit([3,2,6,5,0,3]))
-
-//
-
+*/
 
 
 
