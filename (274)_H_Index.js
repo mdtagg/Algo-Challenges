@@ -15,6 +15,22 @@ var hIndex = function(citations) {
 hIndex([11,15])
 
 /*
+PERFORMANCE SOLUTION
+
+var hIndex = function(citations) {
+    const h = citations.length;
+    citations.sort ((a,b)=>(a-b));
+    
+    let i
+    for(i = 0;i < h;i++){
+        if(h-i<=citations[i]){
+            break;
+        }
+    }
+    return h-i;
+};
+
+
 let h = 0
     nums.sort((a,b) => a - b)
 
