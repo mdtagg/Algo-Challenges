@@ -1,18 +1,17 @@
 
 
-var hIndex = function(citations) {
-    const h = citations.length;
-    citations.sort ((a,b)=>(a-b));
-    
-    let i
-    for(i = 0;i < h;i++){
-        if(h-i<=citations[i]){
-            break;
-        }
+const hIndex = (nums) => {
+
+    let hIdx = 0
+    nums.sort()
+
+    for(let i = nums.length - 1;i >= 0;i--) {
+        if(nums[i] === i + 1) return i;
+        if(nums[i] > i + 1) hIdx++;
     }
-    return h-i;
-};
-hIndex([11,15])
+    return hIdx
+}
+hIndex([1,3,1])
 
 /*
 PERFORMANCE SOLUTION
