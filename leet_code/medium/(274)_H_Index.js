@@ -2,14 +2,14 @@
 
 const hIndex = (nums) => {
 
-    let hIdx = 0
-    nums.sort()
+    let h = nums.length
+    nums = nums.sort((a,b) => a - b)
 
-    for(let i = nums.length - 1;i >= 0;i--) {
-        if(nums[i] === i + 1) return i;
-        if(nums[i] > i + 1) hIdx++;
+    let i
+    for(i = 0;i < h;i++) {
+        if(h - i <= nums[i]) break
     }
-    return hIdx
+    return h - i
 }
 hIndex([1,3,1])
 
