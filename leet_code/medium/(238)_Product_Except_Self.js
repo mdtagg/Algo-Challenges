@@ -13,6 +13,27 @@ Output: [24,12,8,6]
 */
 
 const productExceptSelf = (nums) => {
+    let result = []
+    let prefix = 1
+    for(let i = 0;i < nums.length;i++) {
+        result[i] = prefix 
+        prefix *= nums[i]
+    }
+    let suffix = 1
+    for(let i = nums.length - 1;i >= 0;i--) {
+        result[i] *= suffix
+        suffix *= nums[i]
+    }
+}
+
+// [1,2,6,24] []
+
+console.log(productExceptSelf([1,2,3,4]))
+
+
+/*
+
+const productExceptSelf = (nums) => {
     let prefix = 1
     let result = []
     for(let i = 0;i < nums.length;i++) {
@@ -27,11 +48,6 @@ const productExceptSelf = (nums) => {
     console.log(result)
     return result
 }
-
-console.log(productExceptSelf([1,2,3,4]))
-
-
-/*
 
 OPTIMAL MEMORY
 
