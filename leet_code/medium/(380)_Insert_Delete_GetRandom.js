@@ -1,56 +1,78 @@
 
 
 var RandomizedSet = function() {
-    this.count = 0
-    this.test = []
+    this.stack = []
     this.map = new Map()
 };
 
-/** 
- * @param {number} val
- * @return {boolean}
- */
 RandomizedSet.prototype.insert = function(val) {
     if(!this.map.has(val)) {
-        this.test.push(val)
-        this.map.set(val,this.count)
-        this.count++
+        this.map.set(val,this.stack.length)
+        this.stack.push(val)
         return true
     }
     return false
-
 };
 
-/** 
- * @param {number} val
- * @return {boolean}
- */
 RandomizedSet.prototype.remove = function(val) {
    if(this.map.has(val)) {
-        let idx = this.map.get(val)
+        let newIdx = this.map.get(val)
+        this.swap(newIdx,this.stack.length - 1)
+        this.map.set(this.stack[newIdx],newIdx)
         this.map.delete(val)
-        this.test.splice(idx,1)
-        this.count--
         return true
    }
    return false
 };
 
-/**
- * @return {number}
- */
 RandomizedSet.prototype.getRandom = function() {
-    const rand = Math.floor(Math.random() * this.count)
-    return test[rand]
+    return this.stack[Math.floor(Math.random() * this.stack.length)]
 };
+
+RandomizedSet.prototype.swap = function(newIdx,len) {
+    let temp = this.stack[newIdx]
+    this.stack[newIdx] = this.stack[len]
+    this.stack[len] = temp
+    this.stack.pop()
+}
 
 const set = new RandomizedSet()
 set.insert(5)
 set.insert(7)
 set.insert(9)
 set.remove(7)
-// set.getRandom()
+set.getRandom()
 /*
+
+var RandomizedSet = function() {
+    this.stack = []
+    this.map = new Map()
+};
+
+RandomizedSet.prototype.insert = function(val) {
+    if(!this.map.has(val) || !this.map.get(val)) {
+        this.map.set(val,this.stack.length)
+        this.stack.push(val)
+        return true
+    }
+    return false
+
+};
+
+RandomizedSet.prototype.remove = function(val) {
+   if(this.map.has(val)) {
+        let newIdx = this.map.get(val)
+        this.stack.splice(newIdx,1)
+        this.map.delete(val)
+        return true
+   }
+   return false
+};
+
+RandomizedSet.prototype.getRandom = function() {
+    let randNum = Math.floor(Math.random() * this.idx)
+    return this.stack[randNum] !== undefined ? this.stack[randNum] : this.getRandom()
+};
 
 var RandomizedSet = function() {
     this.numMap = new Map()
