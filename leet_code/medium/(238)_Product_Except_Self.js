@@ -24,6 +24,7 @@ const productExceptSelf = (nums) => {
         result[i] *= suffix
         suffix *= nums[i]
     }
+    return result
 }
 
 // [1,2,6,24] []
