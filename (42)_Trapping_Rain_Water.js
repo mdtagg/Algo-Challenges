@@ -7,6 +7,20 @@ it can trap after raining.
 */
 
 const trap = (height) => {
+
+    let bucket = 0
+
+    for(let i = 0;i < height.length;i++) {
+        
+    }   
+}
+
+console.log(trap([1,0,2,1,0,1,3,2,1,2,1]))
+
+
+
+/*
+const trap = (height) => {
     let n = height.length - 1
     let left = []
     let right = []
@@ -29,11 +43,7 @@ const trap = (height) => {
     return result
 }
 
-console.log(trap([0,1,0,2,1,0,1,3,2,1,2,1]))
-
-
-
-
+*/
 
 
 
