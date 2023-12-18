@@ -2,12 +2,16 @@
 
 const maxProductDifference = (nums) => {
 
-    let mins = [nums[0],0]
-    // let maxs = [0,0]
-    
-    for(let i = 0;i < nums.length;i++) {
-        
-    }
+    let min = Math.min(...nums)
+    let max = Math.max(...nums)
+
+    nums.splice(nums.indexOf(min),1)
+    nums.splice(nums.indexOf(max))
+
+    let min1 = Math.man(...nums)
+    let max1 = Math.max(...nums)
+
+    return (max1 * max) - (min1 * min)
 
 }
 
