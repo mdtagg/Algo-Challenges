@@ -1,6 +1,41 @@
 
 
 var imageSmoother = function(img) {
+
+    const rowLen = img.length
+    const colLen = img[0].length
+    const result = Array.from({length:rowLen},() => new Array(colLen).fill(0))
+
+    for(let i = 0;i < rowLen;++i) {
+        for(let j = 0;j < colLen;++j) {
+
+            let sum = 0
+            let count = 0
+
+            for(let x = Math.max(0,i - 1);x < Math.min(rowLen,i + 2);++x) {
+                for(let y = Math.max(0,j - 1);y < Math.min(colLen, j + 2);++y) {
+                    sum += img[x][y]
+                    count+=1
+                }
+            }
+            result[i][j] = Math.floor(sum / count)
+        }
+    }
+    return result
+};
+
+imageSmoother([[100,200,100,1000],[200,50,200,2000],[100,200,100,3000]])
+
+/*
+STEPS
+
+1. Initialize a new array with the structure of the original filled with zeros
+
+2. Iterate through each column in each row
+
+3. Create two more iterations with the iterations above that start and end at the right indexs
+
+var imageSmoother = function(img) {
     const rows = img.length;
     const cols = img[0].length;
     const result = new Array(rows);
@@ -18,49 +53,13 @@ var imageSmoother = function(img) {
             const rowLen = Math.min(rows,i + 2)
 
             //x is initialized to 0 if we are on row 0 or 1 and 1 if we are on row 2
-            //x is constrained by the row length if the number of rows is less than 3 
+            //x is constrained by the row length if were on row 3 and 
             for (let x = Math.max(0, i - 1); x < Math.min(rows, i + 2); ++x) {
                 for (let y = Math.max(0, j - 1); y < Math.min(cols, j + 2); ++y) {
                     totalSum += img[x][y];
                     count += 1;
                 }
             }
-            result[i][j] = Math.floor(totalSum / count);
-        }
-    }
-
-    return result;
-};
-
-imageSmoother([[100,200,100],[200,50,200],[100,200,100]])
-
-/*
-EXPLANATION 
-
-This was an unbelievably difficult problem for being "easy"
-
-
-
-
-var imageSmoother = function(img) {
-    const rows = img.length;
-    const cols = img[0].length;
-    const result = new Array(rows);
-
-    for (let i = 0; i < rows; ++i) {
-        result[i] = new Array(cols);
-
-        for (let j = 0; j < cols; ++j) {
-            let totalSum = 0;
-            let count = 0;
-
-            for (let x = Math.max(0, i - 1); x < Math.min(rows, i + 2); ++x) {
-                for (let y = Math.max(0, j - 1); y < Math.min(cols, j + 2); ++y) {
-                    totalSum += img[x][y];
-                    count += 1;
-                }
-            }
-
             result[i][j] = Math.floor(totalSum / count);
         }
     }
