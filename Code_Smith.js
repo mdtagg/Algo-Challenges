@@ -1,17 +1,236 @@
 
-const objOfMatches = (array1,array2,callback) => {
-    const newObj = {}
+
+function Inventory(item, price) {
+
+    this.obj = Object.create(Inventory.prototype,{
+        
+        [item]: {
+            value: {
+                price:price,
+                writable:true,
+                quantity:1
+            }
+        }
+    })
+
+    return this.obj
+
+}
+
+Inventory.prototype.addItem = function(item,price) {
     
-    for(let i = 0;i < array1.length;i++) {
-      const capped = callback(array1[i])
-      const nextElement = array2[i]
-      if(capped === nextElement) {
-        newObj[array1[i]] = nextElement
-      }
-    }
-    return newObj
-  }
-objOfMatches()
+    console.log(this.obj)
+}
+
+const myInventory = new Inventory('cucumber', 2);
+myInventory.addItem('banana',1)
+//   myInventory.deleteItem('cucumber',1)
+//   myInventory.checkItem('cucumber')
+// console.log(myInventory)
+
+// this.obj.addItem = (item,price) => {
+//     if(this.obj[item]) {
+//         this.obj[item][quantity]++
+//         this.obj[item][price] = price
+//     } else {
+//         this.obj[item] = {
+//             price:price,
+//             quantity:1
+//         }
+//     }
+// }
+
+// this.obj.deleteItem = (item) => {
+//     if(this.obj[item].quantity === 0) {
+//         return "Nothing to delete"
+//     }else {
+//         this.obj[item].quantity--
+//         return "Deleted"
+//     }
+// }
+
+// this.obj.checkItem = (item) => {
+//     return this.obj[item]
+// }
+// Inventory.prototype.addItem = function(item,price) {
+    // console.log(this.obj)
+    // if(Inventory.prototype.obj[item]) {
+    //     Inventory.prototype.obj[item][quantity]++
+    //     Inventory.prototype.obj[item][price] = price
+    // } else {
+    //     Inventory.prototype.obj[item] = {
+    //         price:price,
+    //         quantity:1
+    //     }
+    // }
+// }
+  
+ 
+
+//   Inventory.prototype.obj = {}
+//     Inventory.prototype.obj[item] = {
+//         price:price,
+//         quantity:1
+//     }
+
+//     Inventory.prototype.addItem = function(item,price) {
+//         if(Inventory.prototype.obj[item]) {
+//             Inventory.prototype.obj[item][quantity]++
+//             Inventory.prototype.obj[item][price] = price
+//         } else {
+//             Inventory.prototype.obj[item] = {
+//                 price:price,
+//                 quantity:1
+//             }
+//         }
+//     }
+
+//     Inventory.prototype.deleteItem = function(item) {
+//         if(Inventory.prototype.obj[item].quantity === 0) {
+//             return "Nothing to delete"
+//         }else {
+//             Inventory.prototype.obj[item].quantity--
+//             return "Deleted"
+//         }
+//     }
+
+//     Inventory.prototype.checkItem = function(item) {
+//         return Inventory.prototype.obj[item]
+//     }
+
+// console.log(obj)
+  
+    // this.obj[item] = {
+    //     price:price,
+    //     quantity:1
+    // }
+    
+    // this.obj.addItem = (item,price) => {
+    //   this.obj[item] ? 
+    //   this.obj[item] = this.obj[item][quantity]++ :
+    //   this.obj[item] = {
+    //     price:price,
+    //     quantity:1
+    //   }
+    // }
+    
+    // this.obj.deleteItem = (item) => {
+    //   if(this.obj[item].quantity === 0) { 
+    //     return "Nothing to delete"
+    //     }
+    //   else {
+    //     this.obj[item].quantity-- 
+    //     return "Deleted"
+    //     }
+    // }
+    
+    // this.obj.checkItem = (item) => {
+    //   return this.obj[item] ? this.obj[item] : "Item is not in inventory"
+    //   }
+    
+    // return this.obj
+
+
+
+
+
+// function Dog(name, breed) {
+  
+//     this.name = name
+//     this.breed = breed
+//     this.tricks = []
+
+// }
+
+// function learnTrick(trick) {
+//     this.tricks.push(trick)
+// }
+
+// function performTrick(trick) {
+//     this.tricks.includes(trick) ? 
+//     console.log(this.name + " performed " + trick + "!") :
+//     console.log(this.name + " doesn't know that trick.")
+// }
+// Dog.prototype.learnTrick = learnTrick
+// Dog.prototype.performTrick = performTrick
+
+// const fido = new Dog('Fido', 'poodle');
+// fido.learnTrick('fetch')
+// fido.performTrick('fetch')
+// const goodKeys = (obj,callback) => {
+//     let arr = []
+//     for(let key of Object.keys(obj)) {
+//       let value = obj[key]
+//       if(callback(value)) arr.push(key);
+//       }
+//     return arr
+//   }
+
+
+// const countBy = (array,callback) => {
+  
+//     const newObj = {}
+    
+//     for(let i = 0;i < array.length;i++) {
+//       const value = callback(array[i])
+//       newObj[value] = (newObj[value] || 0) + 1
+//     }
+    
+//     return newObj
+//   }
+
+// const prioritize = (array,callback) => {
+  
+//     const prefix = []
+//     const suffix = []
+    
+//     for(let i = 0;i < array.length;i++) {
+//       callback(array[i]) ? prefix.push(array[i]) : suffix.push(array[i])
+//       }
+//     return prefix.concat(suffix)
+//   }
+
+// const majority = (arr,callback) => {
+  
+//     let trues = 0, falses = 0
+//     for(let i = 0;i < arr.length;i++) callback(arr[i]) ? trues++ : falses++;
+//     return trues > falses ? true : false
+//   }
+
+// const multiMap = (array1,array2) => {
+  
+//     const newObj = {}
+    
+//     for(let i = 0;i < array1.length;i++) {
+//       newObj[array1[i]] = array2.map(func => func(array1[i]))
+//     }
+//     return newObj
+//   }
+
+
+// const joinAndMap = (array1,array2,callback) => {
+//     const combinedArr = array1.concat(array2)
+    
+//     for(let i = 0;i < combinedArr.length;i++) {
+//       combinedArr[i] = callback(combinedArr[i])
+//     }
+//     return combinedArr
+//   }
+
+
+// const objOfMatches = (array1,array2,callback) => {
+//     const newObj = {}
+    
+//     for(let i = 0;i < array1.length;i++) {
+//       const capped = callback(array1[i])
+//       const nextElement = array2[i]
+//       if(capped === nextElement) {
+//         newObj[array1[i]] = nextElement
+//       }
+//     }
+//     return newObj
+//   }
+// objOfMatches()
 
 
 
