@@ -2,42 +2,78 @@
 
 function Inventory(item, price) {
 
-    this.obj = Object.create(Inventory.prototype,{
-        
+    return Object.create(Inventory.prototype,{
         [item]: {
             value: {
-                price:price,
-                writable:true,
+                price: price,
                 quantity:1
             }
         }
     })
-
-    return this.obj
-
 }
 
 Inventory.prototype.addItem = function(item,price) {
-    
-    console.log(this.obj)
+    // console.log(this[item])
+    if(this[item]) {
+        this[item].quantity++
+        this[item].price = price
+    } else {
+        this[item] = {
+            price:price,
+            quantity:1
+        }
+    }
+}
+
+Inventory.prototype.deleteItem = function(item) {
+    if(this.inventory[item].quantity === 0) {
+        return "Nothing to delete"
+    }else {
+        this.inventory[item].quantity--
+        return "Deleted"
+    }
+}
+
+Inventory.prototype.checkItem = function(item) {
+    if(this.inventory[item]) return this.inventory[item]
+    return "Item is not in inventory"
 }
 
 const myInventory = new Inventory('cucumber', 2);
-myInventory.addItem('banana',1)
+// console.log(myInventory)
+myInventory.addItem('cucumber',5)
+// myInventory.addItem('banana',2)
+// myInventory.deleteItem('banana')
+// console.log(myInventory.checkItem('toast'))
+console.log(myInventory)
+
+// this.obj = Object.create(Inventory.prototype,{
+        
+//     [item]: {
+//         value: {
+//             price:price,
+//             writable:true,
+//             quantity:1
+//         }
+//     }
+// })
+
+// return this.obj
+
 //   myInventory.deleteItem('cucumber',1)
 //   myInventory.checkItem('cucumber')
 // console.log(myInventory)
 
 // this.obj.addItem = (item,price) => {
-//     if(this.obj[item]) {
-//         this.obj[item][quantity]++
-//         this.obj[item][price] = price
-//     } else {
-//         this.obj[item] = {
-//             price:price,
-//             quantity:1
-//         }
-//     }
+    // if(this.obj[item]) {
+    //     this.obj[item][quantity]++
+    //     this.obj[item][price] = price
+    // } else {
+    //     this.obj[item] = {
+    //         price:price,
+    //         quantity:1
+    //     }
+    // }
 // }
 
 // this.obj.deleteItem = (item) => {
