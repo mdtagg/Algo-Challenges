@@ -1,50 +1,93 @@
 
 
-function Inventory(item, price) {
-
-    return Object.create(Inventory.prototype,{
-        [item]: {
-            value: {
-                price: price,
-                quantity:1
-            }
-        }
-    })
+class Chain {
+	constructor(name) {
+    this.name = name
+    this.totalStores = 0
+    this.locations = []
+	}
 }
 
-Inventory.prototype.addItem = function(item,price) {
-    if(this[item]) {
-        this[item].quantity++
-        this[item].price = price
-    } else {
-        this[item] = {
-            price:price,
-            quantity:1
+Chain.prototype.openStore = function(owner,city) {
+    this.locations.push(new Franchise(owner,city))
+    this.totalStores++
+  }
+
+Chain.prototype.closeStore = function(city) {
+    for(let i = 0;i < this.locations.length;i++) {
+        if(this.locations[i].city === city) {
+            this.locations.splice(i,1)
+            this.totalStores--
+            console.log(`${this.name} closed the store in ${city}!`)
+            return
         }
+    }
+    console.log( `${this.name} doesn't have a store in ${city}.`)
+}
+
+
+class Franchise {
+    constructor(owner,city) {
+      this.owner = owner
+      this.city = city
     }
 }
 
-Inventory.prototype.deleteItem = function(item) {
-    if(this[item].quantity === 0) {
-        return "Nothing to delete"
-    }else {
-        this[item].quantity--
-        return "Deleted"
-    }
-}
+const buenoBell = new Chain('Bueno Bell');
+const KFC = new Chain("KFC")
+buenoBell.openStore('Will', 'Phoenix');
+buenoBell.openStore('Kyle', 'Austin');
+buenoBell.openStore('Allison', 'Wichita');
 
-Inventory.prototype.checkItem = function(item) {
-    if(this[item]) return this[item]
-    return "Item is not in inventory"
-}
+buenoBell.closeStore('Austin'); // Should log 'Bueno Bell closed the store in Austin.'
+buenoBell.closeStore('Maui'); // Should log 'Bueno Bell doesn't have a store in Maui.'
 
-const myInventory = new Inventory('cucumber', 2);
+
+// function Inventory(item, price) {
+
+//     return Object.create(Inventory.prototype,{
+//         [item]: {
+//             value: {
+//                 price: price,
+//                 quantity:1
+//             }
+//         }
+//     })
+// }
+
+// Inventory.prototype.addItem = function(item,price) {
+//     if(this[item]) {
+//         this[item].quantity++
+//         this[item].price = price
+//     } else {
+//         this[item] = {
+//             price:price,
+//             quantity:1
+//         }
+//     }
+// }
+
+// Inventory.prototype.deleteItem = function(item) {
+//     if(this[item].quantity === 0) {
+//         return "Nothing to delete"
+//     }else {
+//         this[item].quantity--
+//         return "Deleted"
+//     }
+// }
+
+// Inventory.prototype.checkItem = function(item) {
+//     if(this[item]) return this[item]
+//     return "Item is not in inventory"
+// }
+
+// const myInventory = new Inventory('cucumber', 2);
+// // console.log(myInventory)
+// myInventory.addItem('cucumber',5)
+// // myInventory.addItem('banana',2)
+// // myInventory.deleteItem('banana')
+// // console.log(myInventory.checkItem('toast'))
 // console.log(myInventory)
-myInventory.addItem('cucumber',5)
-// myInventory.addItem('banana',2)
-// myInventory.deleteItem('banana')
-// console.log(myInventory.checkItem('toast'))
-console.log(myInventory)
 
 // this.obj = Object.create(Inventory.prototype,{
         
