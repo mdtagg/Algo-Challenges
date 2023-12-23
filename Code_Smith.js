@@ -13,7 +13,6 @@ function Inventory(item, price) {
 }
 
 Inventory.prototype.addItem = function(item,price) {
-    // console.log(this[item])
     if(this[item]) {
         this[item].quantity++
         this[item].price = price
@@ -26,16 +25,16 @@ Inventory.prototype.addItem = function(item,price) {
 }
 
 Inventory.prototype.deleteItem = function(item) {
-    if(this.inventory[item].quantity === 0) {
+    if(this[item].quantity === 0) {
         return "Nothing to delete"
     }else {
-        this.inventory[item].quantity--
+        this[item].quantity--
         return "Deleted"
     }
 }
 
 Inventory.prototype.checkItem = function(item) {
-    if(this.inventory[item]) return this.inventory[item]
+    if(this[item]) return this[item]
     return "Item is not in inventory"
 }
 
