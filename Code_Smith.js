@@ -1,46 +1,86 @@
 
 
-class Chain {
-	constructor(name) {
-    this.name = name
-    this.totalStores = 0
-    this.locations = []
-	}
-}
 
-Chain.prototype.openStore = function(owner,city) {
-    this.locations.push(new Franchise(owner,city))
-    this.totalStores++
+
+function once(callback) {
+    let count = 0
+    let output
+    return function(num) {
+      if(count === 0) {
+        count++
+        output = callback(num)
+      }
+      return output
+    }
   }
 
-Chain.prototype.closeStore = function(city) {
-    for(let i = 0;i < this.locations.length;i++) {
-        if(this.locations[i].city === city) {
-            this.locations.splice(i,1)
-            this.totalStores--
-            console.log(`${this.name} closed the store in ${city}!`)
-            return
-        }
-    }
-    console.log( `${this.name} doesn't have a store in ${city}.`)
-}
+  const addByTwoOnce = once(function(num) {
+    return num + 2;
+  });
+
+  console.log(addByTwoOnce(5));  //should log 7
+  console.log(addByTwoOnce(10));  //should log 7
 
 
-class Franchise {
-    constructor(owner,city) {
-      this.owner = owner
-      this.city = city
-    }
-}
 
-const buenoBell = new Chain('Bueno Bell');
-const KFC = new Chain("KFC")
-buenoBell.openStore('Will', 'Phoenix');
-buenoBell.openStore('Kyle', 'Austin');
-buenoBell.openStore('Allison', 'Wichita');
+// function addByX(input) {
+//     return function(x) {
+//       return x + input
+//     }
+//   }
+//   const addByTwo = addByX(2)
+//   console.log(addByTwo(1))
+//   console.log(addByTwo(2))
+//   console.log(addByTwo(3))
 
-buenoBell.closeStore('Austin'); // Should log 'Bueno Bell closed the store in Austin.'
-buenoBell.closeStore('Maui'); // Should log 'Bueno Bell doesn't have a store in Maui.'
+
+  // UNCOMMENT THESE TO TEST YOUR WORK!
+//   const sampleFunc = createFunctionWithInput('sample');
+//   console.log(sampleFunc()); // should log: 'sample'
+//   const helloFunc = createFunctionWithInput('hello');
+//   console.log(helloFunc()); // should log: 'hello'
+
+// class Chain {
+// 	constructor(name) {
+//     this.name = name
+//     this.totalStores = 0
+//     this.locations = []
+// 	}
+// }
+
+// Chain.prototype.openStore = function(owner,city) {
+//     this.locations.push(new Franchise(owner,city))
+//     this.totalStores++
+//   }
+
+// Chain.prototype.closeStore = function(city) {
+//     for(let i = 0;i < this.locations.length;i++) {
+//         if(this.locations[i].city === city) {
+//             this.locations.splice(i,1)
+//             this.totalStores--
+//             console.log(`${this.name} closed the store in ${city}!`)
+//             return
+//         }
+//     }
+//     console.log( `${this.name} doesn't have a store in ${city}.`)
+// }
+
+
+// class Franchise {
+//     constructor(owner,city) {
+//       this.owner = owner
+//       this.city = city
+//     }
+// }
+
+// const buenoBell = new Chain('Bueno Bell');
+// const KFC = new Chain("KFC")
+// buenoBell.openStore('Will', 'Phoenix');
+// buenoBell.openStore('Kyle', 'Austin');
+// buenoBell.openStore('Allison', 'Wichita');
+
+// buenoBell.closeStore('Austin'); // Should log 'Bueno Bell closed the store in Austin.'
+// buenoBell.closeStore('Maui'); // Should log 'Bueno Bell doesn't have a store in Maui.'
 
 
 // function Inventory(item, price) {
