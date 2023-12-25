@@ -1,25 +1,109 @@
 
-
-
-
-function once(callback) {
-    let count = 0
-    let output
-    return function(num) {
-      if(count === 0) {
-        count++
-        output = callback(num)
+function hobbyTracker(hobbies) {
+    const cache = {}
+    for(let i = 0;i < hobbies.length;i++) {
+      cache[hobbies[i]] = 0
+    }
+    // const newObj = {}
+    const ogCache = Object.assign(cache,{})
+    
+    return function(hobby,hours) {
+      if(hobby === undefined && hours === undefined) {
+        return ogCache
       }
-      return output
+      cache[hobby] += hours
+      return cache
     }
   }
 
-  const addByTwoOnce = once(function(num) {
-    return num + 2;
-  });
+const updateHobbies = hobbyTracker(['yoga', 'baking', 'piano']);
+updateHobbies('yoga', 2);
+updateHobbies('baking', 4);
+updateHobbies('yoga', 1);
+console.log(updateHobbies('piano', 2)); // --> { yoga: 3, baking: 4, piano: 2 }
+console.log(updateHobbies()); // --> 'tracker has been reset!'
+console.log(updateHobbies('baking', 1)); // --> { yoga: 0, baking: 1, piano: 0}
 
-  console.log(addByTwoOnce(5));  //should log 7
-  console.log(addByTwoOnce(10));  //should log 7
+
+// // ADD CODE HERE
+// const defineFirstArg = (callback,arg1) => {
+//     return function(...args) {
+//       return callback(arg1,...args)
+//     }
+//   }
+//   // Uncomment these to check your work!
+//   const subtract = function(big, small) { return big - small; };
+//   const subFrom20 = defineFirstArg(subtract, 20);
+//   console.log(subFrom20(5)); // should log: 15
+
+
+// const cycleIterator = (arr) => {
+//     let len = arr.length
+//     let count = 0
+//     return function() {
+//       if(count === len) count = 0
+//       return arr[count++]
+//     }
+//   }
+
+// const threeDayWeekend = ['Fri', 'Sat', 'Sun'];
+// const getDay = cycleIterator(threeDayWeekend);
+// console.log(getDay()); // should log: 'Fri'
+// console.log(getDay()); // should log: 'Sat'
+// console.log(getDay()); // should log: 'Sun'
+// console.log(getDay()); // should log: 'Fri'
+
+// ADD CODE HERE
+// const saveOutput = (callback,str) => {
+//     let password = str
+//     let pastWords = {}
+//     return function(arg) {
+//       if(arg !== password) {
+//         pastWords[arg] = callback(arg)
+//         return pastWords[arg]
+//     }
+//         else return pastWords
+//     }
+//   }
+//   // Uncomment these to check your work!
+//   const multiplyBy2 = function(num) { return num * 2; };
+//   const multBy2AndLog = saveOutput(multiplyBy2, 'boo');
+//   console.log(multBy2AndLog(2)); // should log: 4
+//   console.log(multBy2AndLog(9)); // should log: 18
+//   console.log(multBy2AndLog('boo')); // should log: { 2: 4, 9: 18 }
+
+// const after = (times,callback) => {
+
+//     return function increment(str) {
+//         if(times === 0) return callback(str)
+//     }
+//   }
+  
+//   const called = function(string) { return('hello ' + string); };
+//   const afterCalled = after(3, called);
+
+// console.log(afterCalled('world')); // -> undefined is printed
+// console.log(afterCalled('world')); // -> undefined is printed
+// console.log(afterCalled('world')); // -> 'hello world' is printed
+
+// function once(callback) {
+//     let count = 0
+//     let output
+//     return function(num) {
+//       if(count === 0) {
+//         count++
+//         output = callback(num)
+//       }
+//       return output
+//     }
+//   }
+
+//   const addByTwoOnce = once(function(num) {
+//     return num + 2;
+//   });
+
+//   console.log(addByTwoOnce(5));  //should log 7
+//   console.log(addByTwoOnce(10));  //should log 7
 
 
 
