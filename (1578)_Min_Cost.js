@@ -2,27 +2,18 @@
 
 const minCost = (colors,neededTime) => {
 
-    let left = 0
-    let right = 1
+    let total = 0
+    let max = 0
     let result = 0
 
-    while(right < colors.length) {
-
-        let tempArr = [neededTime[left]]
-        let total = tempArr[0]
-        let max = tempArr[0]
-       
-        while(colors[left] === colors[right]) {
-            max = Math.max(max,neededTime[right])
-            total += neededTime[right]
-            tempArr.push(neededTime[right]);
-            right++;
-        }
-        if(tempArr.length > 1) {
+    for(let i = 0;i < colors.length;i ++) {
+        total += neededTime[i]
+        max = Math.max(max,neededTime[i])
+        if(colors[i] !== colors[i + 1]) {
             result += total - max
+            max = 0
+            total = 0
         }
-        left = right
-        right = left + 1
     }
     return result
 }
