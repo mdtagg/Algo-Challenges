@@ -1,5 +1,14 @@
 const MOD = 1e9 +7;
 var numRollsToTarget = function(n, k, target) {
+	
+};
+	
+numRollsToTarget(3,6,7)
+
+/*
+
+const MOD = 1e9 +7;
+var numRollsToTarget = function(n, k, target) {
 	const memo = Array(n + 1).fill(-1).map(x => Array(target + 1).fill(-1));
 	return helper(n, k, target, memo);
 };
@@ -19,13 +28,8 @@ var helper = function(n, k, target, memo) {
 	return memo[n][target] = ways;
 };
 
-numRollsToTarget(3,6,7)
-
-/*
-
 
 [1,1,5],[1,5,1],[5,1,1],[1,2,4],[1,4,2],[4,1,2],[4,2,1],[2,1,4],[2,4,1],[1,3,3],[3,1,3],[3,3,1],[2,2,3],[2,3,2],[3,2,2]
-[1,1,4]
 
 var numRollsToTarget = function(n, k, target) {
     if (n > target || n * k < target) return 0 
