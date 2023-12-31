@@ -1,17 +1,7 @@
 
 
 const reverseWords = (s) => {
-    let word = []
-    let result = []
-    for(let i = s.length - 1;i >= 0;i--) {
-        if(s[i] == ' ' || i - 1 == -1) {
-            if(word.length) result.push(word.join(''));
-            word = []
-            continue 
-        }
-        word.unshift(s[i])
-    }
-    return result.join(' ')
+    return s.split(' ').filter((word) => word.trim()).reverse().join()
 }
 
 reverseWords("the sky is blue")

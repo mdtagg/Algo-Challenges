@@ -16,6 +16,70 @@ Output: "PAHNAPLSIIGYIR"
 
 
 var convert = function(s, numRows) {
+
+    if(numRows === 1) return s
+    let arr = new Array(numRows).fill('')
+    let result = ''
+    if(numRows == 2) {
+        for(let i = 0;i < s.length;i++) {
+            i % 2 !== 0 ? arr[1] += s[i] : arr[0] += s[i]
+        }
+    }
+    else {
+        let rowCount = 0
+        let colCount = numRows - 2
+        let zigzag = false
+
+        for(let i = 0;i < s.length;i++) {
+            if(rowCount == numRows) {
+                rowCount = 0
+                zigzag = true
+            }
+            else if(colCount == 0) {
+                colCount = numRows - 2
+                zigzag = false
+            }
+            if(zigzag) {
+                arr[colCount] += s[i]
+                colCount--
+            }
+            else {
+                arr[rowCount] += s[i]
+                rowCount++
+            }
+        }
+    }
+    for(let i = 0;i < arr.length;i++) {
+        result += arr[i]
+    }
+    return result
+};
+
+
+convert("ABCD",2)
+
+/*
+let arr = new Array(numRows).fill(new Array())
+    let count = numRows - 1
+    let zag = false
+
+    for(let i = 0;i < s.length;i++) {
+        
+        if(!zag) {
+            arr[i % numRows] = [...arr[i % numRows],s[i]]
+        }else {
+            arr[numRows - (i % numRows) - 2] = [...arr[numRows - (i % numRows) - 2],s[i]]
+            count--
+        }
+        if((i + 1) % numRows === 0 || count == 0) {
+            zag = !zag;
+            count = numRows - 1
+        }
+
+    }
+
+
+var convert = function(s, numRows) {
     let sArr = s.split('')
     let rows = Array.from(Array(numRows), () => [])
     while(sArr.length) {
@@ -37,35 +101,33 @@ var convert = function(s, numRows) {
     let zigStr = rows.join('')
     console.log(zigStr)
 };
-
-
-convert("PAYPALISHIRING",4)
+*/
 
 //BEST SOLUTION FOUND
 
-var convert = function(s, numRows) {
-    if (numRows === 1) return s;
+// var convert = function(s, numRows) {
+//     if (numRows === 1) return s;
 
-    const rows = new Array(numRows).fill('');
+//     const rows = new Array(numRows).fill('');
 
-    function getRowsIndex(i, n) {
-        const half = n - 1;
-        const round = 2 * half;
-        const index = i % round;
-        if (index >= half) {
-            return round - index;
-        } else {
-            return index;
-        }
-    }
+//     function getRowsIndex(i, n) {
+//         const half = n - 1;
+//         const round = 2 * half;
+//         const index = i % round;
+//         if (index >= half) {
+//             return round - index;
+//         } else {
+//             return index;
+//         }
+//     }
 
-    for (let i = 0; i < s.length; i++) {
-        const index = getRowsIndex(i, numRows);
-        rows[index] += s[i];
-    }
+//     for (let i = 0; i < s.length; i++) {
+//         const index = getRowsIndex(i, numRows);
+//         rows[index] += s[i];
+//     }
 
-    return rows.join('');
-};
+//     return rows.join('');
+// };
 
 // let sArr = s.split('')
 //     let newStr = []
