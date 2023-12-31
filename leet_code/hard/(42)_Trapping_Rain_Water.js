@@ -8,14 +8,46 @@ it can trap after raining.
 
 const trap = (height) => {
 
-    let bucket = 0
+    let left = 0
+    let right = 1
+    let amtWater = 0
+    let result = 0
+    let maxIdx = [height[0],0]
 
-    for(let i = 0;i < height.length;i++) {
+    while(right < height.length) {
         
-    }   
+        if(maxIdx[0] <= height[right]) {
+            maxIdx[0] = height[right]
+            maxIdx[1] = right
+        }
+        if(height[right] >= height[left]) {
+            left = right
+            result += amtWater 
+            amtWater = 0
+        }else {
+            amtWater += Math.abs(height[left] - height[right])
+        }
+        right++
+    }
+
+    right--
+    left = right - 1
+    amtWater = 0
+
+    while(left >= maxIdx[1]) {
+        if(height[left] >= height[right]) {
+            right = left 
+            result += amtWater 
+            amtWater = 0
+        }else {
+            amtWater += Math.abs(height[left] - height[right])
+        }
+        left--
+    }
+    return result
 }
 
-console.log(trap([1,0,2,1,0,1,3,2,1,2,1]))
+console.log(trap([0,7,1,4,6]))
 
 
 
