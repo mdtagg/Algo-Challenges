@@ -1,4 +1,19 @@
 
+//FLOW
+
+// function flow(input, funcArray,count=0) {
+//   if(!funcArray[count]) return input
+// 	let currFunc = funcArray[count]
+//   input = currFunc(input)
+//   return flow(input,funcArray,++count)
+// }
+
+// function multiplyBy2(num) { return num * 2; }
+// function add7(num) { return num + 7; }
+// function modulo4(num) { return num % 4; }
+// function subtract10(num) { return num - 10; }
+// const arrayOfFunctions = [multiplyBy2, add7, modulo4, subtract10];
+// console.log(flow(2, arrayOfFunctions)); // -> -7
 
 //POW
 
