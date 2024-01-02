@@ -1,31 +1,56 @@
 
-function hobbyTracker(hobbies) {
-  
-  let cache = {}
-  
-  for(let i = 0;i < hobbies.length;i++) {
-    cache[hobbies[i]] = 0
-  }
-  
-  return function(str,int) {
-    if(!str && !int) {
-      for(let hobby of hobbies) {
-        cache[hobby] = 0
-      }
-      return "tracker has been reset!"
-    }
-    cache[str] += int
-    return cache
-  }
-}
 
-const updateHobbies = hobbyTracker(['yoga', 'baking', 'piano']);
-updateHobbies('yoga', 2);
-updateHobbies('baking', 4);
-updateHobbies('yoga', 1);
-console.log(updateHobbies('piano', 2)); // --> { yoga: 3, baking: 4, piano: 2 }
-console.log(updateHobbies()); // --> 'tracker has been reset!'
-console.log(updateHobbies('baking', 1)); // --> { yoga: 0, baking: 1, piano: 0}
+
+//DATE STAMP
+// const dateStamp = (callback) => {
+//   return function(...args) {
+//     return {
+//       date:new Intl.DateTimeFormat('en-US',
+//       {
+//         year: 'numeric',
+//   			month: 'short',
+//   			day: '2-digit',
+//         weekday:"short"
+//       }).format(new Date()).split(',').join(''),
+//       output:callback(...args)
+//     }
+//   }
+// }
+// const stampedMultBy2 = dateStamp(n => n * 2);
+// console.log(stampedMultBy2(4)); // should log: { date: (today's date), output: 8 }
+// console.log(stampedMultBy2(6)); // should log: { date: (today's date), output: 12 }
+
+
+
+//HOBBY TRACKER
+
+// function hobbyTracker(hobbies) {
+  
+//   let cache = {}
+  
+//   for(let i = 0;i < hobbies.length;i++) {
+//     cache[hobbies[i]] = 0
+//   }
+  
+//   return function(str,int) {
+//     if(!str && !int) {
+//       for(let hobby of hobbies) {
+//         cache[hobby] = 0
+//       }
+//       return "tracker has been reset!"
+//     }
+//     cache[str] += int
+//     return cache
+//   }
+// }
+
+// const updateHobbies = hobbyTracker(['yoga', 'baking', 'piano']);
+// updateHobbies('yoga', 2);
+// updateHobbies('baking', 4);
+// updateHobbies('yoga', 1);
+// console.log(updateHobbies('piano', 2)); // --> { yoga: 3, baking: 4, piano: 2 }
+// console.log(updateHobbies()); // --> 'tracker has been reset!'
+// console.log(updateHobbies('baking', 1)); // --> { yoga: 0, baking: 1, piano: 0}
 
 
 // // ADD CODE HERE
