@@ -1,5 +1,18 @@
 
 
+//GET LEN RECURSION
+
+// function getLength(array,len=0) {
+//   if(!array[len]) return len
+//   len = getLength(array,++len)
+//   return len
+// }
+
+// console.log(getLength([1])); // -> 1
+// console.log(getLength([1, 2])); // -> 2
+// console.log(getLength([1, 2, 3, 4, 5])); // -> 5
+// console.log(getLength([])); // -> 0
+
 //FACTORIAL
 
 // function factorial(num) {
