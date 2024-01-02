@@ -21,6 +21,25 @@ to allow for water to fill the 1 chambers.
 
 
 var maxArea = function(height) {
+    
+    let left = 0
+    let right = height.length - 1
+    let maxVolume = 0
+
+    while(left < right) {
+        let lowerBar = Math.min(height[left],height[right])
+        let volume = lowerBar * (right - left)
+        if(maxVolume < volume) maxVolume = volume;
+        if(height[left] < height[right]) left++
+        else right--
+    }
+    return maxVolume
+};
+
+maxArea([1,8,6,2,5,4,8,3,7])
+
+/*
+var maxArea = function(height) {
     let left = 0
     let right = height.length - 1
     let max = 0
@@ -37,8 +56,7 @@ var maxArea = function(height) {
     }
     console.log(max)
 };
-
-maxArea([2,3,4,5,18,17,6])
+*/
 
 
 
