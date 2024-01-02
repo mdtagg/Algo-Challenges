@@ -1,20 +1,23 @@
 
 function hobbyTracker(hobbies) {
-    const cache = {}
-    for(let i = 0;i < hobbies.length;i++) {
-      cache[hobbies[i]] = 0
-    }
-    // const newObj = {}
-    const ogCache = Object.assign(cache,{})
-    
-    return function(hobby,hours) {
-      if(hobby === undefined && hours === undefined) {
-        return ogCache
-      }
-      cache[hobby] += hours
-      return cache
-    }
+  
+  let cache = {}
+  
+  for(let i = 0;i < hobbies.length;i++) {
+    cache[hobbies[i]] = 0
   }
+  
+  return function(str,int) {
+    if(!str && !int) {
+      for(let hobby of hobbies) {
+        cache[hobby] = 0
+      }
+      return "tracker has been reset!"
+    }
+    cache[str] += int
+    return cache
+  }
+}
 
 const updateHobbies = hobbyTracker(['yoga', 'baking', 'piano']);
 updateHobbies('yoga', 2);
