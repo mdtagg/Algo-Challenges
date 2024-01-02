@@ -12,7 +12,6 @@ const fullJustify = (words,maxWidth) => {
         if(!words[i + 1]) {
             let word = ""
             wordLengths -= row.length
-            let rowLen = row.length
             while(row.length) {
                 word += row.shift()
                 if(word.length < maxWidth) word += ' ';
@@ -24,20 +23,13 @@ const fullJustify = (words,maxWidth) => {
 
             wordLengths -= row.length
             let spacesLeft = maxWidth - wordLengths
-            // let totalSpaces = spacesLeft
             let numSpaces = (row.length - 1 || 1)
             let word = ''
 
             while(numSpaces > 0) {
                 let mid = Math.ceil(spacesLeft / numSpaces)
-                // if(spacesLeft > mid || totalSpaces % mid === 0) {
                 word += row.shift() + ' '.repeat(mid);
                 spacesLeft -= mid
-                // }
-                // else {
-                //     word += row.shift() + ' '.repeat(spacesLeft)
-                //     spacesLeft -= spacesLeft
-                // }
                 numSpaces--
             }
             if(row.length) word += row.pop()
@@ -46,7 +38,6 @@ const fullJustify = (words,maxWidth) => {
             wordLengths = 0
         }
     }
-    console.log(result)
     return result
 }
 
