@@ -1,5 +1,26 @@
 
+//CENSOR
 
+// const censor = () => {
+//   let cache = {}
+//   return function(...args) {
+//     if(args.length === 2) {
+//       cache[args[0]] = args[1]
+//     }else {
+//       let [word] = args
+//       let keys = Object.keys(cache)
+//       for(let i = 0;i < keys.length;i++) {
+//         word = word.replace(keys[i],cache[keys[i]])
+//       }
+//       return word
+//     }
+//   }
+// }
+
+// const changeScene = censor();
+// changeScene('dogs', 'cats');
+// changeScene('quick', 'slow');
+// console.log(changeScene('The quick, brown fox jumps over the lazy dogs.')); // should log: 'The slow, brown fox jumps over the lazy cats.'
 
 //DATE STAMP
 // const dateStamp = (callback) => {
