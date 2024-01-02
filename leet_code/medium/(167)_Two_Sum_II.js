@@ -17,6 +17,28 @@ Your solution must use only constant extra space.
 
 
 const twoSum = (nums,target) => {
+
+    let i = 0
+    let j = nums.length - 1
+
+    while(i < j) {
+        let sum = nums[i] + nums[j]
+        if(sum > target) {
+            j--
+        }
+        else if(sum === target) {
+            return [i + 1,j + 1]
+        }else {
+            i++
+        }
+    }
+}
+
+console.log(twoSum([2,7,11,15],9))
+
+
+/*
+const twoSum = (nums,target) => {
     let left = 1
     let right = nums.length
 
@@ -32,9 +54,7 @@ const twoSum = (nums,target) => {
         }
     }
 }
-
-console.log(twoSum([5,25,75],100))
-
+*/
 //FIRST SOLUTION (only did it this way because of misunderstanding of constant
 //space requirement)
 
