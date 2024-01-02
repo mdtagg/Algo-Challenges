@@ -1,4 +1,28 @@
 
+
+//FACTORIAL
+
+// function factorial(num) {
+// 	if(num === 0) return 1
+//   let factor = num
+//   factor *= factorial(--num)
+//   return factor
+// }
+
+// factorial(4)
+
+//REPEATER
+
+// function repeater(char,count=0) {
+//   if(count === 5) return ""
+// 	char += repeater(char,count + 1)
+//   return char
+// }
+
+// console.log(repeater('g'));
+// console.log(repeater('j'));
+
+
 //CENSOR
 
 // const censor = () => {
