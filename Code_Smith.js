@@ -1,4 +1,103 @@
 
+//SHUFFLE
+
+const shuffleCards = (topHalf,bottomHalf,idx=0) => {
+
+  let cards = []
+  if(topHalf[idx]) cards.push(topHalf[idx])
+  if(bottomHalf[idx]) cards.push(bottomHalf[idx])
+  if(topHalf[idx] || bottomHalf[idx]) cards.push(...shuffleCards(topHalf,bottomHalf,++idx))
+  return cards
+}
+console.log(shuffleCards(['Queen of Diamonds', 'Five of Hearts', 'Ace of Spades', 'Eight of Clubs'],['Jack of Hearts', 'Ten of Spades']))
+/*
+
+const shuffleCards = (topHalf,bottomHalf) => {
+
+  let cards = []
+
+  if(topHalf.length) cards.push(topHalf.shift())
+  if(bottomHalf.length) cards.push(bottomHalf.shift())
+  if(topHalf.length || bottomHalf.length) cards.push(...shuffleCards(topHalf,bottomHalf))
+  return cards
+}
+
+const shuffleCards = (topHalf,bottomHalf) => {
+
+  if(!topHalf.length && !bottomHalf.length) return []
+  if(topHalf.length && bottomHalf.length) {
+    return [topHalf.shift(),bottomHalf.shift(),...shuffleCards(topHalf,bottomHalf)]
+  }else if(topHalf.length && !bottomHalf.length) {
+    return [topHalf.shift(),...shuffleCards(topHalf,bottomHalf)]
+  }else if(!topHalf.length && bottomHalf.length) {
+    return [bottomHalf.shift(),...shuffleCards(topHalf,bottomHalf)]
+  }
+  
+}
+
+
+const shuffleCards = (topHalf,bottomHalf) => {
+
+  let card = ""
+
+  if(topHalf.length && bottomHalf.length) {
+    card = [topHalf.shift(),bottomHalf.shift(),...shuffleCards(topHalf,bottomHalf)]
+  }
+  if(!topHalf.length && bottomHalf.length) {
+    card = [bottomHalf.shift(),...shuffleCards(topHalf,bottomHalf)]
+  }
+  if(topHalf.length && !bottomHalf.length) {
+    card = [topHalf.shift(),...shuffleCards(topHalf,bottomHalf)]
+  }
+  
+  return card
+}
+
+const shuffleCards = (topHalf,bottomHalf) => {
+
+  let result = []
+
+  shuffle()
+
+  function shuffle() {
+    let topCard
+    let bottomCard 
+
+    if(topHalf.length) topCard = topHalf.shift();
+    if(bottomHalf.length) bottomCard = bottomHalf.shift()
+    if(!topCard && !bottomCard) return
+    if(topCard && bottomCard) {
+      result.push(topCard)
+      result.push(bottomCard)
+    }
+    else if(!topCard && bottomCard) {
+      result.push(bottomCard)
+    }
+    else if(topCard && !bottomCard) {
+      result.push(topCard)
+    }
+    shuffle(topHalf,bottomHalf)
+  }
+  return result
+}
+
+let topCard = ""
+  let bottomCard = ""
+
+  if(!change && topHalf.length) {
+    topCard = topHalf.shift()
+    shuffleCards(topHalf,bottomHalf,true)
+  }
+  else if(change && bottomHalf.length) {
+    bottomCard = bottomHalf.shift()
+    shuffleCards(topHalf,bottomHalf,false)
+  }else if(topHalf.length && !bottomHalf.length) {
+    topCard = shuffleCards(topHalf,bottomHalf,false) 
+  }else if(!topHalf.length && bottomHalf.length) {
+    bottomCard = shuffleCards(topHalf,bottomHalf,true)
+    
+  }
+ */
 //FLOW
 
 // function flow(input, funcArray,count=0) {
