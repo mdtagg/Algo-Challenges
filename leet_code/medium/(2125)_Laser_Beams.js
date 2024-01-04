@@ -13,10 +13,10 @@ const numberOfBeams = (bank) => {
             if(bank[i][j] == 1) {
                 nextCount++;
             }
-            if(nextCount > 0) {
-                totalLasers += nextCount * count
-                count = nextCount
-            }
+        }
+        if(nextCount > 0) {
+            totalLasers += nextCount * count
+            count = nextCount
         }
     }
     return totalLasers

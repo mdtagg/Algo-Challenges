@@ -1,21 +1,41 @@
 
-//CASCADE
+//for Each Async
 
-function cascade(number) {
-  let num = number % 10
-  if(number / 10 > 1) {
-    console.log(number)
-    number = Math.floor(number/10)
-    cascade(number)
-  }
-  else if(number / 10 < 1) {
-    console.log(number)
-    return
-  }
-  console.log(number * 10 + num)
+// Add code here
+const delays = [200,500,0,350]
+
+function forEach(arr,cb) {
+  for(let i = 0;i < arr.length;i++) {
+    cb(arr[i],i)
+	}
 }
 
-cascade(12345)
+function delayLog(delayTime,i) {
+  setTimeout(() => {
+    console.log(`printing element ${i}`)
+  },delayTime)
+}
+
+forEach(delays,delayLog)
+
+
+// //CASCADE
+
+// function cascade(number) {
+//   let num = number % 10
+//   if(number / 10 >= 1) {
+//     console.log(number)
+//     number = Math.floor(number/10)
+//     cascade(number)
+//   }
+//   else if(number / 10 < 1) {
+//     console.log(number)
+//     return
+//   }
+//   console.log(number * 10 + num)
+// }
+
+// cascade(10000)
 
 /*
 function cascade(number,idx=0,pastNums=[]) {
