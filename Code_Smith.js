@@ -1,22 +1,43 @@
 
+//AJAX SIMULATE
+
+let dataReceived;
+
+function ajaxSimulate(id, callback) {
+  const database = ['Aaron', 'Barbara', 'Chris'];
+  // Add code heref
+  setTimeout(() => {
+    callback(database[id])
+  },0)
+}
+
+function storeData(data) {
+  dataReceived = data
+  console.log(dataReceived)
+}
+// Also add code here
+
+ajaxSimulate(1,storeData)
+console.log(dataReceived)
+
 //for Each Async
 
 // Add code here
-const delays = [200,500,0,350]
+// const delays = [200,500,0,350]
 
-function forEach(arr,cb) {
-  for(let i = 0;i < arr.length;i++) {
-    cb(arr[i],i)
-	}
-}
+// function forEach(arr,cb) {
+//   for(let i = 0;i < arr.length;i++) {
+//     cb(arr[i],i)
+// 	}
+// }
 
-function delayLog(delayTime,i) {
-  setTimeout(() => {
-    console.log(`printing element ${i}`)
-  },delayTime)
-}
+// function delayLog(delayTime,i) {
+//   setTimeout(() => {
+//     console.log(`printing element ${i}`)
+//   },delayTime)
+// }
 
-forEach(delays,delayLog)
+// forEach(delays,delayLog)
 
 
 // //CASCADE
