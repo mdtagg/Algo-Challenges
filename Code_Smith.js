@@ -1,24 +1,56 @@
 
+// RULE IN ORDER
+
+// Add code here
+function runInOrder(funcs,arr) {
+  if(!funcs.length) {
+    return
+  }
+  setTimeout(() => {
+    let func = funcs.shift()
+    func()
+    runInOrder(funcs,arr)
+  },arr.shift())
+}
+// /* Uncomment the following lines and click 'run' to test your work */
+
+function sayHi() {
+  console.log('hi');
+}
+function sayBye() {
+  console.log('bye');
+}
+function sayHowdy() {
+  console.log('howdy');
+}
+
+runInOrder([sayHi, sayBye, sayHowdy], [200, 100, 300]);
+
+//LIMITED INTERVAL
+
+// const limitedInterval = (callback,wait,limit) => {
+//   let intervalId = setInterval(callback,wait)
+//   setTimeout(() => clearInterval(intervalId),limit)
+// }
+// limitedInterval(() => console.log('repeating'), 100, 550);
+
 //AJAX SIMULATE
 
-let dataReceived;
+// let dataReceived;
 
-function ajaxSimulate(id, callback) {
-  const database = ['Aaron', 'Barbara', 'Chris'];
-  // Add code heref
-  setTimeout(() => {
-    callback(database[id])
-  },0)
-}
+// function ajaxSimulate(id, callback) {
+//   const database = ['Aaron', 'Barbara', 'Chris'];
+//   setTimeout(() => {
+//     callback(database[id])
+//   },0)
+// }
 
-function storeData(data) {
-  dataReceived = data
-  console.log(dataReceived)
-}
-// Also add code here
-
-ajaxSimulate(1,storeData)
-console.log(dataReceived)
+// function storeData(data) {
+//   dataReceived = data
+//   console.log(dataReceived)
+// }
+// ajaxSimulate(1,storeData)
+// console.log(dataReceived)
 
 //for Each Async
 
