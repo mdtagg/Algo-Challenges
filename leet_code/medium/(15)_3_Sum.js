@@ -6,12 +6,66 @@ Notice that the solution set must not contain duplicate triplets.
 */
 
 var threeSum = function(nums) {
-    
+
+    nums = nums.sort((a,b) => a - b)
+    let duplicates = new Set()
+    let result = []
+
+    let left = 0
+    let mid = 1
+    let right = nums.length - 1
+
+    while(left < right) {
+
+        let sum = nums[left] + nums[mid] + nums[right] 
+        let strSum = `${nums[left]}${nums[mid]}${nums[right]}`
+
+        if(mid >= right) {
+            left++
+            mid = left + 1
+            right = nums.length - 1
+            continue
+        }
+        
+        if(sum === 0) {
+            if(!duplicates.has(strSum)) {
+                duplicates.add(strSum)
+                result.push([nums[left],nums[mid],nums[right]])
+            }
+        }
+
+        if(sum > 0) {
+            right--
+            mid--
+        }
+        mid++
+    }
+    return result
 }
 
-threeSum([-2,0,1,1,2])
+threeSum([-2,-3,0,0,-2])
 
 /*
+// if(!duplicates.has(strSum)) {
+            //     duplicates.add(strSum)
+            //     result.push([nums[left],nums[mid],nums[right]])
+            // }
+
+// for(let left = 0;left < nums.length - 2;left++) {
+    //     for(let mid = left + 1;mid < nums.lenth - 1;mid++) {
+
+    //         let sum = nums[left] + nums[mid] + nums[right] 
+    //         let strSum = `${nums[left]}${nums[mid]}${nums[right]}`
+
+    //         if(sum === 0 && !duplicates.has(strSum)) {
+    //             duplicates.add(strSum)
+    //             result.push([nums[left],nums[mid],nums[right]])
+    //         }else if(sum > 0) {
+    //             continue
+    //         }
+    //     }
+    // }
+
 var threeSum = function(nums) {
     nums = nums.sort((a,b) => a - b)
     let duplicates = new Set()
