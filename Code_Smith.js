@@ -1,15 +1,54 @@
 
+//CASCADE
+
+function cascade(number) {
+  let num = number % 10
+  if(number / 10 > 1) {
+    console.log(number)
+    number = Math.floor(number/10)
+    cascade(number)
+  }
+  else if(number / 10 < 1) {
+    console.log(number)
+    return
+  }
+  console.log(number * 10 + num)
+}
+
+cascade(12345)
+
+/*
+function cascade(number,idx=0,pastNums=[]) {
+  if(number / 10 > 1 && idx === 0) {
+    console.log(number)
+    pastNums.unshift(number)
+    number = Math.floor(number/10)
+    cascade(number,idx,pastNums)
+  }
+  else if(number / 10 < 1) {
+    pastNums.unshift(number)
+    console.log(number)
+    idx++
+  }
+  if(idx !== 0 && idx < pastNums.length) {
+    console.log(pastNums[idx])
+    cascade(number * 10,++idx,pastNums)
+  }
+}
+*/
+
+
 //SHUFFLE
 
-const shuffleCards = (topHalf,bottomHalf,idx=0) => {
+// const shuffleCards = (topHalf,bottomHalf,idx=0) => {
 
-  let cards = []
-  if(topHalf[idx]) cards.push(topHalf[idx])
-  if(bottomHalf[idx]) cards.push(bottomHalf[idx])
-  if(topHalf[idx] || bottomHalf[idx]) cards.push(...shuffleCards(topHalf,bottomHalf,++idx))
-  return cards
-}
-console.log(shuffleCards(['Queen of Diamonds', 'Five of Hearts', 'Ace of Spades', 'Eight of Clubs'],['Jack of Hearts', 'Ten of Spades']))
+//   let cards = []
+//   if(topHalf[idx]) cards.push(topHalf[idx])
+//   if(bottomHalf[idx]) cards.push(bottomHalf[idx])
+//   if(topHalf[idx] || bottomHalf[idx]) cards.push(...shuffleCards(topHalf,bottomHalf,++idx))
+//   return cards
+// }
+// console.log(shuffleCards(['Queen of Diamonds', 'Five of Hearts', 'Ace of Spades', 'Eight of Clubs'],['Jack of Hearts', 'Ten of Spades']))
 /*
 
 const shuffleCards = (topHalf,bottomHalf) => {
