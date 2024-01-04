@@ -6,6 +6,13 @@ Notice that the solution set must not contain duplicate triplets.
 */
 
 var threeSum = function(nums) {
+    
+}
+
+threeSum([-2,0,1,1,2])
+
+/*
+var threeSum = function(nums) {
     nums = nums.sort((a,b) => a - b)
     let duplicates = new Set()
     let result = []
@@ -33,9 +40,7 @@ var threeSum = function(nums) {
     return result
 }
 
-threeSum([-2,0,1,1,2])
 
-/*
 var threeSum = function(nums) {
     nums = nums.sort((a,b) => a - b)
     let duplicates = new Set()
