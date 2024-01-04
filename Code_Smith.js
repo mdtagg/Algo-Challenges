@@ -1,30 +1,48 @@
 
+//ARRAY BUILDER
+
+function arrayBuilder(obj) {
+  let arr = []
+  for(let [item,count] of Object.entries(obj)) {
+    while(count > 0) {
+      arr.push(item)
+      count--
+    }
+  }
+  return arr
+}
+
+// Uncomment these to check your work!
+console.log(arrayBuilder({'cats': 2, 'dogs': 1})); // => ['cats', 'cats', 'dogs']
+console.log(arrayBuilder({})); // => []
+
+
 // RULE IN ORDER
 
 // Add code here
-function runInOrder(funcs,arr) {
-  if(!funcs.length) {
-    return
-  }
-  setTimeout(() => {
-    let func = funcs.shift()
-    func()
-    runInOrder(funcs,arr)
-  },arr.shift())
-}
-// /* Uncomment the following lines and click 'run' to test your work */
+// function runInOrder(funcs,arr) {
+//   if(!funcs.length) {
+//     return
+//   }
+//   setTimeout(() => {
+//     let func = funcs.shift()
+//     func()
+//     runInOrder(funcs,arr)
+//   },arr.shift())
+// }
+// // /* Uncomment the following lines and click 'run' to test your work */
 
-function sayHi() {
-  console.log('hi');
-}
-function sayBye() {
-  console.log('bye');
-}
-function sayHowdy() {
-  console.log('howdy');
-}
+// function sayHi() {
+//   console.log('hi');
+// }
+// function sayBye() {
+//   console.log('bye');
+// }
+// function sayHowdy() {
+//   console.log('howdy');
+// }
 
-runInOrder([sayHi, sayBye, sayHowdy], [200, 100, 300]);
+// runInOrder([sayHi, sayBye, sayHowdy], [200, 100, 300]);
 
 //LIMITED INTERVAL
 
