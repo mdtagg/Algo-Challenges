@@ -2,6 +2,93 @@
 
 function findSubstring(s,words) {
 
+    let wordLen = words[0].length 
+    let left = 0
+    let right = wordLen
+    let result = []
+
+    let wordsMap = new Map()
+    for(let i = 0;i < words.length;i++) {
+        wordsMap.set(words[i],(wordsMap.get(words[i]) || 0) + 1)
+    }
+
+    while(right <= s.length) {
+        let substr = s.substring(left,right)
+        if(words.includes(substr)) {
+
+            if(words.length == 1) result.push(left);
+
+            let newMap = new Map(wordsMap)
+            let j = right 
+            let k = right + wordLen
+            newMap.set(substr,newMap.get(substr) - 1)
+            let amt = 1
+
+            while(k <= s.length) {
+                let substr = s.substring(j,k)
+                if(words.includes(substr)) {
+                    if(newMap.get(substr) === 0) break
+                    newMap.set(substr,newMap.get(substr) - 1)
+                    amt++
+                }else break
+                if(amt === words.length) result.push(left)
+                j += wordLen 
+                k += wordLen
+            } 
+        }
+        left++
+        right++
+    }
+    return result
+}
+
+findSubstring("a",["a"])
+
+/*
+function findSubstring(s,words) {
+
+    let wordLen = words[0].length 
+    let left = 0
+    let right = wordLen
+    let result = []
+
+    let wordsMap = new Map()
+    for(let i = 0;i < words.length;i++) {
+        wordsMap.set(words[i],(wordsMap.get(words[i]) || 0) + 1)
+    }
+
+    while(right <= s.length) {
+        let substr = s.substring(left,right)
+        if(words.includes(substr)) {
+
+            if(words.length == 1) result.push(left);
+            
+            let newMap = new Map(wordsMap)
+            let j = right 
+            let k = right + wordLen
+            newMap.set(substr,newMap.get(substr) - 1)
+            let amt = 1
+
+            while(k <= s.length) {
+                let substr = s.substring(j,k)
+                if(words.includes(substr)) {
+                    if(newMap.get(substr) === 0) break
+                    newMap.set(substr,newMap.get(substr) - 1)
+                    amt++
+                }else break
+                if(amt === words.length) result.push(left)
+                j += wordLen 
+                k += wordLen
+            } 
+        }
+        left++
+        right++
+    }
+    return result
+}
+
+function findSubstring(s,words) {
+
     const result = []
     const wordLength = words[0].length 
     let windowLength = wordLength * words.length
@@ -35,9 +122,6 @@ function findSubstring(s,words) {
     return result
 }
 
-findSubstring("wordgoodgoodgoodbestword",["word","good","best","good"])
-
-/*
 const result = []
     const wordCounts = new Map()
     const letterMap = new Map()

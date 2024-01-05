@@ -18,6 +18,7 @@ var lengthOfLongestSubstring = function(s) {
         }
         result = Math.max(stack.length,result)
     }
+    return result
 };
 
 console.log(lengthOfLongestSubstring("dvdf"))
