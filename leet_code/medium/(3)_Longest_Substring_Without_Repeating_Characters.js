@@ -6,6 +6,45 @@ substring without repeating characters.
 
 var lengthOfLongestSubstring = function(s) {
 
+    let stack = []
+    let result = 0
+
+    for(let i = 0;i < s.length;i++) {
+        if(!stack.includes(s[i])) {
+            stack.push(s[i])
+        }else {
+            stack.shift()
+            i--
+        }
+        result = Math.max(stack.length,result)
+    }
+};
+
+console.log(lengthOfLongestSubstring("dvdf"))
+
+/*
+if(s.length === 0) return 0
+    if(s.length === 1) return 1
+    
+    let charSet = new Set()
+    let diffs = 0
+    let result = 0
+
+    for(let i = 0;i < s.length;i++) {
+        if(!charSet.has(s[i])) {
+            charSet.add(s[i])
+            diffs++;
+        }
+        else {
+            charSet = new Set().add(s[i])
+            result = Math.max(result,diffs)
+            diffs = 1
+        }
+    }
+    return Math.max(result,diffs)
+
+var lengthOfLongestSubstring = function(s) {
+
     let left = 0
     let right = 0
     let stack = []
@@ -23,8 +62,7 @@ var lengthOfLongestSubstring = function(s) {
     }
     return longest
 };
-
-console.log(lengthOfLongestSubstring("abcabcdbbc"))
+*/
 
 
 
