@@ -2,7 +2,35 @@
 
 const minSubArrayLen = (target,nums) => {
 
-    nums = nums.sort((a,b) => a - b)
+    nums = nums.sort((a,b) => b - a)
+    let result = nums.length + 1
+    let store = 1
+    let sum = nums[0]
+
+    for(let i = 1;i < nums.length;i++) {
+        let currSum = nums[i] + sum
+        let idx = i
+        store++
+        while(idx < nums.length) {
+            currSum += nums[idx + 1]
+            if(currSum === target) {
+                store++
+                break
+            }
+            if(currSum > target) {
+                currSum -= nums[idx + 1]
+                idx++;
+            }
+        }
+    }
+}
+
+minSubArrayLen(9,[2,3,1,2,4,3])
+
+/*
+const minSubArrayLen = (target,nums) => {
+
+    nums = nums.sort((a,b) => b - a)
 
     let result = nums.length + 1
     let left = 0
@@ -25,6 +53,7 @@ const minSubArrayLen = (target,nums) => {
             right++
             stack.push(nums[right])
             sum += nums[right]
+            
         }else if(sum > target) {
             sum -= stack.shift()
             left++
@@ -33,9 +62,7 @@ const minSubArrayLen = (target,nums) => {
     return result < nums.length + 1 ? stack.length : 0
 }
 
-minSubArrayLen(9,[2,3,1,2,4,3])
 
-/*
 nums = nums.sort((a,b) => a - b)
     let left = nums.length - 2
     let right = nums.length - 1
