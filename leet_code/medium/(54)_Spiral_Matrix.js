@@ -44,7 +44,11 @@ const spiralOrder = (matrix) => {
         if(count === 0) break
 
     }
+    return result
+}
 
+function move() {
+    
 }
 
 spiralOrder([[1,2,3],[4,5,6],[7,8,9]])
