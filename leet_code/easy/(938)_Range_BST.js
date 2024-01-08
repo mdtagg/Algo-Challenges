@@ -25,20 +25,10 @@ const rangeSumBST = (root,low,high) => {
     if(!root) return 0
     let leftVal = rangeSumBST(root.left,low,high)
     let rightVal = rangeSumBST(root.right,low,high)
-    let topVal = root.val
 
     if(root.val >= low && root.val <= high) {
         return leftVal + rightVal + root.val
     }
-    // if(leftVal > high || leftVal < low) {
-    //     leftVal = 0
-    // }
-    // if(rightVal > high || rightVal < low) {
-    //     rightVal = 0
-    // }
-    // if(topVal > high || topVal < low) {
-    //     topVal = 0
-    // }
 
     return leftVal + rightVal 
 }
