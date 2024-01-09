@@ -1,20 +1,61 @@
 
-//ARRAY BUILDER
-
-function arrayBuilder(obj) {
-  let arr = []
-  for(let [item,count] of Object.entries(obj)) {
-    while(count > 0) {
-      arr.push(item)
-      count--
-    }
-  }
-  return arr
+function curriedJoin(fn) {
+  let [args] = fn
+  return join(args + fn)
 }
 
-// Uncomment these to check your work!
-console.log(arrayBuilder({'cats': 2, 'dogs': 1})); // => ['cats', 'cats', 'dogs']
-console.log(arrayBuilder({})); // => []
+function join(args) {
+  
+}
+curriedJoin(1)(2, 3)
+
+
+// function undefinedToNull(arg) {
+//   return Array.isArray(arg) ? traverseArray(arg) : traverseObject(arg);
+// }
+
+// function traverseArray(arr) {
+//   for(let i = 0;i < arr.length;i++) {
+//     if(typeof(arr[i]) !== 'object' || arr[i] === null) {
+//       if(arr[i] === undefined) arr[i] = null;
+//       continue
+//     }
+//     if(Array.isArray(arr[i])) arr[i] = traverseArray(arr[i])
+//     else arr[i] = traverseObject(arr[i])
+//   }
+//   return arr
+// }
+
+// function traverseObject(obj) {
+//   for(let key of Object.keys(obj)) {
+//     if(typeof(obj[key]) !== 'object'|| arr[i] === null) {
+//       if(obj[key] === undefined) obj[key] = null;
+//       continue
+//     }
+//     if(Array.isArray(obj[key])) obj[key] = traverseArray(obj[key])
+//     else obj[key] = traverseObject(obj[key])
+//   }
+//   return obj
+// }
+
+console.log(undefinedToNull(['BFE.dev', undefined, null, {a: ['BFE.dev', undefined]}]))
+
+// //ARRAY BUILDERz
+
+// function arrayBuilder(obj) {
+//   let arr = []
+//   for(let [item,count] of Object.entries(obj)) {
+//     while(count > 0) {
+//       arr.push(item)
+//       count--
+//     }
+//   }
+//   return arr
+// }
+
+// // Uncomment these to check your work!
+// console.log(arrayBuilder({'cats': 2, 'dogs': 1})); // => ['cats', 'cats', 'dogs']
+// console.log(arrayBuilder({})); // => []
 
 
 // RULE IN ORDER
