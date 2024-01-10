@@ -17,6 +17,34 @@ root.left.right.left = new TreeNode(9)
 
 
 const amountOfTime = (root, start) => {
+    let amt = 0
+
+    function traverse(root,start) {
+        if(!root) return 0
+
+        let left = traverse(root.left,start)
+        let right = traverse(root.right,start)
+
+        if(root.val === start) {
+            amt = Math.max(left,right)
+            return -1
+        }
+        else if(left >= 0 && right >= 0) {
+            return Math.max(left,right) + 1
+        }
+        else {
+            amt = Math.max(amt,Math.abs(left - right))
+            return Math.min(left,right) - 1
+        }
+    }
+    traverse(root,start)
+    return amt
+}
+
+amountOfTime(root,4)
+
+/*
+const amountOfTime = (root, start) => {
     let amount = 0;
     const traverse = (root, start) => {
         if (!root) {
@@ -41,9 +69,6 @@ const amountOfTime = (root, start) => {
     return amount;
 }
 
-amountOfTime(root,3)
-
-/*
 const amountOfTime = (root,start) => {
     
     let time = 1
