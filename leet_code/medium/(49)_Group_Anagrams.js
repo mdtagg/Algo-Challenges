@@ -1,6 +1,24 @@
 
 
 var groupAnagrams = function(strs) {
+
+    let strMap = new Map()
+
+    for(let i = 0;i < strs.length;i++) {
+
+        let sortedStr = strs[i].split("").sort().join("")
+
+        !strMap.has(sortedStr) ? 
+        strMap.set(sortedStr,[strs[i]]) : 
+        strMap.set(sortedStr,[...strMap.get(sortedStr),strs[i]])
+    }
+    return Array.from(strMap.values())
+};
+
+console.log(groupAnagrams(["cab","tin","pew","duh","may","ill","buy","bar","max","doc"]))
+
+/*
+var groupAnagrams = function(strs) {
     const map = new Map()
     const anagrams = []
 
@@ -19,5 +37,4 @@ var groupAnagrams = function(strs) {
     }
     return anagrams
 };
-
-console.log(groupAnagrams(["a"]))
+*/
