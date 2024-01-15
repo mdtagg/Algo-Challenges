@@ -7,6 +7,21 @@ You can return the answer in any order.*/
 //REDO 1
 
 var twoSum = (nums,target) => {
+  let numMap = new Map()
+
+  for(let i = 0;i < nums.length;i++) {
+    let diff = target - nums[i]
+    if(numMap.has(diff)) {
+      return [numMap.get(diff),i]
+    }
+      numMap.set(nums[i],i)
+  }
+}
+
+console.log(twoSum([3,2,4],6))
+
+/*
+var twoSum = (nums,target) => {
   const map = new Map()
 
   for(let i = 0;i < nums.length;i++) {
@@ -17,8 +32,7 @@ var twoSum = (nums,target) => {
     map.set(nums[i],i)
   }
 }
-
-console.log(twoSum([3,2,4],6))
+*/
 
 
 
