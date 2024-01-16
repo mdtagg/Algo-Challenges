@@ -1,6 +1,4 @@
 
-
-
 // function undefinedToNull(arg) {
 //   return Array.isArray(arg) ? traverseArray(arg) : traverseObject(arg);
 // }
@@ -464,23 +462,23 @@ let topCard = ""
 // console.log(getDay()); // should log: 'Fri'
 
 // ADD CODE HERE
-// const saveOutput = (callback,str) => {
-//     let password = str
-//     let pastWords = {}
-//     return function(arg) {
-//       if(arg !== password) {
-//         pastWords[arg] = callback(arg)
-//         return pastWords[arg]
-//     }
-//         else return pastWords
-//     }
-//   }
+const saveOutput = (callback,str) => {
+    let password = str
+    let pastWords = {}
+    return function(arg) {
+      if(arg !== password) {
+        pastWords[arg] = callback(arg)
+        return pastWords[arg]
+    }
+        else return pastWords
+    }
+  }
 //   // Uncomment these to check your work!
-//   const multiplyBy2 = function(num) { return num * 2; };
-//   const multBy2AndLog = saveOutput(multiplyBy2, 'boo');
-//   console.log(multBy2AndLog(2)); // should log: 4
-//   console.log(multBy2AndLog(9)); // should log: 18
-//   console.log(multBy2AndLog('boo')); // should log: { 2: 4, 9: 18 }
+  const multiplyBy2 = function(num) { return num * 2; };
+  const multBy2AndLog = saveOutput(multiplyBy2, 'boo');
+  console.log(multBy2AndLog(2)); // should log: 4
+  console.log(multBy2AndLog(9)); // should log: 18
+  console.log(multBy2AndLog('boo')); // should log: { 2: 4, 9: 18 }
 
 // const after = (times,callback) => {
 
@@ -579,50 +577,17 @@ let topCard = ""
 
 //INVENTORY
 
-function Inventory(item, price) {
+// function Inventory(item, price) {
 
-    // return Object.create(Inventory.prototype,{
-    //     [item]: {
-    //         value: {
-    //             price: price,
-    //             quantity:1
-    //         }
-    //     }
-    // })
-
-   
-     return {
-      [item]: {
-        price:price,
-        quantity:1
-      },
-      addItem: (item,price) => {
-        if(item) {
-          item.quantity++
-          item.price = price
-        }else {
-          item = {
-            price:price,
-            quantity:1
-          }
-        }
-      }
-     }
-  }
-    
-    // this.prototype.addItem = function (item,price) {
-    //   if(this.obj[item]) {
-    //       this.obj[item].quantity++
-    //       this.obj[item].price = price
-    //   } else {
-    //       this.obj[item] = {
-    //           price:price,
-    //           quantity:1
-    //       }
-    //   }
-    // }
-//     return this.obj
-// }
+//     return Object.create(Inventory.prototype,{
+//         [item]: {
+//             value: {
+//                 price: price,
+//                 quantity:1
+//             }
+//         }
+//     })
+//   }
 
 // Inventory.prototype.addItem = function(item,price) {
 //     if(this[item]) {
@@ -636,28 +601,28 @@ function Inventory(item, price) {
 //     }
 // }
 
-Inventory.prototype.deleteItem = function(item) {
-    if(this[item].quantity === 0) {
-        return "Nothing to delete"
-    }else {
-        this[item].quantity--
-        return "Deleted"
-    }
-}
+// Inventory.prototype.deleteItem = function(item) {
+//     if(this[item].quantity === 0) {
+//         return "Nothing to delete"
+//     }else {
+//         this[item].quantity--
+//         return "Deleted"
+//     }
+// }
 
-Inventory.prototype.checkItem = function(item) {
-    if(this[item]) return this[item]
-    return "Item is not in inventory"
-}
+// Inventory.prototype.checkItem = function(item) {
+//     if(this[item]) return this[item]
+//     return "Item is not in inventory"
+// }
 
-const myInventory = new Inventory('cucumber', 2);
+// const myInventory = new Inventory('cucumber', 2);
+// // console.log(myInventory)
+// console.log(myInventory.addItem("test",1))
+// myInventory.addItem('cucumber',5)
+// // myInventory.addItem('banana',2)
+// // myInventory.deleteItem('banana')
+// // console.log(myInventory.checkItem('toast'))
 // console.log(myInventory)
-console.log(myInventory.addItem("test",1))
-myInventory.addItem('cucumber',5)
-// myInventory.addItem('banana',2)
-// myInventory.deleteItem('banana')
-// console.log(myInventory.checkItem('toast'))
-console.log(myInventory)
 
 // this.obj = Object.create(Inventory.prototype,{
         
