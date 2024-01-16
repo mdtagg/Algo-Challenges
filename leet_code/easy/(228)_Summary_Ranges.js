@@ -6,11 +6,9 @@ const summaryRanges = (nums) => {
 
     for(let right = 0;right < nums.length;right++) {
         if(nums[right] + 1 == nums[right + 1]) continue;
-        if(left == right) {
-            result.push(`${nums[left]}`)
-        }else {
-            result.push(`${nums[left]}->${nums[right]}`)
-        }
+        left === right ? 
+        result.push(`${nums[left]}`) :
+        result.push(`${nums[left]}->${nums[right]}`)
         left = right + 1
     }
     return result
