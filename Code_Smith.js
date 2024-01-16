@@ -1,13 +1,4 @@
 
-function curriedJoin(fn) {
-  let [args] = fn
-  return join(args + fn)
-}
-
-function join(args) {
-  
-}
-curriedJoin(1)(2, 3)
 
 
 // function undefinedToNull(arg) {
@@ -38,7 +29,7 @@ curriedJoin(1)(2, 3)
 //   return obj
 // }
 
-console.log(undefinedToNull(['BFE.dev', undefined, null, {a: ['BFE.dev', undefined]}]))
+// console.log(undefinedToNull(['BFE.dev', undefined, null, {a: ['BFE.dev', undefined]}]))
 
 // //ARRAY BUILDERz
 
@@ -62,16 +53,51 @@ console.log(undefinedToNull(['BFE.dev', undefined, null, {a: ['BFE.dev', undefin
 
 // Add code here
 // function runInOrder(funcs,arr) {
-//   if(!funcs.length) {
-//     return
-//   }
+
+//   if(!funcs.length) return;
+  
 //   setTimeout(() => {
-//     let func = funcs.shift()
-//     func()
+//     (funcs.shift())()
 //     runInOrder(funcs,arr)
 //   },arr.shift())
 // }
 // // /* Uncomment the following lines and click 'run' to test your work */
+
+// function runInOrder(funcs,times) {
+//   let totalTime = 0
+
+//   for(let i = 0;i < funcs.length;i++) {
+//     totalTime += times[i]
+//     setTimeout(funcs[i],totalTime)
+//   }
+// }
+
+// async function runInOrder(funcs,times) {
+//   async function runFunc() {
+//     return new Promise((resolve) => {
+      
+//       setTimeout(() => {
+
+//         resolve(funcs.shift())
+
+//       },times.shift())
+//     })
+//   }
+
+//   while(funcs.length) {
+//     const func = await runFunc()
+//     func()
+//   }
+// }
+
+/*
+  define variable total time that will increment its total by each time value in our times array
+
+  invoke a for loop starting at index 0 and continuing to the end of our funcs array
+    add each time to our totalTime variable 
+    invoke a setTimeout function that calls the function at our current index after the time in our total time variable
+
+*/
 
 // function sayHi() {
 //   console.log('hi');
@@ -84,6 +110,7 @@ console.log(undefinedToNull(['BFE.dev', undefined, null, {a: ['BFE.dev', undefin
 // }
 
 // runInOrder([sayHi, sayBye, sayHowdy], [200, 100, 300]);
+
 
 //LIMITED INTERVAL
 
@@ -111,7 +138,7 @@ console.log(undefinedToNull(['BFE.dev', undefined, null, {a: ['BFE.dev', undefin
 // ajaxSimulate(1,storeData)
 // console.log(dataReceived)
 
-//for Each Async
+//FOR EACH ASYNC
 
 // Add code here
 // const delays = [200,500,0,350]
@@ -131,7 +158,7 @@ console.log(undefinedToNull(['BFE.dev', undefined, null, {a: ['BFE.dev', undefin
 // forEach(delays,delayLog)
 
 
-// //CASCADE
+// CASCADE
 
 // function cascade(number) {
 //   let num = number % 10
@@ -550,16 +577,51 @@ let topCard = ""
 // buenoBell.closeStore('Maui'); // Should log 'Bueno Bell doesn't have a store in Maui.'
 
 
-// function Inventory(item, price) {
+//INVENTORY
 
-//     return Object.create(Inventory.prototype,{
-//         [item]: {
-//             value: {
-//                 price: price,
-//                 quantity:1
-//             }
-//         }
-//     })
+function Inventory(item, price) {
+
+    // return Object.create(Inventory.prototype,{
+    //     [item]: {
+    //         value: {
+    //             price: price,
+    //             quantity:1
+    //         }
+    //     }
+    // })
+
+   
+     return {
+      [item]: {
+        price:price,
+        quantity:1
+      },
+      addItem: (item,price) => {
+        if(item) {
+          item.quantity++
+          item.price = price
+        }else {
+          item = {
+            price:price,
+            quantity:1
+          }
+        }
+      }
+     }
+  }
+    
+    // this.prototype.addItem = function (item,price) {
+    //   if(this.obj[item]) {
+    //       this.obj[item].quantity++
+    //       this.obj[item].price = price
+    //   } else {
+    //       this.obj[item] = {
+    //           price:price,
+    //           quantity:1
+    //       }
+    //   }
+    // }
+//     return this.obj
 // }
 
 // Inventory.prototype.addItem = function(item,price) {
@@ -574,27 +636,28 @@ let topCard = ""
 //     }
 // }
 
-// Inventory.prototype.deleteItem = function(item) {
-//     if(this[item].quantity === 0) {
-//         return "Nothing to delete"
-//     }else {
-//         this[item].quantity--
-//         return "Deleted"
-//     }
-// }
+Inventory.prototype.deleteItem = function(item) {
+    if(this[item].quantity === 0) {
+        return "Nothing to delete"
+    }else {
+        this[item].quantity--
+        return "Deleted"
+    }
+}
 
-// Inventory.prototype.checkItem = function(item) {
-//     if(this[item]) return this[item]
-//     return "Item is not in inventory"
-// }
+Inventory.prototype.checkItem = function(item) {
+    if(this[item]) return this[item]
+    return "Item is not in inventory"
+}
 
-// const myInventory = new Inventory('cucumber', 2);
-// // console.log(myInventory)
-// myInventory.addItem('cucumber',5)
-// // myInventory.addItem('banana',2)
-// // myInventory.deleteItem('banana')
-// // console.log(myInventory.checkItem('toast'))
+const myInventory = new Inventory('cucumber', 2);
 // console.log(myInventory)
+console.log(myInventory.addItem("test",1))
+myInventory.addItem('cucumber',5)
+// myInventory.addItem('banana',2)
+// myInventory.deleteItem('banana')
+// console.log(myInventory.checkItem('toast'))
+console.log(myInventory)
 
 // this.obj = Object.create(Inventory.prototype,{
         
