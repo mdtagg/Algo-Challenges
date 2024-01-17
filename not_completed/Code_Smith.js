@@ -1,3 +1,20 @@
+function shuffleCards(top,bottom) {
+  let cards = []
+  function shuffle(top,bottom) {
+    if(!top.length) cards.push(...bottom);
+    if(!bottom.length) cards.push(...top);
+    else {
+      cards.push(top.shift())
+      cards.push(bottom.shift())
+      shuffle(top,bottom)
+    }
+  }
+  shuffle(top,bottom)
+  return cards
+}
+
+shuffleCards(['Queen of Diamonds', 'Five of Hearts', 'Ace of Spades', 'Eight of Clubs'],['Jack of Hearts', 'Ten of Spades'])
+
 
 // function undefinedToNull(arg) {
 //   return Array.isArray(arg) ? traverseArray(arg) : traverseObject(arg);
@@ -192,7 +209,7 @@ function cascade(number,idx=0,pastNums=[]) {
     cascade(number * 10,++idx,pastNums)
   }
 }
-*/
+
 
 
 //SHUFFLE
@@ -206,7 +223,21 @@ function cascade(number,idx=0,pastNums=[]) {
 //   return cards
 // }
 // console.log(shuffleCards(['Queen of Diamonds', 'Five of Hearts', 'Ace of Spades', 'Eight of Clubs'],['Jack of Hearts', 'Ten of Spades']))
-/*
+
+
+function shuffleCards(top,bottom) {
+    let cards = []
+    function shuffle(top,bottom) {
+      if(!top.length) cards.push(...bottom);
+      if(!bottom.length) cards.push(...top);
+      else {
+        cards.push(top.shift())
+        cards.push(bottom.shift())
+        shuffleCards(top,bottom)
+      }
+    }
+    return cards
+  }
 
 const shuffleCards = (topHalf,bottomHalf) => {
 
@@ -360,21 +391,21 @@ let topCard = ""
 
 //CENSOR
 
-// const censor = () => {
-//   let cache = {}
-//   return function(...args) {
-//     if(args.length === 2) {
-//       cache[args[0]] = args[1]
-//     }else {
-//       let [word] = args
-//       let keys = Object.keys(cache)
-//       for(let i = 0;i < keys.length;i++) {
-//         word = word.replace(keys[i],cache[keys[i]])
-//       }
-//       return word
-//     }
-//   }
-// }
+const censor = () => {
+  let cache = {}
+  return function(...args) {
+    if(args.length === 2) {
+      cache[args[0]] = args[1]
+    }else {
+      let [word] = args
+      let keys = Object.keys(cache)
+      for(let i = 0;i < keys.length;i++) {
+        word = word.replace(keys[i],cache[keys[i]])
+      }
+      return word
+    }
+  }
+}
 
 // const changeScene = censor();
 // changeScene('dogs', 'cats');
@@ -465,7 +496,7 @@ let topCard = ""
 const saveOutput = (callback,str) => {
     let password = str
     let pastWords = {}
-    return function(arg) {
+    return function(arg) {https://stackoverflow.com/jobs/companies?so_medium=superuser&so_source=SiteNav
       if(arg !== password) {
         pastWords[arg] = callback(arg)
         return pastWords[arg]
