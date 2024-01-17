@@ -1,6 +1,6 @@
 
 
-const uniqueOccurances = (arr) => {
+const uniqueOccurrences = (arr) => {
     //initialize instance of map object
     let uniqueOccurancesMap = new Map()
     //iterate through our array
@@ -26,7 +26,6 @@ const uniqueOccurances = (arr) => {
 
         //if we have not returned false return true
         return true
-        
 }
 
-uniqueOccurances([1,2,2,1,1,3])
+uniqueOccurrences([1,2,2,1,1,3])
