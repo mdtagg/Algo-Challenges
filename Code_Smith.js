@@ -1,19 +1,63 @@
-function shuffleCards(top,bottom) {
-  let cards = []
-  function shuffle(top,bottom) {
-    if(!top.length) cards.push(...bottom);
-    if(!bottom.length) cards.push(...top);
-    else {
-      cards.push(top.shift())
-      cards.push(bottom.shift())
-      shuffle(top,bottom)
+
+
+function List() {
+  
+  return Object.create(List.prototype,{
+    list: {
+      value: {}
+    },
+    length: {
+      writable:true,
+      value:0
     }
-  }
-  shuffle(top,bottom)
-  return cards
+  })
+
 }
 
-shuffleCards(['Queen of Diamonds', 'Five of Hearts', 'Ace of Spades', 'Eight of Clubs'],['Jack of Hearts', 'Ten of Spades'])
+List.prototype.add = function(arg) {
+  this.list[this.length] = arg
+  this.length++
+  return length
+}
+const myList = new List()
+myList.add("test")
+myList.add("testTwo")
+
+console.log(myList)
+
+// function findIndex(array,value,idx=0) {
+//   if(idx === array.length) return -1;
+//   if(array[idx] === value) return idx
+//   let nextIdx = findIndex(array,value,++idx)
+//   return nextIdx
+// }
+
+// console.log(findIndex([1,1, 2, 3, 4, 5, 3], 10))
+
+// function shuffleCards(top,bottom) {
+//   let cards = []
+//   function shuffle(top,bottom) {
+//     if(!top.length) cards.push(...bottom);
+//     if(!bottom.length) cards.push(...top);
+//     else {
+//       cards.push(top.shift())
+//       cards.push(bottom.shift())
+//       shuffle(top,bottom)
+//     }
+//   }
+//   shuffle(top,bottom)
+//   return cards
+// }
+
+// const shuffleCards = (topHalf,bottomHalf,idx=0) => {
+//   let cards = []
+//   if(topHalf.length) cards.push(topHalf.shift())
+//   if(bottomHalf.length) cards.push(bottomHalf.shift())
+//   if(topHalf.length || bottomHalf.length) cards.push(...shuffleCards(topHalf,bottomHalf))
+//   return cards
+// }
+
+// console.log(shuffleCards(['Queen of Diamonds', 'Five of Hearts', 'Ace of Spades', 'Eight of Clubs'],['Jack of Hearts', 'Ten of Spades']))
 
 
 // function undefinedToNull(arg) {
@@ -391,21 +435,21 @@ let topCard = ""
 
 //CENSOR
 
-const censor = () => {
-  let cache = {}
-  return function(...args) {
-    if(args.length === 2) {
-      cache[args[0]] = args[1]
-    }else {
-      let [word] = args
-      let keys = Object.keys(cache)
-      for(let i = 0;i < keys.length;i++) {
-        word = word.replace(keys[i],cache[keys[i]])
-      }
-      return word
-    }
-  }
-}
+// const censor = () => {
+//   let cache = {}
+//   return function(...args) {
+//     if(args.length === 2) {
+//       cache[args[0]] = args[1]
+//     }else {
+//       let [word] = args
+//       let keys = Object.keys(cache)
+//       for(let i = 0;i < keys.length;i++) {
+//         word = word.replace(keys[i],cache[keys[i]])
+//       }
+//       return word
+//     }
+//   }
+// }
 
 // const changeScene = censor();
 // changeScene('dogs', 'cats');
@@ -493,23 +537,23 @@ const censor = () => {
 // console.log(getDay()); // should log: 'Fri'
 
 // ADD CODE HERE
-const saveOutput = (callback,str) => {
-    let password = str
-    let pastWords = {}
-    return function(arg) {https://stackoverflow.com/jobs/companies?so_medium=superuser&so_source=SiteNav
-      if(arg !== password) {
-        pastWords[arg] = callback(arg)
-        return pastWords[arg]
-    }
-        else return pastWords
-    }
-  }
-//   // Uncomment these to check your work!
-  const multiplyBy2 = function(num) { return num * 2; };
-  const multBy2AndLog = saveOutput(multiplyBy2, 'boo');
-  console.log(multBy2AndLog(2)); // should log: 4
-  console.log(multBy2AndLog(9)); // should log: 18
-  console.log(multBy2AndLog('boo')); // should log: { 2: 4, 9: 18 }
+// const saveOutput = (callback,str) => {
+//     let password = str
+//     let pastWords = {}
+//     return function(arg) {https://stackoverflow.com/jobs/companies?so_medium=superuser&so_source=SiteNav
+//       if(arg !== password) {
+//         pastWords[arg] = callback(arg)
+//         return pastWords[arg]
+//     }
+//         else return pastWords
+//     }
+//   }
+// //   // Uncomment these to check your work!
+//   const multiplyBy2 = function(num) { return num * 2; };
+//   const multBy2AndLog = saveOutput(multiplyBy2, 'boo');
+//   console.log(multBy2AndLog(2)); // should log: 4
+//   console.log(multBy2AndLog(9)); // should log: 18
+//   console.log(multBy2AndLog('boo')); // should log: { 2: 4, 9: 18 }
 
 // const after = (times,callback) => {
 
