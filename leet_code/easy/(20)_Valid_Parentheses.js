@@ -1,26 +1,22 @@
 
 const isValid = (s) => {
-  //create an object with the keys being the right parens and vals being left
+
   const validParens = {
     ")" : "(",
     "]" : "[",
     "}" : "{"
   }
 
-  //create an array which will be our stack to compare parens
   const stack = []
 
-  //iterate through our s string
   for(let i = 0;i < s.length;i++) {
     if(validParens[s[i]]) {
-      while(stack.length) {
         if(validParens[s[i]] !== stack.pop()) return false;
-      }
     }else {
       stack.push(s[i])
     }
   }
-  return true
+return stack.length ? false : true
 }
 
 isValid("{[]}")
