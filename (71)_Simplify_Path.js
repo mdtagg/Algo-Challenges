@@ -17,7 +17,6 @@ const simplifyPath = (path) => {
         }
     }
     return "/" + stack.join('/')
-
 }
 
 const testCases = [
