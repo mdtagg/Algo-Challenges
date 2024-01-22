@@ -1,21 +1,24 @@
 
 
 var rob = function(nums) {
-    let rob = 0;
-    let norob = 0;
-    for (let i = 0; i < nums.length; i++) {
-        let newRob = norob + nums[i];
-        let newNoRob = Math.max(norob, rob);
-        rob = newRob;
-        norob = newNoRob;
+
+    let rob = 0
+    let stopRob = 0
+
+    for(let i = 0;i < nums.length;i++) {
+        let newRob = nums[i] + stopRob
+        let newStopRob = Math.max(rob,stopRob)
+        rob = newRob 
+        stopRob = newStopRob
     }
-    return Math.max(rob, norob);
+    return Math.max(rob,stopRob)
 };
 
 rob([1,3,1,3,100,8,9])
 
 /*
-[1,2,3,4,5,6,7,8,9]
+comparing the max value of the sequence of robberies to the max value 
+of a robery that would force us to stop robbing
 
 var rob = function(nums) {
     let rob = 0;
