@@ -1,6 +1,45 @@
 
 
 var calculate = function(s) {
+
+    let stack = [1]
+    let sum = 0
+    let result = 0
+    let sign = 1
+    
+    function isDigit(ch) {
+        return ch >= "0" && ch <= "9" ? true : false;
+    }
+
+    for(let i = 0;i < s.length;i++) {
+        if(isDigit(s[i])) sum = sum * 10 + (s[i] - "0")
+        else {
+            result += sum * sign * stack[stack.length - 1]
+            sum = 0
+            if(s[i] === "-") sign = -1;
+            if(s[i] === "+") sign = 1;
+            if(s[i] === "(") {
+                stack.push(stack[stack.length - 1]) * sign;
+                sign = 1;
+            }
+            if(s[i] === ")") stack.pop()
+        } 
+    }
+    return result += sign * sum
+};
+
+const testCases = [
+    "(1-11)",
+    "-2+ 1",
+    "1-(     -2)",
+    "2147483647",
+    "(1+(4+5+2)-3)+(6+8)"
+]
+
+console.log(calculate(testCases[0]))
+
+/*
+var calculate = function(s) {
     let res = 0, sum = 0, sign = 1;
     let myStack = [];
     myStack.push(1);
@@ -8,7 +47,6 @@ var calculate = function(s) {
         return ch >= '0' && ch <= '9';
     }
     for(let ch of s){
-        
         if(isDigit(ch)) sum = sum * 10 + (ch - '0');
         else{
             res += sum * sign * myStack[myStack.length - 1];
@@ -22,17 +60,6 @@ var calculate = function(s) {
     return res += (sign * sum);
 };
 
-const testCases = [
-    "1-11",
-    "-2+ 1",
-    "1-(     -2)",
-    "2147483647",
-    "(1+(4+5+2)-3)+(6+8)"
-]
-
-console.log(calculate(testCases[4]))
-
-/*
  if(expression[i] === "+" || expression[i] === "-") {
             if(!operand) operand = expression[i]
             else {
