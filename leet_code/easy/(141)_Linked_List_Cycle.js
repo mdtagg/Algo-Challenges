@@ -27,8 +27,24 @@ const node2 = new ListNode(2,node3)
 const l1 = new ListNode(3,node2)
 node4.next = node2
 
+// const l1 = new ListNode(1,null)
+
 const hasCycle = (head) => {
-    let slow = head
+    let fast = head
+
+    while(fast && fast.next) {
+        head = head.next
+        fast = fast.next.next
+        if(head === fast) return true
+    }
+    return false
+}
+
+console.log(hasCycle(l1))
+
+/*
+
+let slow = head
     let fast = head 
 
     while(fast && fast.next) {
@@ -40,11 +56,6 @@ const hasCycle = (head) => {
         }
     }
     return false
-}
-
-hasCycle(l1)
-
-/*
 PERFORMANCE SOLUTION
 
 let slow = head
