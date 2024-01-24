@@ -8,7 +8,7 @@ var calculate = function(s) {
     let sign = 1
     
     function isDigit(ch) {
-        return ch >= "0" && ch <= "9" ? true : false;
+        return ch >= "0" && ch <= "9";
     }
 
     for(let i = 0;i < s.length;i++) {
@@ -19,7 +19,7 @@ var calculate = function(s) {
             if(s[i] === "-") sign = -1;
             if(s[i] === "+") sign = 1;
             if(s[i] === "(") {
-                stack.push(stack[stack.length - 1]) * sign;
+                stack.push(stack[stack.length - 1] * sign);
                 sign = 1;
             }
             if(s[i] === ")") stack.pop()
