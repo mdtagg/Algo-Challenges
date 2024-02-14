@@ -24,26 +24,157 @@ leading zero, except the number 0 itself.
  * @return {ListNode}
  */
 
-function ListNode(val, next) {
-    this.val = (val===undefined ? 0 : val)
-    this.next = (next===undefined ? null : next)
+function ListNode(val,next) {
+    this.val = val || 0
+    this.next = next || null
 }
 
-const node3 = new ListNode(3)
-const node2 = new ListNode(4,node3)
-const l1 = new ListNode(2,node2)
+const n3 = new ListNode(3)
+const n2 = new ListNode(4,n3)
+const l1 = new ListNode(2,n2)
 
-const n3 = new ListNode(4)
-const n2 = new ListNode(6,n3)
-const l2 = new ListNode(5,n2)
+const node3 = new ListNode(4)
+const node2 = new ListNode(6,node3)
+const l2 = new ListNode(5,node2)
 
-var addTwoNumbers = function(l1, l2) {
-    
-    let dummy = new ListNode()
-    let pointer = dummy 
+
+const addTwoNumbers = (l1,l2) => {
+
+    let mover = new ListNode()
+    let pointer = mover
     let carry = 0
 
     while(l1 || l2 || carry) {
+
+        let val1 = 0
+        let val2 = 0
+    
+        if(l1) {
+            val1 = l1.val 
+            l1 = l1.next
+        }
+    
+        if(l2) {
+            val2 = l2.val 
+            l2 = l2.next
+        }
+
+        let sum = val1 + val2 + carry
+        let digit = sum % 10
+        carry = Math.floor(sum / 10)
+
+        let newNode = new ListNode(digit)
+        mover.next = newNode
+        mover = newNode
+        
+    }
+    return pointer.next
+}
+
+console.log(addTwoNumbers(l1,l2))
+
+
+// function ListNode(val, next) {
+//     this.val = (val===undefined ? 0 : val)
+//     this.next = (next===undefined ? null : next)
+// }
+
+// const node3 = new ListNode(3)
+// const node2 = new ListNode(4,node3)
+// const l1 = new ListNode(2,node2)
+
+// const n3 = new ListNode(4)
+// const n2 = new ListNode(6,n3)
+// const l2 = new ListNode(5,n2)
+
+// var addTwoNumbers = function(l1, l2) {
+    
+//     let dummy = new ListNode()
+//     let pointer = dummy 
+//     let carry = 0
+
+//     while(l1 || l2 || carry) {
+//         let val1 = 0
+//         let val2 = 0
+
+//         if(l1) {
+//             val1 = l1.val 
+//             l1 = l1.next
+//         }
+
+//         if(l2) {
+//             val2 = l2.val 
+//             l2 = l2.next
+//         }
+
+//         let sum = val1 + val2 + carry 
+//         let digit = sum % 10
+//         carry = Math.floor(sum / 10)
+
+//         let newNode = new ListNode(digit)
+//         dummy.next = newNode 
+//         dummy = newNode
+//     }
+//     return pointer.next
+// }
+// addTwoNumbers(l1,l2)
+
+
+
+
+
+
+
+/*
+
+REDO 5 (FAIL)
+
+// const addTwo = (l1,l2) => {
+
+//     let head = new ListNode()
+//     // let pointer = head
+
+//     function traverseList(l1,l2,carry=0) {
+
+//         if(!l1 && !l2) return null
+
+//         let val1 = 0
+//         let val2 = 0
+    
+//         if(l1) {
+//             val1 = l1.val 
+//         }
+//         if(l2) {
+//             val2 = l2.val 
+//         }
+    
+//         let sum = val1 + val2 + carry
+//         let pointer = new ListNode()
+
+//         if(sum > 9) {
+//             // result.unshift(sum % 10)
+//             pointer.val = sum % 10
+//             pointer.next = traverseList(l1.next,l2.next,sum - 9)
+//             head.next = pointer
+
+//         }else if(sum > 0) {
+//             pointer.val = sum
+//             pointer.next = traverseList(l1.next,l2.next)
+//             head.next = pointer
+
+//         }
+//         return pointer
+//     }
+//     traverseList(l1,l2)
+//     return head
+// }
+
+const dummy = new ListNode()
+    const pointer = dummy
+    let carry = 0
+
+    while(l1 || l2 || carry) {
+
         let val1 = 0
         let val2 = 0
 
@@ -66,16 +197,7 @@ var addTwoNumbers = function(l1, l2) {
         dummy = newNode
     }
     return pointer.next
-}
-addTwoNumbers(l1,l2)
 
-
-
-
-
-
-
-/*
 REDOS 4
 
 PERFORMANCE SOLUTION

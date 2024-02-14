@@ -34,23 +34,6 @@ var largestDivisibleSubset = function(nums) {
 console.log(largestDivisibleSubset([1,2,4,8]))
 
 /*
- let max = 1
-    let left = 0
-    let right = 1
-    let result = 0
 
-    while(left < nums.length - 1) {
-        if(nums[left] === nums[right] || nums[right] % nums[left] === 0) {
-            max++
-        }else {
-            result = Math.max(max,result)
-            max = 1
-            left++
-            right = left + 1
-        }
-        right++
-    }
-    
-
-    return result
+ 
 */
