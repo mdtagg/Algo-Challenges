@@ -1,0 +1,16 @@
+{
+  "name": "algo-challenges",
+  "version": "1.0.0",
+  "description": "",
+  "main": "(21)_Merge_Two_Lists.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "yallist": "^4.0.0"
+  },
+  "type":"module"
+}

@@ -1,17 +1,12 @@
-/*
-You are given the heads of two sorted linked lists list1 and list2.
-
-Merge the two lists in a one sorted list. The list should be made by
-splicing together the nodes of the first two lists.
-
-Return the head of the merged linked list.
-*/
 
 function ListNode(val, next) {
     this.val = (val===undefined ? 0 : val)
     this.next = (next===undefined ? null : next)
 }
 
+const yallist = require('yallist')
+const l1Test = yallist.create([1,2,4])
+console.log(l1Test.head)
 const node3 = new ListNode(4)
 const node2 = new ListNode(2,node3)
 const l1 = new ListNode(1,node2)
@@ -47,6 +42,15 @@ var mergeTwoLists = function(l1, l2) {
 
 
 console.log(mergeTwoLists(l1,l2))
+
+/*
+You are given the heads of two sorted linked lists list1 and list2.
+
+Merge the two lists in a one sorted list. The list should be made by
+splicing together the nodes of the first two lists.
+
+Return the head of the merged linked list.
+*/
 
 // - In this challenge we are using recursion to merge the two lists
 // - We do this by redefining what the next value in the linked list is on each recursion. 
