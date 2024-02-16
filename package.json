@@ -11,6 +11,5 @@
   "license": "ISC",
   "dependencies": {
     "yallist": "^4.0.0"
-  },
-  "type":"module"
+  }
 }
