@@ -1,55 +1,96 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+
+const yallist = require('yallist')
+const myList = yallist.create([1,2,3,4,5]).head
+
 function ListNode(val, next) {
     this.val = (val===undefined ? 0 : val)
     this.next = (next===undefined ? null : next)
 }
 
-const yallist = require('yallist')
-const myList = yallist.create([1,1]).head
+const rotateRight = (head,k) => {
 
-const deleteDuplicates = (head) => {
-
-    if(!head || !head.next) return head
+    if(!head || !head.next) return head 
 
     let result = new ListNode()
     let resultPointer = result
-
-    while(head) {
-        let val = head.value
-        if(head.next && head.value === head.next.value) {
-            while(head.next && head.next.value === val) head = head.next;
-        }else {
-            result.next = new ListNode(head.value)
-            result = result.next
+    let pointer = head
+    let len = 0
+     
+    while(pointer) {
+        len++
+        if(pointer.next === null) {
+            pointer.next = head 
+            break
         }
-        head = head.next
+        pointer = pointer.next
     }
-    return resultPointer
 
+    pointer = head
+
+    let rotations = len - k 
+    if(k > len) rotations = len - (k % len)
+
+    while(rotations) {
+        pointer = pointer.next
+        rotations--
+    }
+
+    while(len > 0) {
+        result.next = new ListNode(pointer.value)
+        result = result.next
+        pointer = pointer.next
+        len--
+    }
+    
+    // pointer = head 
+
+    // let tail = pointer.next
+    // pointer.next = null 
+    // result.next = tail 
+
+
+    
 }
 
-deleteDuplicates(myList)
+rotateRight(myList,2)
 
 /*
-const deleteDuplicates = (head) => {
+if(!head || !head.next) return head 
 
-    if(!head || !head.next) return head
+    let reverseNodes = new ListNode()
+    let pointer = head
+    let len = 0
 
-    let result = new ListNode()
-    result.next = head
-    let resultPointer = result
-    let prev = result
-
-    while(prev.next) {
-        let current = prev.next
-        if(prev.value !== prev.next.value) {
-            result.next = current
-            result = result.next
-        }
-        prev = prev.next
+    while(pointer) {
+        let nextNode = new ListNode(pointer.value)
+        nextNode.next = reverseNodes.next
+        reverseNodes.next = nextNode
+        len++
+        pointer = pointer.next
     }
-    return resultPointer
-}
+
+    let newResult = new ListNode()
+    let newResultPointer = newResult
+    reverseNodes = reverseNodes.next
+    let start = head
+    let rotations = k
+    if(k > len) rotations = k % len
+
+    while(reverseNodes) {
+        if(rotations > 0) {
+            newResult.next = new ListNode(reverseNodes.val)
+        }
+        else {
+            newResult.next = new ListNode(start.value)
+            start = start.next
+        }
+        newResult = newResult.next
+        reverseNodes = reverseNodes.next
+        rotations--
+    }
+    newResult.next = start
+    return newResultPointer.next
 */
 },{"yallist":3}],2:[function(require,module,exports){
 'use strict'
