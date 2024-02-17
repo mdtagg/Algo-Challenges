@@ -1,86 +1,55 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-
-const yallist = require('yallist')
-const myList = yallist.create([1,2,3,4,5,6,7,8]).head
-
 function ListNode(val, next) {
     this.val = (val===undefined ? 0 : val)
     this.next = (next===undefined ? null : next)
 }
-const reverseBetween = (head,left,right) => {
 
-    if(!head || left === right) return head
+const yallist = require('yallist')
+const myList = yallist.create([1,1]).head
 
-    let result = new ListNode()
-    result.next = head 
-    let prev = result
+const deleteDuplicates = (head) => {
 
-    for(let i = 0;i < left - 1;++i) {
-        prev = prev.next
-    }
+    if(!head || !head.next) return head
 
-    let current = prev.next
-
-    for(let i = 0;i < right - left;++i) {
-        const nextNode = current.next
-        current.next = nextNode.next 
-        nextNode.next = prev.next 
-        prev.next = nextNode
-    }
-    return result.next
-}
-
-reverseBetween(myList,2,6)
-
-/*
-
-const reverseBetween = (head,left,right) => {
-
-    left -= 1
-    right -= 1
     let result = new ListNode()
     let resultPointer = result
-    let pointer = head 
 
-    while(left) {
-        result.next = new ListNode(pointer.value)
-        result = result.next
-        pointer = pointer.next
-        left--
+    while(head) {
+        let val = head.value
+        if(head.next && head.value === head.next.value) {
+            while(head.next && head.next.value === val) head = head.next;
+        }else {
+            result.next = new ListNode(head.value)
+            result = result.next
+        }
+        head = head.next
     }
-    while(right) {
-        let prevNode = new ListNode(pointer.value)
-        prevNode.next = result.next || null
-        result.next = prevNode
-        pointer = pointer.next
-        right--
-    }
-    while(result.next) {
-        result = result.next
-    }
-    result.next = pointer
     return resultPointer
+
 }
 
-if(!head || left === right) return head
+deleteDuplicates(myList)
+
+/*
+const deleteDuplicates = (head) => {
+
+    if(!head || !head.next) return head
 
     let result = new ListNode()
-    result.next = head 
+    result.next = head
+    let resultPointer = result
     let prev = result
 
-    for(let i = 0;i < left - 1;++i) {
+    while(prev.next) {
+        let current = prev.next
+        if(prev.value !== prev.next.value) {
+            result.next = current
+            result = result.next
+        }
         prev = prev.next
     }
-
-    let current = prev.next
-
-    for(let i = 0;i < right - left;++i) {
-        const nextNode = current.next
-        current.next = nextNode.next 
-        nextNode.next = prev.next 
-        prev.next = nextNode
-    }
-    return result.next
+    return resultPointer
+}
 */
 },{"yallist":3}],2:[function(require,module,exports){
 'use strict'
