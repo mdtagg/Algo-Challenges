@@ -1,133 +1,87 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 
+const yallist = require('yallist')
+const myList = yallist.create([1,2,3,4,5,6,7,8]).head
+
 function ListNode(val, next) {
     this.val = (val===undefined ? 0 : val)
     this.next = (next===undefined ? null : next)
 }
+const reverseBetween = (head,left,right) => {
 
-const yallist = require('yallist')
-const l1 = yallist.create([1,2,4])
-const l2 = yallist.create([1,3,4])
+    if(!head || left === right) return head
 
+    let result = new ListNode()
+    result.next = head 
+    let prev = result
 
-var mergeTwoLists = function(l1, l2) {
-    
-    let mover = new ListNode()
-    let pointer = mover 
-
-    while(l1 && l2) {
-        if(l1.value <= l2.value) {
-            mover.next = l1 
-            mover = mover.next
-            l1 = l1.next
-        }
-        else {
-            mover.next = l2 
-            mover = mover.next 
-            l2 = l2.next
-        }
-    }
-    if(!l1) mover.next = l2;
-    if(!l2) mover.next = l1;
-
-    return pointer.next
-};
-
-
-
-console.log(mergeTwoLists(l1.head,l2.head))
-
-/*
-You are given the heads of two sorted linked lists list1 and list2.
-
-Merge the two lists in a one sorted list. The list should be made by
-splicing together the nodes of the first two lists.
-
-Return the head of the merged linked list.
-*/
-
-// - In this challenge we are using recursion to merge the two lists
-// - We do this by redefining what the next value in the linked list is on each recursion. 
-// - The first equality comparison chooses what the head of the linked list will be and then 
-//  each recursion resets the value of .next until we hit the tail of the list. 
-
-/*
-if(!l1) return l2
-    else if(!l2) return l1
-    else if(l1.val <= l2.val) {
-        l1.next = mergeTwoLists(l1.next,l2)
-        return l1 
-    } else {
-        l2.next = mergeTwoLists(l1,l2.next) 
-        return l2
+    for(let i = 0;i < left - 1;++i) {
+        prev = prev.next
     }
 
-// const node3 = new ListNode(4)
-// const node2 = new ListNode(2,node3)
-// const l1 = new ListNode(1,node2)
-// const node2_3 = new ListNode(4)
-// const node2_2 = new ListNode(3,node2_3)
-// const l2 = new ListNode(1,node2_2)
+    let current = prev.next
+
+    for(let i = 0;i < right - left;++i) {
+        const nextNode = current.next
+        current.next = nextNode.next 
+        nextNode.next = prev.next 
+        prev.next = nextNode
+    }
+    return result.next
+}
+
+reverseBetween(myList,2,6)
+
+/*
+
+const reverseBetween = (head,left,right) => {
+
+    left -= 1
+    right -= 1
+    let result = new ListNode()
+    let resultPointer = result
+    let pointer = head 
+
+    while(left) {
+        result.next = new ListNode(pointer.value)
+        result = result.next
+        pointer = pointer.next
+        left--
+    }
+    while(right) {
+        let prevNode = new ListNode(pointer.value)
+        prevNode.next = result.next || null
+        result.next = prevNode
+        pointer = pointer.next
+        right--
+    }
+    while(result.next) {
+        result = result.next
+    }
+    result.next = pointer
+    return resultPointer
+}
+
+if(!head || left === right) return head
+
+    let result = new ListNode()
+    result.next = head 
+    let prev = result
+
+    for(let i = 0;i < left - 1;++i) {
+        prev = prev.next
+    }
+
+    let current = prev.next
+
+    for(let i = 0;i < right - left;++i) {
+        const nextNode = current.next
+        current.next = nextNode.next 
+        nextNode.next = prev.next 
+        prev.next = nextNode
+    }
+    return result.next
 */
-
-//REDO 2 FAIL
-
-// let mover = new ListNode()
-//     let pointer = mover
-//     let flip = false
-
-//     while(l1 || l2) {
-
-//         let newNode = new ListNode()
-
-//         if(!flip) {
-//             if(l1) {
-//                 newNode.val = l1.val
-//                 l1 = l1.next
-//                 flip = true
-//             }
-//         }else if(flip) {
-//             if(l2) {
-//                 newNode.val = l2.val 
-//                 l2 = l2.next 
-//                 flip = false
-//             }
-//         }
-
-//         mover.next = newNode 
-//         mover = newNode
-//     }
-//     return pointer.next
-
-//REDO 1
-
-// if(!l1) return l2 
-//     //ERROR: if should be else if
-//     // if
-//     else if(!l2) return l1 
-//     //ERROR: if should be else if 
-//     //if
-//     else if(l1.val <= l2.val) {
-//         //ERROR: param 1 should be l1.next
-//         // l1.next = mergeTwoLists(l1,l2)
-//         l1.next = mergeTwoLists(l1.next,l2)
-//         return l1
-//     }else {
-//         l2.next = mergeTwoLists(l1,l2.next)
-//         return l2
-//     }
-
-
-// if (!l1) return l2;
-//     else if (!l2) return l1;
-//     else if (l1.val <= l2.val) {
-//         l1.next = mergeTwoLists(l1.next, l2);
-//         return l1;
-//     } else {
-//         l2.next = mergeTwoLists(l1, l2.next);
-//         return l2
-//     }
-
 },{"yallist":3}],2:[function(require,module,exports){
 'use strict'
 module.exports = function (Yallist) {
