@@ -11,7 +11,6 @@ the digits 1-9 without repetition.
 
 */
 
-
 const validSudoku = (board) => {
 
     for(let i = 0;i < board.length;i++) {
