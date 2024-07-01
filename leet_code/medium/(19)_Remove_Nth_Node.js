@@ -34,6 +34,29 @@ const removeNthFromEnd = (head,n) => {
 removeNthFromEnd(node1,2)
 
 /*
+MY REDO 
+
+function removeNthFromEnd(head,n) {
+  let pointer = head;
+  const map = new Map();
+  let len = 0
+
+  while(pointer) {
+    map.set(++len,pointer);
+    pointer = pointer.next;
+  }
+
+  let startNode = map.get(len - n);
+  let endNode = map.get(len - n + 2);
+
+  if(!startNode) head = head.next;
+  else if(n === 1) startNode.next = null;
+  else startNode.next = endNode;
+
+  return head;
+
+}
+
 PERFORMANCE SOLUTION
 
 var removeNthFromEnd = function(head, n) {
