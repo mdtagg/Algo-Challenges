@@ -53,6 +53,38 @@ function reverseKGroup(list,k) {
 reverseKGroup(l1,3)
 
 /*
+REDO SOLUTION
+
+function reverseKGroup(head,x) {
+  const nodes = [];
+  let count = 0;
+  let pointer = head;
+
+  let newList = new ListNode();
+  let newPointer = newList;
+
+  while(pointer) {
+    if(count === x) {
+      while(nodes.length) {
+        let prevNode = nodes.pop();
+        newPointer.next = prevNode;
+        newPointer = newPointer.next;
+      }
+      count = 0;
+    }
+    nodes.push(pointer)
+    count++
+    pointer = pointer.next
+  }
+  while(nodes.length) {
+    let prevNode = count === x ? nodes.pop() : nodes.shift();
+    newPointer.next = prevNode;
+    newPointer = newPointer.next;
+  }
+  if(count === x) newPointer.next = null;
+  return newList.next;
+}
+
 PERFORMANCE SOLUTION 
 
 function reverseKGroup(list,k) {
