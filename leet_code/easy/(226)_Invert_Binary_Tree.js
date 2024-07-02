@@ -13,20 +13,34 @@ tree.right = new TreeNode(7)
 tree.right.left = new TreeNode(6)
 tree.right.right = new TreeNode(9)
 
-function invertTree(tree) {
-    if(tree === null) return tree 
 
-    invertTree(tree.left)
-    invertTree(tree.right)
+function invertTree(node) {
+    if(!node) return null;
+    let left = invertTree(node.left);
+    let right = invertTree(node.right);
 
-    let temp = tree.left
-    tree.left = tree.right 
-    tree.right = temp
-
-    return tree
+    let swap = left;
+    node.left = right;
+    node.right = swap;
+    return node
 }
 
-invertTree(tree)
+console.log(invertTree(tree))
+
+// function invertTree(tree) {
+//     if(tree === null) return tree 
+
+//     invertTree(tree.left)
+//     invertTree(tree.right)
+
+//     let temp = tree.left
+//     tree.left = tree.right 
+//     tree.right = temp
+
+//     return tree
+// }
+
+// invertTree(tree)
 
 /*
 
