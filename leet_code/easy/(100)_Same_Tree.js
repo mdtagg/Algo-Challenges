@@ -23,21 +23,33 @@ const root2 = new TreeNode(1)
 root2.left = new TreeNode(2)
 root2.right = new TreeNode(2)
 
-const isSameTree = (root1,root2) => {
+//REDO SOLUTION 
 
-    let same = true
+function isSameTree(p,q) {
+    if(!p && !q) return true;
+    if( (!p && q || p && !q) || (p.val !== q.val)) return false;
+    let left = isSameTree(p.left,q.left);
+    let right = isSameTree(p.right,q.right);
+  
+    if(left === false || right === false) return false;
+    else return true
+  }
 
-    function dfs(root1,root2) {
-        if(!root1 && !root2) return
-        if(root1.val !== root2.val || !root1 || !root2) same = false;
-        dfs(root1.left,root2.left)
-        dfs(root1.right,root2.right)
-    }
+// const isSameTree = (root1,root2) => {
 
-    dfs(root1,root2)
+//     let same = true
 
-    return same
-}
+//     function dfs(root1,root2) {
+//         if(!root1 && !root2) return
+//         if(root1.val !== root2.val || !root1 || !root2) same = false;
+//         dfs(root1.left,root2.left)
+//         dfs(root1.right,root2.right)
+//     }
+
+//     dfs(root1,root2)
+
+//     return same
+// }
 
 isSameTree(root1,root2)
 
