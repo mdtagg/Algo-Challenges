@@ -17,18 +17,24 @@ var buildTree = function(inorder, postorder) {
 
   function build(stopper) {
     if(inorder[iIndex] !== stopper) {
-      const node = new TreeNode(postorder[pIndex--])
-      node.right = build(node.val)
-      iIndex--
-      node.left = build(stopper)
+      const node = new TreeNode(postorder[pIndex--]);
+      node.right = build(node.val);
+      iIndex--;
+      node.left = build(stopper);
       return node
     }
-    return null
+    return null;
   }
+
   return build()
 };
 
 console.log(buildTree(...sampleInputs[0]))
+
+
+
+
+
 
 // if(!inorder) return null;
 //   if(inorder.length === 1) return new TreeNode(inorder[0]);
