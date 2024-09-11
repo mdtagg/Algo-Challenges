@@ -9,12 +9,10 @@ const root = new TreeNode(1)
 root.left = new TreeNode(2)
 root.left.left = new TreeNode(3)
 root.left.right = new TreeNode(4)
-root.left.left.left = new TreeNode(8)
 
 root.right = new TreeNode(2)
 root.right.left = new TreeNode(4)
 root.right.right = new TreeNode(3)
-root.right.left.left = new TreeNode(8)
 
 function isSame(root) {
   if(!root) return false;
